@@ -8,6 +8,9 @@ import { InicioComponent } from './inicio/inicio.component';
 import { NavComponent } from './nav/nav.component';
 import { RestriccionesComponent } from './restricciones/restricciones.component';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
+import { IncidenciasComponent } from './incidencias/incidencias.component';
+import { PruebasDeVidaComponent } from './pruebas-de-vida/pruebas-de-vida.component';
+import { AdministracionComponent } from './administracion/administracion.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { NotificacionesComponent } from './notificaciones/notificaciones.compone
     InicioComponent,
     NavComponent,
     RestriccionesComponent,
-    NotificacionesComponent
+    NotificacionesComponent,
+    IncidenciasComponent,
+    PruebasDeVidaComponent,
+    AdministracionComponent
   ],
   imports: [
     BrowserModule,
