@@ -12,6 +12,9 @@ import { IncidenciasComponent } from './incidencias/incidencias.component';
 import { PruebasDeVidaComponent } from './pruebas-de-vida/pruebas-de-vida.component';
 import { AdministracionComponent } from './administracion/administracion.component';
 
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule} from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +29,9 @@ import { AdministracionComponent } from './administracion/administracion.compone
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

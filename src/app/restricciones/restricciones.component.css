@@ -2,19 +2,16 @@
     margin: auto;
     width: 99%;
     height: 800px;
-    background-color: blue;
 }
 
 .lista-restricciones{
     float: left;
     width: 30%;
     height: 100%;
-    background-color: aqua
 }
 
 .map{
     float: left;
     width: 70%;
     height: 100%;
-    background-color: blueviolet
 }
