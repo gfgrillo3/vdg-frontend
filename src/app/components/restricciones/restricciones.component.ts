@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RestriccionService } from '../services/restricciones/restriccion.service';
-import { Restriccion } from '../models/restriccion';
+import { RestriccionService } from '../../services/restricciones/restriccion.service';
+import { Restriccion } from '../../models/restriccion';
 
 @Component({
   selector: 'app-restricciones',

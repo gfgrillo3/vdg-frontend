@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { InicioComponent } from './inicio/inicio.component';
-import { UsuarioComponent } from './usuario/usuario.component';
-import { RestriccionesComponent } from './restricciones/restricciones.component';
-import { NotificacionesComponent } from './notificaciones/notificaciones.component';
-import { IncidenciasComponent } from './incidencias/incidencias.component';
-import { PruebasDeVidaComponent } from './pruebas-de-vida/pruebas-de-vida.component';
-import { AdministracionComponent } from './administracion/administracion.component';
+import { InicioComponent } from './components/inicio/inicio.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { RestriccionesComponent } from './components/restricciones/restricciones.component';
+import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
+import { IncidenciasComponent } from './components/incidencias/incidencias.component';
+import { PruebasDeVidaComponent } from './components/pruebas-de-vida/pruebas-de-vida.component';
+import { AdministracionComponent } from './components/administracion/administracion.component';
 
 
 const routes: Routes = [
