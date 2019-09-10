@@ -3,21 +3,23 @@
         <div class="card border-primary mb-3 text-center">
             <form #usuarioForm="ngForm" (ngSubmit)="ingresar(usuarioForm)">
                 <fieldset>
-                    <legend></legend>
+                    <legend>Iniciar Sesión</legend>
                     <div class="form-group">
-                        <legend>Iniciar Sesión</legend>
                         <i class="large material-icons">person</i>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Email">
+                        <input type="text" class="form-control" placeholder="Email"
+                            name="mail" #mail="ngModel"
+                            [(ngModel)]="usuarioService.usuarioSeleccionado.email">
                         <small id="emailHelp" class="form-text text-muted">Ingrese su email</small>
                     </div>
                     <div class="form-group">
                         <i class="large material-icons">https</i>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password"
+                            name="contrasena" #contrasena="ngModel"
+                            [(ngModel)]="usuarioService.usuarioSeleccionado.contrasena">
                         <small id="forgotPassword" class="form-text text-muted">Olvidé mi contraseña</small>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary"  routerLink="/inicio">Ingresar</button>
+                        <button class="btn btn-primary" routerLink="/inicio">Ingresar</button>
                     </div>
                 </fieldset>
             </form>

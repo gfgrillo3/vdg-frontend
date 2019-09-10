@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/login/usuario.service';
 import { Usuario } from '../../models/usuario';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-usuario',
@@ -13,7 +15,10 @@ export class UsuarioComponent implements OnInit {
   constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit() {
-    this.getUsuarios();
+  }
+
+  ingresar(usuarioForm: NgForm){
+    console.log(usuarioForm.value);
   }
 
   getUsuarios(){
