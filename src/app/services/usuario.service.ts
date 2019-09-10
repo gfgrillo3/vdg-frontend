@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../models/usuario';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class UsuarioService {
   }
 
   getUsuarios(){
-    return this.http.get("http://localhost:9090/")
+    return this.http.get("http://localhost:9090/usuarios")
   }
 
 }
