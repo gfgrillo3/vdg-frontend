@@ -1,16 +1,54 @@
 <div class="container">
-    
-    <div class="formUsuario">
-        <div class="card bg-light mb-3" style="max-width: 20rem;">
-            <div class="card-body">
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-success">Agregar</button>
+    <div class="row">
+        <div class="col-4">
+            <div class="card bg-light mb-3" style="max-width: 20rem;">
+                <div class="card-body">
+                    <legend>Usuario</legend>
+                    <form #usuarioForm="ngForm" (ngSubmit)="agregarUsuario(usuarioForm)">
+                        <div class="row">
+                            <input class="form-control" type="text" name="email" #email="ngModel" placeholder="Email"
+                                [(ngModel)]="usuarioService.usuarioSeleccionado.email">
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>SUPERVISOR</option>
+                                    <option>ADMINISTRATIVO</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary btn-block">Agregar</button>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="listaUsuarios">
-
+        <div class="col">
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuarioService.usuarios" class="table-active">
+                        <td>{{usuario.email}}</td>
+                        <td>{{usuario.rolDeUsuario}}</td>
+                        <td>
+                            <a (click)="editarUsuario(usuario)">
+                                <i class="material-icons">editar</i>
+                            </a>
+                            <a (click)="eliminarUsuario">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
