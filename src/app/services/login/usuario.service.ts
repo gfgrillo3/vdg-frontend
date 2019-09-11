@@ -9,7 +9,7 @@ export class UsuarioService {
 
   usuarioSeleccionado: Usuario;
   usuarios: Usuario[];
-  readonly URL_API = 'http://localhost:9090/usuarios'
+  readonly URL_API = 'http://localhost:9090/Usuario'
 
   constructor(private http: HttpClient) {
     this.usuarioSeleccionado = new Usuario();
@@ -27,7 +27,11 @@ export class UsuarioService {
     return this.http.delete(this.URL_API + `/${id}`);
   }
 
-  login(usuario: Usuario){
+  login(email: String, contrasena: String){
+    const loginInfo = {};
+    loginInfo["email"] = email;
+    loginInfo["contrasena"] = contrasena;
+    return this.http.post(this.URL_API+"/login", loginInfo);
   }
 
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/login/usuario.service';
 import { Usuario } from '../../models/usuario';
-import { NgForm } from '@angular/forms';
+import { NgForm} from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,13 +13,24 @@ import { NgForm } from '@angular/forms';
 })
 export class UsuarioComponent implements OnInit {
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit() {
   }
 
   ingresar(usuarioForm: NgForm){
-    console.log(usuarioForm.value);
+    var mail = usuarioForm.value.mail;
+    var contrasena = usuarioForm.value.contrasena;
+    var datosValidos;
+    this.usuarioService.login(mail, contrasena)
+      .subscribe(res => { 
+        datosValidos = res;
+        if(datosValidos)
+          this.router.navigate(["/inicio"]);
+        else
+          console.log("LOGIN ERRONEO");
+        //MOSTRAR MENSAJE DE DATOS ERRÓNEOS
+      });   
   }
 
   getUsuarios(){
