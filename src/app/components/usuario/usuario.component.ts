@@ -3,6 +3,8 @@ import { UsuarioService } from '../../services/login/usuario.service';
 import { Usuario } from '../../models/usuario';
 import { NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
+import * as sha256 from 'js-sha256';
+
 
 
 @Component({
@@ -20,7 +22,7 @@ export class UsuarioComponent implements OnInit {
 
   ingresar(usuarioForm: NgForm){
     var mail = usuarioForm.value.mail;
-    var contrasena = usuarioForm.value.contrasena;
+    var contrasena = sha256.sha256(usuarioForm.value.contrasena);
     var datosValidos;
     this.usuarioService.login(mail, contrasena)
       .subscribe(res => { 
