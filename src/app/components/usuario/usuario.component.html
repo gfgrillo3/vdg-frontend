@@ -4,23 +4,49 @@
             <form #usuarioForm="ngForm" (ngSubmit)="ingresar(usuarioForm)">
                 <fieldset>
                     <legend>Iniciar Sesión</legend>
+
                     <div class="form-group">
                         <i class="large material-icons">person</i>
                         <input type="text" class="form-control" placeholder="Email"
                             name="mail" #mail="ngModel" 
-                            [(ngModel)]="usuarioService.usuarioSeleccionado.email">
+                            [(ngModel)]="usuarioService.usuarioSeleccionado.email" required email>
+                            
                         <small id="emailHelp" class="form-text text-muted">Ingrese su email</small>
+                        
+                        <div class="alert alert-danger" *ngIf="mail.invalid && (mail.dirty || mail.touched)">
+                                <div *ngIf="mail.errors.required">
+                                  Email requerido
+                                </div>
+                                <div *ngIf="mail.errors.email">
+                                  Email invalido
+                                </div>
+                              </div>
+
                     </div>
+
                     <div class="form-group">
                         <i class="large material-icons">https</i>
                         <input type="password" class="form-control" placeholder="Password"
                             name="contrasena" #contrasena="ngModel"
-                            [(ngModel)]="usuarioService.usuarioSeleccionado.contrasena">
+                            [(ngModel)]="usuarioService.usuarioSeleccionado.contrasena" required>
+
+                            <div class="alert alert-danger" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
+                                    <div *ngIf="contrasena.errors.required">
+                                      Contraseña requerida.
+                                    </div>
+                                  </div>
+
                         <small id="forgotPassword" class="form-text text-muted">Olvidé mi contraseña</small>
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary">Ingresar</button>
+
+                    <div class="alert alert-danger" role="alert" *ngIf="loginEsInvalido">
+                            Error al iniciar sesión. Por favor verifique los datos ingresados.
                     </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" [disabled]="!usuarioForm.valid">Ingresar</button>
+                    </div>
+                    
                 </fieldset>
             </form>
         </div>

@@ -15,12 +15,15 @@ import * as sha256 from 'js-sha256';
 })
 export class UsuarioComponent implements OnInit {
 
+  loginEsInvalido = false;
+
   constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit() {
   }
 
   ingresar(usuarioForm: NgForm){
+    if(usuarioForm.valid){
     var mail = usuarioForm.value.mail;
     var contrasena = sha256.sha256(usuarioForm.value.contrasena);
     var datosValidos;
@@ -30,9 +33,9 @@ export class UsuarioComponent implements OnInit {
         if(datosValidos)
           this.router.navigate(["/inicio"]);
         else
-          console.log("LOGIN ERRONEO");
-        //MOSTRAR MENSAJE DE DATOS ERRÓNEOS
+          this.setLoginInvalido();
       });   
+  }
   }
 
   getUsuarios(){
@@ -41,6 +44,13 @@ export class UsuarioComponent implements OnInit {
         this.usuarioService.usuarios = res as Usuario[];
         console.log(res);
       })
+  }
+
+  setLoginInvalido(): void{
+    this.loginEsInvalido = true;
+    setTimeout(() => {
+      this.loginEsInvalido = false;
+    }, 5000);  
   }
 
 }
