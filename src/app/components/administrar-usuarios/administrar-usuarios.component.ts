@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/login/usuario.service';
 import { Usuario } from 'src/app/models/usuario';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-administrar-usuarios',
@@ -9,7 +10,12 @@ import { Usuario } from 'src/app/models/usuario';
 })
 export class AdministrarUsuariosComponent implements OnInit {
 
-  constructor(private usuarioService: UsuarioService) { }
+  roles;
+  seleccionado;
+
+  constructor(private usuarioService: UsuarioService) {
+    this.roles = ['SUPERVISOR','ADMINISTRATIVO','DAMNIFICADA','VICTIMARIO'];
+  }
 
   ngOnInit() {
     this.getUsuarios();
@@ -23,11 +29,28 @@ export class AdministrarUsuariosComponent implements OnInit {
       })
   }
 
+  agregarUsuario(usuarioForm: NgForm){
+    let usuarioNuevo = new Usuario;
+    usuarioNuevo.email = usuarioForm.value.email;
+    usuarioNuevo.rolDeUsuario = this.seleccionado;
+    //POR AHORA ESTA POR DEFECTO ESTA CONTRASEÑA
+    usuarioNuevo.contrasena = "123";
+    this.usuarioService.postUsuario(usuarioNuevo)
+      .subscribe(res => {
+        console.log(usuarioNuevo);
+        this.getUsuarios();
+        usuarioForm.reset();
+      })
+  }
+
   editarUsuario(usuario: Usuario){
   }
 
-  eliminarUsuario(){    
+  eliminarUsuario(idUsuario: number){
+    this.usuarioService.deleteUsuario(idUsuario)
+      .subscribe(res => {
+        console.log("Usuario eliminado");
+        this.getUsuarios();
+      });
   }
-
-
 }
