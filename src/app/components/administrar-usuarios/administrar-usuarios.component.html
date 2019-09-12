@@ -1,5 +1,6 @@
 <div class="container">
     <div class="row">
+
         <div class="col-4">
             <div class="card bg-light mb-3" style="max-width: 20rem;">
                 <div class="card-body">
@@ -10,14 +11,13 @@
                                 [(ngModel)]="usuarioService.usuarioSeleccionado.email">
                         </div>
                         <div class="row">
-                            <div class="form-group">
+                                <div class="form-group btn-block">
                                 <select class="form-control">
                                     <option>SUPERVISOR</option>
                                     <option>ADMINISTRATIVO</option>
                                 </select>
                             </div>
                         </div>
-
                     </form>
                 </div>
                 <div class="card-footer">
@@ -25,6 +25,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col">
             <table class="table table-light">
                 <thead>
@@ -50,5 +51,6 @@
                 </tbody>
             </table>
         </div>
+
     </div>
 </div>

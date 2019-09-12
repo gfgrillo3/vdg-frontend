@@ -17,6 +17,8 @@ import { AdministrarPersonasComponent } from './components/administrar-personas/
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
+import { FormPersonaComponent } from './components/administrar-personas/form-persona/form-persona.component';
+import { ListaPersonaComponent } from './components/administrar-personas/lista-persona/lista-persona.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { HttpClientModule} from '@angular/common/http';
     AdministracionComponent,
     AdministrarRestriccionesComponent,
     AdministrarUsuariosComponent,
-    AdministrarPersonasComponent
+    AdministrarPersonasComponent,
+    FormPersonaComponent,
+    ListaPersonaComponent
   ],
   imports: [
     BrowserModule,
