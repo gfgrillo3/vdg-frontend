@@ -1,15 +1,60 @@
 <div class="container">
-    <div class="formUsuario">
-        <div class="card bg-light mb-3" style="max-width: 20rem;">
-            <div class="card-body">
-
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-success">Agregar</button>
+    <div class="row">
+        <!-- FORMULARIO DE RESTRICCIONES -->
+        <div class="col-4">
+            <div class="card bg-light mb-3" style="max-width: 20rem;">
+                <div class="card-body">
+                    <legend>Restricción Perimetral</legend>
+                    <form #personaForm="ngForm">
+                        <div class="row">
+                            <input class="form-control" type="text" name="dniVictimario" placeholder="DNI Victimario">
+                        </div>
+                        <div class="row">
+                            <input class="form-control" type="text" name="dniDamnificada" placeholder="DNI Damnificada">
+                        </div>
+                        <div class="row">
+                            <input class="form-control" type="text" name="emailAdministrativo"
+                                placeholder="Email Administrativo a cargo">
+                        </div>
+                        <div class="row">
+                            <input class="form-control" type="number" name="distancia" placeholder="Distancia">
+                        </div>
+                        <div class="row">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Fecha (Año-Mes-Día)" name="dp"
+                                    [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                        type="button">
+                                        <i class="small material-icons">event</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary btn-block">Agregar</button>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="listaUsuarios">
+        <!-- TABLA DE RESTRICCIONES -->
+        <div class="col">
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">Victimario</th>
+                        <th scope="col">Damnificada</th>
+                        <th scope="col">Fecha Sentencia</th>
+                        <th scope="col">Distancia</th>
+                        <th scope="col">Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
 
     </div>
 </div>

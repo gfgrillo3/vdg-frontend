@@ -10,15 +10,13 @@ import { RestriccionesComponent } from './components/restricciones/restricciones
 import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
 import { IncidenciasComponent } from './components/incidencias/incidencias.component';
 import { PruebasDeVidaComponent } from './components/pruebas-de-vida/pruebas-de-vida.component';
-import { AdministracionComponent } from './components/administracion/administracion.component';
 import { AdministrarRestriccionesComponent } from './components/administrar-restricciones/administrar-restricciones.component';
 import { AdministrarUsuariosComponent } from './components/administrar-usuarios/administrar-usuarios.component';
 import { AdministrarPersonasComponent } from './components/administrar-personas/administrar-personas.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
-import { FormPersonaComponent } from './components/administrar-personas/form-persona/form-persona.component';
-import { ListaPersonaComponent } from './components/administrar-personas/lista-persona/lista-persona.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -30,19 +28,17 @@ import { ListaPersonaComponent } from './components/administrar-personas/lista-p
     NotificacionesComponent,
     IncidenciasComponent,
     PruebasDeVidaComponent,
-    AdministracionComponent,
     AdministrarRestriccionesComponent,
     AdministrarUsuariosComponent,
     AdministrarPersonasComponent,
-    FormPersonaComponent,
-    ListaPersonaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,10 +1,84 @@
 <div class="container">
     <div class="row">
+        <!-- FORMULARIO DE PERSONAS -->
         <div class="col-4">
-            <app-form-persona></app-form-persona>
+            <div class="card bg-light mb-3" style="max-width: 20rem;">
+                <div class="card-body">
+                    <legend>Persona</legend>
+                    <form #personaForm="ngForm">
+                        <div class="row">
+                            <input class="form-control" type="text" name="nombre" placeholder="Nombre">
+                        </div>
+                        <div class="row">
+                            <input class="form-control" type="text" name="apellido" placeholder="Apellido">
+                        </div>
+                        <div class="row">
+                            <input class="form-control" type="text" name="dni" placeholder="DNI">
+                        </div>
+                        <div class="row">
+                            <input class="form-control" type="text" name="telefono" placeholder="Teléfono">
+                        </div>
+                        <div class="row">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Fecha nacimiento (Año-Mes-Día)" name="dp"
+                                    [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                        type="button">
+                                        <i class="small material-icons">event</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group btn-block">
+                                <select class="custom-select">
+                                    <option selected="">Tipo de persona</option>
+                                    <option value="1">VICTIMARIO</option>
+                                    <option value="2">DAMNIFICADA</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label>Dirección</label>
+                        <div class="row">
+                            <input class="form-control" type="text" name="calle" placeholder="Calle">
+                        </div>
+                        <div class="row">
+                            <input class="form-control" type="text" name="altura" placeholder="Altura">
+                        </div>
+                        <div class="row">
+                            <input class="form-control" type="text" name="piso" placeholder="Piso">
+                        </div>
+                        <div class="row">
+                            <input class="form-control" type="text" name="departamento" placeholder="Departamento">
+                        </div>
+                        <div class="row">
+                            <input class="form-control" type="text" name="localidad" placeholder="Localidad">
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary btn-block">Agregar</button>
+                </div>
+            </div>
         </div>
+        <!-- TABLA DE PERSONAS -->
         <div class="col">
-            <app-lista-persona></app-lista-persona>
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">DNI</th>
+                        <th scope="col">Fecha nacimiento</th>
+                        <th scope="col">Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
         </div>
+
     </div>
 </div>
