@@ -14,7 +14,7 @@ export class AdministrarPersonasComponent implements OnInit {
   personaDTOSelleccionada = new FormPersonaDTO;
   rolSeleccionado;
   roles;
-  
+
   constructor(private personaService: PersonaService) { 
     this.roles = ['DAMNIFICADA','VICTIMARIO'];
   }
@@ -33,7 +33,12 @@ export class AdministrarPersonasComponent implements OnInit {
 
   agregarPersona(personaForm: NgForm){
     this.personaDTOSelleccionada.usuario.rolDeUsuario=this.rolSeleccionado;
-    console.log(this.personaDTOSelleccionada);
+    this.personaService.postPersona(this.personaDTOSelleccionada)
+      .subscribe(res => {
+        console.log("persona agregada correctamente");
+        this.getPersonas();
+        personaForm.reset();
+      })
   }
 
 }
