@@ -7,22 +7,51 @@
                     <legend>Restricción Perimetral</legend>
                     <form #personaForm="ngForm">
                         <div class="row">
-                            <input class="form-control" type="text" name="dniVictimario" placeholder="DNI Victimario">
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="dniVictimario"
+                                    placeholder="DNI Victimario" ngbTooltip="DNI victimario">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" (click)="agregarVictimario()">
+                                        <i class="small material-icons">person_add</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <label id="labelVictimario"></label>
                         </div>
                         <div class="row">
-                            <input class="form-control" type="text" name="dniDamnificada" placeholder="DNI Damnificada">
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="dniDamnificada"
+                                    placeholder="DNI Damnificada" ngbTooltip="DNI damnificada">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" (click)="agregarDamnificada()">
+                                        <i class="small material-icons">person_add</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <label id="labelDamnificada"></label>
                         </div>
                         <div class="row">
-                            <input class="form-control" type="text" name="emailAdministrativo"
-                                placeholder="Email Administrativo a cargo">
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="emailAdministrativo"
+                                    placeholder="Email Administrativo a cargo"
+                                    ngbTooltip="Email administrativo a cargo">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" (click)="agregarAdministrativo()">
+                                        <i class="small material-icons">person_add</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <label id="labelAdministrativo"></label>
                         </div>
                         <div class="row">
-                            <input class="form-control" type="number" name="distancia" placeholder="Distancia">
+                            <input class="form-control" type="number" name="distancia" placeholder="Distancia"
+                                ngbTooltip="Distancia restricción">
                         </div>
                         <div class="row">
                             <div class="input-group">
                                 <input class="form-control" placeholder="Fecha (Año-Mes-Día)" name="dp"
-                                    [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                    [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
+                                    ngbTooltip="Fecha de sentencia">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
                                         type="button">
@@ -31,10 +60,11 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <button class="btn btn-primary btn-block" (click)="agregarRestriccion()">
+                                Agregar</button>
+                        </div>
                     </form>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary btn-block">Agregar</button>
                 </div>
             </div>
         </div>
