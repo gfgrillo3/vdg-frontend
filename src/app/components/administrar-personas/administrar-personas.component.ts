@@ -37,7 +37,6 @@ export class AdministrarPersonasComponent implements OnInit {
     let ngbDate = personaForm.value.fechaNacimiento;
     let myDate = new Date(ngbDate.year, ngbDate.month-1, ngbDate.day);
     this.personaDTOSelleccionada.persona.fechaNacimiento = myDate;
-    console.log("LA FECHA SE VE COMO "+JSON.stringify(this.personaDTOSelleccionada.persona.fechaNacimiento));
     this.personaService.postPersona(this.personaDTOSelleccionada)
       .subscribe(res => {
         console.log("persona agregada correctamente");
