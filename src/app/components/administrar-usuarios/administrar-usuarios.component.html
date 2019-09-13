@@ -8,11 +8,11 @@
                     <form #usuarioForm="ngForm" (ngSubmit)="agregarUsuario(usuarioForm)">
                         <div class="row">
                             <input class="form-control" type="text" name="email" #email="ngModel" placeholder="Email"
-                                [(ngModel)]="usuarioService.usuarioSeleccionado.email">
+                                [(ngModel)]="usuarioSeleccionado.email">
                         </div>
                         <div class="row">
                             <div class="form-group btn-block">
-                                <select class="form-control" name="seleccionado" [(ngModel)]="seleccionado" >
+                                <select class="form-control" name="rolSeleccionado" [(ngModel)]="rolSeleccionado" >
                                     <option *ngFor="let rol of roles">
                                         {{rol}}
                                       </option>

@@ -11,7 +11,8 @@ import { NgForm } from '@angular/forms';
 export class AdministrarUsuariosComponent implements OnInit {
 
   roles;
-  seleccionado;
+  rolSeleccionado;
+  usuarioSeleccionado = new Usuario;
 
   constructor(private usuarioService: UsuarioService) {
     this.roles = ['SUPERVISOR','ADMINISTRATIVO'];
@@ -30,13 +31,11 @@ export class AdministrarUsuariosComponent implements OnInit {
   }
 
   agregarUsuario(usuarioForm: NgForm){
-    let usuarioNuevo = new Usuario;
-    usuarioNuevo.email = usuarioForm.value.email;
-    usuarioNuevo.rolDeUsuario = this.seleccionado;
+    this.usuarioSeleccionado.rolDeUsuario = this.rolSeleccionado;
     //POR AHORA ESTA POR DEFECTO ESTA CONTRASEÑA EN EL MODEL
-    this.usuarioService.postUsuario(usuarioNuevo)
+    this.usuarioService.postUsuario(this.usuarioSeleccionado)
       .subscribe(res => {
-        console.log(usuarioNuevo);
+        console.log(this.usuarioSeleccionado);
         this.getUsuarios();
         usuarioForm.reset();
       })
