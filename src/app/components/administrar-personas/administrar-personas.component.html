@@ -5,23 +5,31 @@
             <div class="card bg-light mb-3" style="max-width: 20rem;">
                 <div class="card-body">
                     <legend>Persona</legend>
-                    <form #personaForm="ngForm">
+                    <form #personaForm="ngForm" (ngSubmit)="agregarPersona(personaForm)">
                         <div class="row">
-                            <input class="form-control" type="text" name="nombre" placeholder="Nombre">
+                            <input class="form-control" type="text" name="nombre" placeholder="Nombre"
+                            #nombre="ngModel" [(ngModel)]="personaDTOSelleccionada.persona.nombre">
                         </div>
                         <div class="row">
-                            <input class="form-control" type="text" name="apellido" placeholder="Apellido">
+                            <input class="form-control" type="text" name="apellido" placeholder="Apellido"
+                            #apellido="ngModel" [(ngModel)]="personaDTOSelleccionada.persona.apellido">
                         </div>
                         <div class="row">
-                            <input class="form-control" type="text" name="dni" placeholder="DNI">
+                            <input class="form-control" type="text" name="DNI" placeholder="DNI"
+                            #DNI="ngModel" [(ngModel)]="personaDTOSelleccionada.persona.DNI">
                         </div>
                         <div class="row">
-                            <input class="form-control" type="text" name="telefono" placeholder="Teléfono">
+                            <input class="form-control" type="text" name="telefono" placeholder="Teléfono"
+                            #telefono="ngModel" [(ngModel)]="personaDTOSelleccionada.persona.telefono">
+                        </div>
+                        <div class="row">
+                            <input class="form-control" type="text" name="email" placeholder="Email"
+                            #email="ngModel" [(ngModel)]="personaDTOSelleccionada.usuario.email">
                         </div>
                         <div class="row">
                             <div class="input-group">
-                                <input class="form-control" placeholder="Fecha nacimiento (Año-Mes-Día)" name="dp"
-                                    [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                <input class="form-control" placeholder="Fecha nacimiento (Año-Mes-Día)" name="fechaNacimiento"
+                                    [(ngModel)]="personaDTOSelleccionada.persona.fechaNacimiento" ngbDatepicker #d="ngbDatepicker">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
                                         type="button">
@@ -32,33 +40,37 @@
                         </div>
                         <div class="row">
                             <div class="form-group btn-block">
-                                <select class="custom-select">
-                                    <option selected="">Tipo de persona</option>
-                                    <option value="1">VICTIMARIO</option>
-                                    <option value="2">DAMNIFICADA</option>
+                                <select class="form-control" name="rolSeleccionado" [(ngModel)]="rolSeleccionado">
+                                    <option *ngFor="let rol of roles">
+                                        {{rol}}
+                                      </option>
                                 </select>
                             </div>
                         </div>
                         <label>Dirección</label>
                         <div class="row">
-                            <input class="form-control" type="text" name="calle" placeholder="Calle">
+                            <input class="form-control" type="text" name="calle" placeholder="Calle"
+                            #calle="ngModel" [(ngModel)]="personaDTOSelleccionada.direccion.calle">
                         </div>
                         <div class="row">
-                            <input class="form-control" type="text" name="altura" placeholder="Altura">
+                            <input class="form-control" type="text" name="altura" placeholder="Altura"
+                            #altura="ngModel" [(ngModel)]="personaDTOSelleccionada.direccion.altura">
                         </div>
                         <div class="row">
-                            <input class="form-control" type="text" name="piso" placeholder="Piso">
+                            <input class="form-control" type="text" name="piso" placeholder="Piso"
+                            #piso="ngModel" [(ngModel)]="personaDTOSelleccionada.direccion.piso">
                         </div>
                         <div class="row">
-                            <input class="form-control" type="text" name="departamento" placeholder="Departamento">
+                            <input class="form-control" type="text" name="departamento" placeholder="Departamento"
+                            #departamento="ngModel" [(ngModel)]="personaDTOSelleccionada.direccion.departamento">
                         </div>
                         <div class="row">
                             <input class="form-control" type="text" name="localidad" placeholder="Localidad">
                         </div>
+                        <div class="row">
+                            <button class="btn btn-primary btn-block">Agregar</button>
+                        </div>
                     </form>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary btn-block">Agregar</button>
                 </div>
             </div>
         </div>
@@ -75,7 +87,20 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    <tr *ngFor="let persona of personaService.personas" class="table-active">
+                        <td>{{persona.nombre}}</td>
+                        <td>{{persona.apellido}}</td>
+                        <td>{{persona.dni}}</td>
+                        <td>{{persona.fechaNacimiento}}</td>
+                        <td>
+                            <a (click)="editarPersona(persona)">
+                                <i class="material-icons">editar</i>
+                            </a>
+                            <a (click)="eliminarPersona(persona.idPersona)">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

@@ -14,7 +14,7 @@ export class AdministrarUsuariosComponent implements OnInit {
   seleccionado;
 
   constructor(private usuarioService: UsuarioService) {
-    this.roles = ['SUPERVISOR','ADMINISTRATIVO','DAMNIFICADA','VICTIMARIO'];
+    this.roles = ['SUPERVISOR','ADMINISTRATIVO'];
   }
 
   ngOnInit() {
@@ -33,8 +33,7 @@ export class AdministrarUsuariosComponent implements OnInit {
     let usuarioNuevo = new Usuario;
     usuarioNuevo.email = usuarioForm.value.email;
     usuarioNuevo.rolDeUsuario = this.seleccionado;
-    //POR AHORA ESTA POR DEFECTO ESTA CONTRASEÑA
-    usuarioNuevo.contrasena = "123";
+    //POR AHORA ESTA POR DEFECTO ESTA CONTRASEÑA EN EL MODEL
     this.usuarioService.postUsuario(usuarioNuevo)
       .subscribe(res => {
         console.log(usuarioNuevo);
