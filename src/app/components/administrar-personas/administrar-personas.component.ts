@@ -16,7 +16,7 @@ export class AdministrarPersonasComponent implements OnInit {
   roles;
 
   constructor(private personaService: PersonaService) { 
-    this.roles = ['DAMNIFICADA','VICTIMARIO'];
+    this.roles = ['VICTIMA','VICTIMARIO'];
   }
 
   ngOnInit() {
@@ -33,6 +33,11 @@ export class AdministrarPersonasComponent implements OnInit {
 
   agregarPersona(personaForm: NgForm){
     this.personaDTOSelleccionada.usuario.rolDeUsuario=this.rolSeleccionado;
+
+    let ngbDate = personaForm.value.fechaNacimiento;
+    let myDate = new Date(ngbDate.year, ngbDate.month-1, ngbDate.day);
+    this.personaDTOSelleccionada.persona.fechaNacimiento = myDate;
+    console.log("LA FECHA SE VE COMO "+JSON.stringify(this.personaDTOSelleccionada.persona.fechaNacimiento));
     this.personaService.postPersona(this.personaDTOSelleccionada)
       .subscribe(res => {
         console.log("persona agregada correctamente");

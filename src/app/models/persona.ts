@@ -5,7 +5,7 @@ export class Persona {
             this.idPersona=idPersona;
             this.nombre=nombre;
             this.apellido=apellido;
-            this.DNI=DNI;
+            this.dni=DNI;
             this.telefono=telefono;
             this.fechaNacimiento=fechaNacimiento;
             this.idDireccion=idDireccion;
@@ -15,7 +15,7 @@ export class Persona {
     idPersona: number;
     nombre: string;
     apellido: string;
-    DNI: string;
+    dni: string;
     telefono: string;
     fechaNacimiento: Date;
     idDireccion: number;
