@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Persona } from 'src/app/models/persona';
+import { Usuario } from 'src/app/models/usuario';
+import { Restriccion } from 'src/app/models/restriccion';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-administrar-restricciones',
@@ -7,6 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministrarRestriccionesComponent implements OnInit {
 
+  damnificada = new Persona;
+  victimario = new Persona;
+  administrativo = new Usuario;
+  restriccion = new Restriccion;
+
   constructor() { }
 
   ngOnInit() {
@@ -14,19 +23,30 @@ export class AdministrarRestriccionesComponent implements OnInit {
 
 
   agregarVictimario(){
-    document.getElementById("labelVictimario").innerHTML = "Victimario: ";
+    //ACA TRAIGO AL VICTIMARIO
+    document.getElementById("labelVictimario").innerHTML =
+    "Victimario: "+this.victimario.apellido+", "+this.victimario.nombre;
   }
 
   agregarDamnificada(){
-    document.getElementById("labelDamnificada").innerHTML = "Daminifacada: ";
+    //ACA TRAIGO LA DAMNIFICADA
+    document.getElementById("labelDamnificada").innerHTML =
+    "Daminifacada: "+this.damnificada.apellido+", "+this.damnificada.nombre;
 
   }
 
   agregarAdministrativo(){
-    document.getElementById("labelAdministrativo").innerHTML = "Administrativo: ";
+    //ACA TRAIGO EL ADM
+    document.getElementById("labelAdministrativo").innerHTML =
+    "Administrativo: "+this.administrativo.email;
   }
 
-  agregarRestriccion(){
+  agregarRestriccion(restriccionForm: NgForm){
+    this.restriccion.idDamnificada = this.damnificada.idPersona;
+    this.restriccion.idVictimario = this.victimario.idPersona;
+    this.restriccion.idAdministrativo = this.administrativo.idUsuario;
+
+    console.log(this.restriccion);
     document.getElementById("labelVictimario").innerHTML = "";
     document.getElementById("labelDamnificada").innerHTML = "";
     document.getElementById("labelAdministrativo").innerHTML = "";
