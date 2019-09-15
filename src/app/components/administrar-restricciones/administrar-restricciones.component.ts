@@ -41,13 +41,24 @@ export class AdministrarRestriccionesComponent implements OnInit {
 
   agregarDamnificada() {
     //ACA TRAIGO LA DAMNIFICADA
+    this.personaService.getPersonaByDNI(this.damnificada.dni)
+    .subscribe(res => {
+      this.damnificada = res;
+      console.log(this.damnificada);
+    })
+
     document.getElementById("labelDamnificada").innerHTML =
       "Daminifacada: " + this.damnificada.apellido + ", " + this.damnificada.nombre;
-
   }
 
   agregarAdministrativo() {
     //ACA TRAIGO EL ADM
+    this.usuarioService.getUsuarioByEmail(this.administrativo.email)
+    .subscribe(res => {
+      this.administrativo = res;
+      console.log(this.administrativo);
+    })
+
     document.getElementById("labelAdministrativo").innerHTML =
       "Administrativo: " + this.administrativo.email;
   }
