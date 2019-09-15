@@ -26,8 +26,8 @@ export class PersonaService {
     return this.http.post(this.URL_API, personaDTO);
   }
 
-  getPersonaById(id: Persona){
-    return this.http.get("http://localhost:9090/Persona/GetById/"+id);
+  getPersonaByDNI(dni: string){
+    return this.http.get<Persona>("http://localhost:9090/Persona/GetByDni/"+dni);
   }
 
 }

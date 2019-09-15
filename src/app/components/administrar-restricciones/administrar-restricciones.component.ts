@@ -29,6 +29,12 @@ export class AdministrarRestriccionesComponent implements OnInit {
 
   agregarVictimario() {
     //ACA TRAIGO AL VICTIMARIO
+    this.personaService.getPersonaByDNI(this.victimario.dni)
+    .subscribe(res => {
+      this.victimario = res;
+      console.log(this.victimario);
+    })
+
     document.getElementById("labelVictimario").innerHTML =
       "Victimario: " + this.victimario.apellido + ", " + this.victimario.nombre;
   }

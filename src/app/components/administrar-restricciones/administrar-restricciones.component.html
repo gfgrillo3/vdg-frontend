@@ -9,7 +9,8 @@
                         <div class="row">
                             <div class="input-group">
                                 <input class="form-control" type="text" name="dniVictimario"
-                                    placeholder="DNI Victimario" ngbTooltip="DNI victimario">
+                                    placeholder="DNI Victimario" ngbTooltip="DNI victimario"
+                                    [(ngModel)]="victimario.dni">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button" (click)="agregarVictimario()">
                                         <i class="small material-icons">person_add</i>
@@ -21,7 +22,8 @@
                         <div class="row">
                             <div class="input-group">
                                 <input class="form-control" type="text" name="dniDamnificada"
-                                    placeholder="DNI Damnificada" ngbTooltip="DNI damnificada">
+                                    placeholder="DNI Damnificada" ngbTooltip="DNI damnificada"
+                                    [(ngModel)]="damnificada.dni">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button" (click)="agregarDamnificada()">
                                         <i class="small material-icons">person_add</i>
@@ -34,7 +36,8 @@
                             <div class="input-group">
                                 <input class="form-control" type="text" name="emailAdministrativo"
                                     placeholder="Email Administrativo a cargo"
-                                    ngbTooltip="Email administrativo a cargo">
+                                    ngbTooltip="Email administrativo a cargo"
+                                    [(ngModel)]="administrativo.email">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button" (click)="agregarAdministrativo()">
                                         <i class="small material-icons">person_add</i>
