@@ -3,6 +3,9 @@ import { Persona } from 'src/app/models/persona';
 import { Usuario } from 'src/app/models/usuario';
 import { Restriccion } from 'src/app/models/restriccion';
 import { NgForm } from '@angular/forms';
+import { RestriccionService } from 'src/app/services/restricciones/restriccion.service';
+import { PersonaService } from 'src/app/services/personas/persona.service';
+import { UsuarioService } from 'src/app/services/login/usuario.service';
 
 @Component({
   selector: 'app-administrar-restricciones',
@@ -16,44 +19,58 @@ export class AdministrarRestriccionesComponent implements OnInit {
   administrativo = new Usuario;
   restriccion = new Restriccion;
 
-  constructor() { }
+  constructor(private restriccionService: RestriccionService,
+    private personaService: PersonaService,
+    private usuarioService: UsuarioService) { }
 
   ngOnInit() {
   }
 
 
-  agregarVictimario(){
+  agregarVictimario() {
     //ACA TRAIGO AL VICTIMARIO
     document.getElementById("labelVictimario").innerHTML =
-    "Victimario: "+this.victimario.apellido+", "+this.victimario.nombre;
+      "Victimario: " + this.victimario.apellido + ", " + this.victimario.nombre;
   }
 
-  agregarDamnificada(){
+  agregarDamnificada() {
     //ACA TRAIGO LA DAMNIFICADA
     document.getElementById("labelDamnificada").innerHTML =
-    "Daminifacada: "+this.damnificada.apellido+", "+this.damnificada.nombre;
+      "Daminifacada: " + this.damnificada.apellido + ", " + this.damnificada.nombre;
 
   }
 
-  agregarAdministrativo(){
+  agregarAdministrativo() {
     //ACA TRAIGO EL ADM
     document.getElementById("labelAdministrativo").innerHTML =
-    "Administrativo: "+this.administrativo.email;
+      "Administrativo: " + this.administrativo.email;
   }
 
-  agregarRestriccion(restriccionForm: NgForm){
+  agregarRestriccion(restriccionForm: NgForm) {
     this.restriccion.idDamnificada = this.damnificada.idPersona;
     this.restriccion.idVictimario = this.victimario.idPersona;
-    this.restriccion.idAdministrativo = this.administrativo.idUsuario;
+    this.restriccion.idUsuario = this.administrativo.idUsuario;
 
-    console.log(this.restriccion);
-    document.getElementById("labelVictimario").innerHTML = "";
-    document.getElementById("labelDamnificada").innerHTML = "";
-    document.getElementById("labelAdministrativo").innerHTML = "";
+    let ngbDate = restriccionForm.value.dp;
+    let myDate = new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
+    this.restriccion.fechaSentencia = myDate;
+
+    this.restriccionService.postRestriccion(this.restriccion)
+      .subscribe(res => {
+        console.log("Restricción agregada correctamente");
+        restriccionForm.reset();
+      })
+
+      document.getElementById("labelVictimario").innerHTML = "";
+      document.getElementById("labelDamnificada").innerHTML = "";
+      document.getElementById("labelAdministrativo").innerHTML = "";
+
+      console.log(this.restriccion);
+
   }
 
-  confirm(){
-    if(window.confirm("Are you sure to delete ")) {
+  confirm() {
+    if (window.confirm("Are you sure to delete ")) {
       console.log("eliminar restriccion");
     }
   }

@@ -1,9 +1,9 @@
 export class Restriccion {
 
-    constructor(idRestriccion=0,idAdministrativo=0,idDamnificada=0,
+    constructor(idRestriccion=0,idUsuario=0,idDamnificada=0,
         idVictimario=0,distancia=0,fechaSentencia=null){
             this.idRestriccion=idRestriccion;
-            this.idAdministrativo=idAdministrativo;
+            this.idUsuario=idUsuario;
             this.idDamnificada=idDamnificada;
             this.idVictimario=idVictimario;
             this.distancia=distancia;
@@ -11,7 +11,7 @@ export class Restriccion {
     }
 
     idRestriccion: number;
-    idAdministrativo: number;
+    idUsuario: number;
     idDamnificada: number;
     idVictimario: number;
     distancia: number;
