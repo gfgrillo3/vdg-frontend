@@ -74,7 +74,7 @@ export class AdministrarRestriccionesComponent implements OnInit {
 
     this.restriccionService.postRestriccion(this.restriccion)
       .subscribe(res => {
-        console.log("Restricción agregada correctamente");
+        console.log("Restricción agregada correctament");
         restriccionForm.reset();
       })
 
