@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestriccionService } from '../../services/restricciones/restriccion.service';
-import { Restriccion } from '../../models/restriccion';
+import { RestriccionDTO } from 'src/app/models/restriccion-dto';
 
 @Component({
   selector: 'app-restricciones',
@@ -19,10 +19,9 @@ export class RestriccionesComponent implements OnInit {
   getRestricciones(){
    this.restriccionService.getRestricciones()
    .subscribe(res =>  {
-     this.restriccionService.restricciones = res as Restriccion[];
+     this.restriccionService.restricciones = res as RestriccionDTO[];
      console.log(res);
    })
   }
-
 
 }

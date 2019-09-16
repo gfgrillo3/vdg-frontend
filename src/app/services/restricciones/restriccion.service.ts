@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Restriccion } from '../../models/restriccion';
+import { RestriccionDTO } from 'src/app/models/restriccion-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Restriccion } from '../../models/restriccion';
 export class RestriccionService {
 
   restriccionSeleccionada: Restriccion;
-  restricciones: Restriccion[];
+  restricciones: RestriccionDTO[];  
   readonly URL_API = 'http://localhost:9090/RestriccionPerimetral';
 
   constructor(private http:HttpClient) { 
@@ -16,11 +17,16 @@ export class RestriccionService {
   }
 
   getRestricciones(){
-    return this.http.get(this.URL_API);
+    return this.http.get("http://localhost:9090/RestriccionPerimetral/RestriccionDTO");
   }
 
   postRestriccion(restriccion: Restriccion){
     return this.http.post(this.URL_API, restriccion);
+  }
+
+  getRestriccionesAdministrativo(idUsuario: number){
+    return this.http.get("http://localhost:9090/RestriccionPerimetral/RestriccionDTO/getByUsuario/"+
+      idUsuario);
   }
 
 }

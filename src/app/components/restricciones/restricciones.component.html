@@ -3,14 +3,23 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Agresor</th>
-                    <th scope="col">Víctima</th>
+                    <th scope="col">Victimario</th>
+                    <th scope="col">Damnificada</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="table-active">
-                    <td>Agresor 1</td>
-                    <td>Víctima 1</td>
+                <tr *ngFor="let restriccion of restriccionService.restricciones" class="table-active">
+                    <td>{{restriccion.victimario.apellido}}</td>
+                    <td>{{restriccion.damnificada.apellido}}</td>
+                    <td>
+                        <a>
+                            <i class="material-icons">editar</i>
+                        </a>
+                        <a>
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </td>
+                </tr>
                 </tr>
             </tbody>
         </table>

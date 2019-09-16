@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { RestriccionService } from 'src/app/services/restricciones/restriccion.service';
 import { PersonaService } from 'src/app/services/personas/persona.service';
 import { UsuarioService } from 'src/app/services/login/usuario.service';
+import { RestriccionDTO } from 'src/app/models/restriccion-dto';
 
 @Component({
   selector: 'app-administrar-restricciones',
@@ -24,8 +25,16 @@ export class AdministrarRestriccionesComponent implements OnInit {
     private usuarioService: UsuarioService) { }
 
   ngOnInit() {
+    this.getRestricciones();
   }
 
+  getRestricciones(){
+    this.restriccionService.getRestricciones()
+    .subscribe(res => {
+      this.restriccionService.restricciones = res as RestriccionDTO[];
+      console.log(res);
+    })
+   } 
 
   agregarVictimario() {
     //ACA TRAIGO AL VICTIMARIO
@@ -76,6 +85,7 @@ export class AdministrarRestriccionesComponent implements OnInit {
       .subscribe(res => {
         console.log("Restricción agregada correctament");
         restriccionForm.reset();
+        this.getRestricciones();
       })
 
       document.getElementById("labelVictimario").innerHTML = "";

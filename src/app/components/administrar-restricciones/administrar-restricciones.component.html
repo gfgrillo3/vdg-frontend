@@ -12,7 +12,8 @@
                                     placeholder="DNI Victimario" ngbTooltip="DNI victimario"
                                     [(ngModel)]="victimario.dni">
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" (click)="agregarVictimario()">
+                                    <button class="btn btn-outline-secondary" type="button"
+                                        (click)="agregarVictimario()">
                                         <i class="small material-icons">person_add</i>
                                     </button>
                                 </div>
@@ -25,7 +26,8 @@
                                     placeholder="DNI Damnificada" ngbTooltip="DNI damnificada"
                                     [(ngModel)]="damnificada.dni">
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" (click)="agregarDamnificada()">
+                                    <button class="btn btn-outline-secondary" type="button"
+                                        (click)="agregarDamnificada()">
                                         <i class="small material-icons">person_add</i>
                                     </button>
                                 </div>
@@ -35,11 +37,11 @@
                         <div class="row">
                             <div class="input-group">
                                 <input class="form-control" type="text" name="emailAdministrativo"
-                                    placeholder="Email Administrativo a cargo"
-                                    ngbTooltip="Email administrativo a cargo"
+                                    placeholder="Email Administrativo a cargo" ngbTooltip="Email administrativo a cargo"
                                     [(ngModel)]="administrativo.email">
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" (click)="agregarAdministrativo()">
+                                    <button class="btn btn-outline-secondary" type="button"
+                                        (click)="agregarAdministrativo()">
                                         <i class="small material-icons">person_add</i>
                                     </button>
                                 </div>
@@ -79,13 +81,24 @@
                     <tr>
                         <th scope="col">Victimario</th>
                         <th scope="col">Damnificada</th>
-                        <th scope="col">Fecha Sentencia</th>
-                        <th scope="col">Distancia</th>
+                        <th scope="col">Administrativo</th>
                         <th scope="col">Operaciones</th>
                     </tr>
                 </thead>
                 <tbody>
-
+                    <tr *ngFor="let restriccion of restriccionService.restricciones" class="table-active">
+                        <td>{{restriccion.victimario.apellido}}</td>
+                        <td>{{restriccion.damnificada.apellido}}</td>
+                        <td>{{restriccion.administrativo.email}}</td>
+                        <td>
+                            <a>
+                                <i class="material-icons">editar</i>
+                            </a>
+                            <a>
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
