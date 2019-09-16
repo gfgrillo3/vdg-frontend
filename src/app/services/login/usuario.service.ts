@@ -35,6 +35,6 @@ export class UsuarioService {
   }
 
   getUsuarioByEmail(email: string){
-    return this.http.get<Usuario>("/GetByEmail/"+email);
+    return this.http.get<Usuario>(this.URL_API+"/GetByEmail/"+email);
   }
 }

@@ -48,7 +48,7 @@ export class AdministrarRestriccionesComponent implements OnInit {
     })
 
     document.getElementById("labelDamnificada").innerHTML =
-      "Daminifacada: " + this.damnificada.apellido + ", " + this.damnificada.nombre;
+      "Damnificada: " + this.damnificada.apellido + ", " + this.damnificada.nombre;
   }
 
   agregarAdministrativo() {
