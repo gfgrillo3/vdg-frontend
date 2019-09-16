@@ -17,7 +17,7 @@ export class RestriccionService {
   }
 
   getRestricciones(){
-    return this.http.get("http://localhost:9090/RestriccionPerimetral/RestriccionDTO");
+    return this.http.get("http://localhost:9090/RestriccionDTO");
   }
 
   postRestriccion(restriccion: Restriccion){
@@ -25,7 +25,7 @@ export class RestriccionService {
   }
 
   getRestriccionesAdministrativo(idUsuario: number){
-    return this.http.get("http://localhost:9090/RestriccionPerimetral/RestriccionDTO/getByUsuario/"+
+    return this.http.get("http://localhost:9090/RestriccionDTO/getByUsuario/"+
       idUsuario);
   }
 
