@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/login/usuario.service';
 import { Usuario } from 'src/app/models/usuario';
 import { NgForm } from '@angular/forms';
+import { ErrorDTO } from 'src/app/models/error-dto';
 
 @Component({
   selector: 'app-administrar-usuarios',
@@ -35,9 +36,16 @@ export class AdministrarUsuariosComponent implements OnInit {
     //POR AHORA ESTA POR DEFECTO ESTA CONTRASEÑA EN EL MODEL
     this.usuarioService.postUsuario(this.usuarioSeleccionado)
       .subscribe(res => {
+        var error = res as ErrorDTO;
+        if(error.hayError){
+          //MOSTRAR ERROR
+          //error.mensajeError
+        }
+        else{
         console.log(this.usuarioSeleccionado);
         this.getUsuarios();
         usuarioForm.reset();
+        }
       })
   }
 
@@ -47,8 +55,15 @@ export class AdministrarUsuariosComponent implements OnInit {
   eliminarUsuario(idUsuario: number){
     this.usuarioService.deleteUsuario(idUsuario)
       .subscribe(res => {
+        var error = res as ErrorDTO;
+        if(error.hayError){
+          //MOSTRAR ERROR
+          //error.mensajeError
+        }
+        else{
         console.log("Usuario eliminado");
         this.getUsuarios();
+        }
       });
   }
 }

@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { RestriccionService } from 'src/app/services/restricciones/restriccion.service';
 import { PersonaService } from 'src/app/services/personas/persona.service';
 import { UsuarioService } from 'src/app/services/login/usuario.service';
+import { ErrorDTO } from 'src/app/models/error-dto';
 
 @Component({
   selector: 'app-administrar-restricciones',
@@ -74,8 +75,15 @@ export class AdministrarRestriccionesComponent implements OnInit {
 
     this.restriccionService.postRestriccion(this.restriccion)
       .subscribe(res => {
+        var error = res as ErrorDTO;
+        if(error.hayError){
+          //MOSTRAR ERROR
+          //error.mensajeError
+        }
+        else{
         console.log("Restricción agregada correctament");
         restriccionForm.reset();
+        }
       })
 
       document.getElementById("labelVictimario").innerHTML = "";

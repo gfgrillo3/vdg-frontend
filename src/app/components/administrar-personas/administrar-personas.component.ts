@@ -3,6 +3,7 @@ import { PersonaService } from 'src/app/services/personas/persona.service';
 import { Persona } from 'src/app/models/persona';
 import { NgForm } from '@angular/forms';
 import { FormPersonaDTO } from 'src/app/models/form-persona-dto';
+import { ErrorDTO } from 'src/app/models/error-dto';
 
 @Component({
   selector: 'app-administrar-personas',
@@ -16,7 +17,7 @@ export class AdministrarPersonasComponent implements OnInit {
   roles;
 
   constructor(private personaService: PersonaService) { 
-    this.roles = ['VICTIMA','VICTIMARIO'];
+    this.roles = ['DAMNIFICADA','VICTIMARIO'];
   }
 
   ngOnInit() {
@@ -39,9 +40,16 @@ export class AdministrarPersonasComponent implements OnInit {
     this.personaDTOSelleccionada.persona.fechaNacimiento = myDate;
     this.personaService.postPersona(this.personaDTOSelleccionada)
       .subscribe(res => {
+        var error = res as ErrorDTO;
+        if(error.hayError){
+          //MOSTRAR ERROR
+          //error.mensajeError
+        }
+        else{
         console.log("persona agregada correctamente");
         this.getPersonas();
         personaForm.reset();
+      }
       })
   }
 
