@@ -30,8 +30,10 @@ export class UsuarioComponent implements OnInit {
     this.usuarioService.login(mail, contrasena)
       .subscribe(res => { 
         datosValidos = res;
-        if(datosValidos)
+        if(datosValidos){
           this.router.navigate(["/inicio"]);
+          localStorage.setItem('emailUsuario', mail);
+        }
         else
           this.setLoginInvalido();
       });   

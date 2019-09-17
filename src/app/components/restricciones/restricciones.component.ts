@@ -13,7 +13,7 @@ export class RestriccionesComponent implements OnInit {
   constructor(private restriccionService : RestriccionService) { }
 
   ngOnInit() {
-//    this.getRestricciones();
+    this.getRestricciones(localStorage.getItem("emailUsuario"));
   }
 
   getRestricciones(email: string){
