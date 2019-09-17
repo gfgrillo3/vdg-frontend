@@ -9,6 +9,7 @@
                         <div class="row">
                             <input class="form-control" type="text" name="nombre" placeholder="Nombre"
                             #nombre="ngModel" [(ngModel)]="personaDTOSelleccionada.persona.nombre"
+                            [ngClass]="{ 'is-invalid': nombre.invalid && nombre.touched, 'is-valid': nombre.valid}" 
                             ngbTooltip="Nombre">
                         </div>
                         <div class="row">
