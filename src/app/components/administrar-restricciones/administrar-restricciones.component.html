@@ -1,4 +1,7 @@
 <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+<div class="alert alert-danger" role="alert" *ngIf="camposIncompletos">
+        Completar todos los campos.
+    </div>
 <div class="container">
     <div class="row">
         <!-- FORMULARIO DE RESTRICCIONES -->
@@ -52,13 +55,13 @@
                         <div class="row">
                             <input class="form-control" type="number" name="distancia" placeholder="Distancia"
                                 ngbTooltip="Distancia restricción" #distancia="ngModel"
-                                [(ngModel)]="restriccion.distancia">
+                                [(ngModel)]="restriccion.distancia" required>
                         </div>
                         <div class="row">
                             <div class="input-group">
                                 <input class="form-control" placeholder="Fecha (Año-Mes-Día)" name="dp"
                                     [(ngModel)]="restriccion.fechaSentencia" ngbDatepicker #d="ngbDatepicker"
-                                    ngbTooltip="Fecha de sentencia">
+                                    ngbTooltip="Fecha de sentencia" required>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
                                         type="button">
@@ -68,7 +71,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button class="btn btn-primary btn-block">
+                            <button class="btn btn-primary btn-block" [disabled]="!restriccionForm.valid">
                                 Agregar</button>
                         </div>
                     </form>

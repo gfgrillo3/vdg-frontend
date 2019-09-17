@@ -26,6 +26,8 @@ export class AdministrarRestriccionesComponent implements OnInit {
   private _success = new Subject<string>();
   successMessage: string;
 
+  camposIncompletos = false;
+
   constructor(private restriccionService: RestriccionService,
     private personaService: PersonaService,
     private usuarioService: UsuarioService) { }
@@ -85,6 +87,11 @@ export class AdministrarRestriccionesComponent implements OnInit {
     let myDate = new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
     this.restriccion.fechaSentencia = myDate;
 
+    if(this.restriccion.idDamnificada == 0 || this.restriccion.idVictimario == 0 
+      || this.restriccion.idDamnificada ==0){
+        this.setCamposIncompletos();
+      }
+    else{
     this.restriccionService.postRestriccion(this.restriccion)
       .subscribe(res => {
         var error = res as ErrorDTO;
@@ -104,12 +111,20 @@ export class AdministrarRestriccionesComponent implements OnInit {
     document.getElementById("labelVictimario").innerHTML = "";
     document.getElementById("labelDamnificada").innerHTML = "";
     document.getElementById("labelAdministrativo").innerHTML = "";
+    }
   }
 
   confirm() {
     if (window.confirm("Are you sure to delete ")) {
       console.log("eliminar restriccion");
     }
+  }
+
+  setCamposIncompletos(): void{
+    this.camposIncompletos = true;
+    setTimeout(() => {
+      this.camposIncompletos = false;
+    }, 5000);  
   }
 
 }
