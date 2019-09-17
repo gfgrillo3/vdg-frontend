@@ -13,15 +13,14 @@ export class RestriccionesComponent implements OnInit {
   constructor(private restriccionService : RestriccionService) { }
 
   ngOnInit() {
-    this.getRestricciones();
+//    this.getRestricciones();
   }
 
-  getRestricciones(){
-   this.restriccionService.getRestricciones()
+  getRestricciones(email: string){
+   this.restriccionService.getRestriccionesAdministrativo(email)
    .subscribe(res =>  {
      this.restriccionService.restricciones = res as RestriccionDTO[];
      console.log(res);
    })
   }
-
 }

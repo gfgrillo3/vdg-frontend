@@ -24,9 +24,9 @@ export class RestriccionService {
     return this.http.post(this.URL_API, restriccion);
   }
 
-  getRestriccionesAdministrativo(idUsuario: number){
+  getRestriccionesAdministrativo(email: string){
     return this.http.get("http://localhost:9090/RestriccionDTO/getByUsuario/"+
-      idUsuario);
+      email);
   }
 
 }

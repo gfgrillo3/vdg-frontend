@@ -11,14 +11,6 @@
                 <tr *ngFor="let restriccion of restriccionService.restricciones" class="table-active">
                     <td>{{restriccion.victimario.apellido}}</td>
                     <td>{{restriccion.damnificada.apellido}}</td>
-                    <td>
-                        <a>
-                            <i class="material-icons">editar</i>
-                        </a>
-                        <a>
-                            <i class="material-icons">delete</i>
-                        </a>
-                    </td>
                 </tr>
             </tbody>
         </table>
