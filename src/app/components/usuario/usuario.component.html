@@ -1,26 +1,27 @@
 <div class="container">
     <div class="col-4 mx-auto">
         <div class="card border-primary mb-3 text-center">
-            <form #usuarioForm="ngForm" (ngSubmit)="ingresar(usuarioForm)">
+            <form #usuarioForm="ngForm" (ngSubmit)="ingresar(usuarioForm)" novalidate>
                 <fieldset>
                     <legend>Iniciar Sesión</legend>
 
                     <div class="form-group">
                         <i class="large material-icons">person</i>
-                        <input type="text" class="form-control" placeholder="Email"
-                            name="mail" #mail="ngModel" autofocus
+                        <input type="text"  class="form-control" 
+                            [ngClass]="{ 'is-invalid': mail.invalid && mail.touched, 'is-valid': mail.valid}" 
+                            placeholder="Email" name="mail" #mail="ngModel" autofocus
                             [(ngModel)]="usuarioService.usuarioSeleccionado.email" required email>
-                            
+                            <div class="invalid-feedback d-block" *ngIf="mail.invalid && (mail.dirty || mail.touched)">
+                                    <div *ngIf="mail.errors.required">
+                                      Email requerido
+                                    </div>
+                                    <div *ngIf="mail.errors.email">
+                                      Email invalido
+                                    </div>
+                                  </div>
                         <small id="emailHelp" class="form-text text-muted">Ingrese su email</small>
                         
-                        <div class="alert alert-danger" *ngIf="mail.invalid && (mail.dirty || mail.touched)">
-                                <div *ngIf="mail.errors.required">
-                                  Email requerido
-                                </div>
-                                <div *ngIf="mail.errors.email">
-                                  Email invalido
-                                </div>
-                              </div>
+                       
 
                     </div>
 
@@ -28,9 +29,10 @@
                         <i class="large material-icons">https</i>
                         <input type="password" class="form-control" placeholder="Password"
                             name="contrasena" #contrasena="ngModel"
+                            [ngClass]="{ 'is-invalid': contrasena.invalid && contrasena.touched, 'is-valid': contrasena.valid}" 
                             [(ngModel)]="usuarioService.usuarioSeleccionado.contrasena" required>
 
-                            <div class="alert alert-danger" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
+                            <div class="invalid-feedback d-block" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
                                     <div *ngIf="contrasena.errors.required">
                                       Contraseña requerida.
                                     </div>
