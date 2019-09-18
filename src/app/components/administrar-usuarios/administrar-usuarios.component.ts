@@ -15,6 +15,9 @@ export class AdministrarUsuariosComponent implements OnInit {
   rolSeleccionado;
   usuarioSeleccionado = new Usuario;
 
+  hayError = false;
+  mensajeError: String;
+
   constructor(private usuarioService: UsuarioService) {
     this.roles = ['SUPERVISOR','ADMINISTRATIVO'];
   }
@@ -39,7 +42,8 @@ export class AdministrarUsuariosComponent implements OnInit {
         var error = res as ErrorDTO;
         if(error.hayError){
           //MOSTRAR ERROR
-          //error.mensajeError
+          this.mensajeError = error.mensajeError;
+          this.setHayError();
         }
         else{
         console.log(this.usuarioSeleccionado);
@@ -58,12 +62,20 @@ export class AdministrarUsuariosComponent implements OnInit {
         var error = res as ErrorDTO;
         if(error.hayError){
           //MOSTRAR ERROR
-          //error.mensajeError
+          this.mensajeError = error.mensajeError;
+          this.setHayError();
         }
         else{
         console.log("Usuario eliminado");
         this.getUsuarios();
         }
       });
+  }
+
+  setHayError(): void{
+    this.hayError = true;
+    setTimeout(() => {
+      this.hayError = false;
+    }, 5000);  
   }
 }

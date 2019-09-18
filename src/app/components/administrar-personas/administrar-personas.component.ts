@@ -16,6 +16,9 @@ export class AdministrarPersonasComponent implements OnInit {
   rolSeleccionado;
   roles;
 
+  hayError = false;
+  mensajeError: String;
+
   constructor(private personaService: PersonaService) { 
     this.roles = ['DAMNIFICADA','VICTIMARIO'];
   }
@@ -43,7 +46,8 @@ export class AdministrarPersonasComponent implements OnInit {
         var error = res as ErrorDTO;
         if(error.hayError){
           //MOSTRAR ERROR
-          //error.mensajeError
+          this.mensajeError = error.mensajeError;
+          this.setHayError();
         }
         else{
         console.log("persona agregada correctamente");
@@ -53,4 +57,10 @@ export class AdministrarPersonasComponent implements OnInit {
       })
   }
 
+  setHayError(): void{
+    this.hayError = true;
+    setTimeout(() => {
+      this.hayError = false;
+    }, 5000);  
+  }
 }
