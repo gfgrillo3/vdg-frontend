@@ -116,9 +116,9 @@ export class AdministrarRestriccionesComponent implements OnInit {
           document.getElementById("labelVictimario").innerHTML = "";
           document.getElementById("labelDamnificada").innerHTML = "";
           document.getElementById("labelAdministrativo").innerHTML = "";
-          this.victimario = null;
-          this.damnificada = null;
-          this.administrativo = null;
+          this.victimario = new Persona;
+          this.damnificada = new Persona;
+          this.administrativo = new Usuario;
         }
       })
 
