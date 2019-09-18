@@ -58,7 +58,6 @@ export class AdministrarUsuariosComponent implements OnInit {
         var error = res as ErrorDTO;
         if (error.hayError) {
           //MOSTRAR ERROR
-          //error.mensajeError
           this.toastr.error("" + error.mensajeError, "Error!");
         }
         else {

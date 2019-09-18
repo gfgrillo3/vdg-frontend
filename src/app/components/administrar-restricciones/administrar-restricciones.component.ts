@@ -9,6 +9,7 @@ import { UsuarioService } from 'src/app/services/login/usuario.service';
 import { RestriccionDTO } from 'src/app/models/restriccion-dto';
 import { ErrorDTO } from 'src/app/models/error-dto';
 import { Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-administrar-restricciones',
@@ -22,23 +23,14 @@ export class AdministrarRestriccionesComponent implements OnInit {
   administrativo = new Usuario;
   restriccion = new Restriccion;
 
-  //ALERTA
-  private _success = new Subject<string>();
-  successMessage: string;
-
   camposIncompletos = false;
-  mensajeError: String;
-
+  
   constructor(private restriccionService: RestriccionService,
     private personaService: PersonaService,
-    private usuarioService: UsuarioService) { }
+    private usuarioService: UsuarioService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getRestricciones();
-
-    //ALERTA
-    setTimeout(() => this.successMessage = null, 10000);
-    this._success.subscribe((message) => this.successMessage = message);
   }  
 
   getRestricciones() {
@@ -54,7 +46,7 @@ export class AdministrarRestriccionesComponent implements OnInit {
     this.personaService.getPersonaByDNI(this.victimario.dni)
       .subscribe(res => {
         if(res==null){
-          this.mensajeError = "Verificar el DNI de victimario ingresado.";
+          this.toastr.error("Verificar el DNI de victimario ingresado.", "Error!");
           this.setCamposIncompletos();
           return;
         }
@@ -70,7 +62,7 @@ export class AdministrarRestriccionesComponent implements OnInit {
     this.personaService.getPersonaByDNI(this.damnificada.dni)
       .subscribe(res => {
         if(res==null){
-          this.mensajeError = "Verificar el DNI de damnificada ingresado.";
+          this.toastr.error("Verificar el DNI de damnificada ingresado.", "Error!");          
           this.setCamposIncompletos();
           return;
         }
@@ -84,7 +76,7 @@ export class AdministrarRestriccionesComponent implements OnInit {
     this.usuarioService.getUsuarioByEmail(this.administrativo.email)
       .subscribe(res => {
         if(res==null){
-          this.mensajeError = "Verificar el email de usuario ingresado.";
+          this.toastr.error("Verificar el email de usuario ingresado.", "Error!");
           this.setCamposIncompletos();
           return;
         }
@@ -105,7 +97,7 @@ export class AdministrarRestriccionesComponent implements OnInit {
 
     if(this.restriccion.idDamnificada == 0 || this.restriccion.idVictimario == 0 
       || this.restriccion.idDamnificada ==0){
-        this.mensajeError = "Completar todos los campos";
+        this.toastr.error("Completar todos los campos", "Error!");
         this.setCamposIncompletos();
       }
     else{
@@ -114,11 +106,11 @@ export class AdministrarRestriccionesComponent implements OnInit {
         var error = res as ErrorDTO;
         if (error.hayError) {
           //MOSTRAR ERROR
-          this.mensajeError = error.mensajeError;
+          this.toastr.error(""+error.mensajeError, "Error!");
           this.setCamposIncompletos();
         }
         else {
-          this._success.next("La restricción se agrego correctamente");
+          this.toastr.success("La restricción se agrego correctamente", "Agregada!");
           restriccionForm.reset();
           this.getRestricciones();
           document.getElementById("labelVictimario").innerHTML = "";

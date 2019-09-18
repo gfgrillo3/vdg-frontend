@@ -4,6 +4,7 @@ import { Persona } from 'src/app/models/persona';
 import { NgForm } from '@angular/forms';
 import { FormPersonaDTO } from 'src/app/models/form-persona-dto';
 import { ErrorDTO } from 'src/app/models/error-dto';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-administrar-personas',
@@ -17,17 +18,16 @@ export class AdministrarPersonasComponent implements OnInit {
   roles;
 
   hayError = false;
-  mensajeError: String;
 
-  constructor(private personaService: PersonaService) { 
-    this.roles = ['DAMNIFICADA','VICTIMARIO'];
+  constructor(private personaService: PersonaService, private toastr: ToastrService) {
+    this.roles = ['DAMNIFICADA', 'VICTIMARIO'];
   }
 
   ngOnInit() {
     this.getPersonas();
   }
 
-  getPersonas(){
+  getPersonas() {
     this.personaService.getPersonas()
       .subscribe(res => {
         this.personaService.personas = res as Persona[];
@@ -35,32 +35,32 @@ export class AdministrarPersonasComponent implements OnInit {
       })
   }
 
-  agregarPersona(personaForm: NgForm){
-    this.personaDTOSelleccionada.usuario.rolDeUsuario=this.rolSeleccionado;
+  agregarPersona(personaForm: NgForm) {
+    this.personaDTOSelleccionada.usuario.rolDeUsuario = this.rolSeleccionado;
 
     let ngbDate = personaForm.value.fechaNacimiento;
-    let myDate = new Date(ngbDate.year, ngbDate.month-1, ngbDate.day);
+    let myDate = new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
     this.personaDTOSelleccionada.persona.fechaNacimiento = myDate;
     this.personaService.postPersona(this.personaDTOSelleccionada)
       .subscribe(res => {
         var error = res as ErrorDTO;
-        if(error.hayError){
+        if (error.hayError) {
           //MOSTRAR ERROR
-          this.mensajeError = error.mensajeError;
+          this.toastr.error("" + error.mensajeError, "Error!");
           this.setHayError();
         }
-        else{
-        console.log("persona agregada correctamente");
-        this.getPersonas();
-        personaForm.reset();
-      }
+        else {
+          this.toastr.success("Persona agregada correctamente", "Agregada!");
+          this.getPersonas();
+          personaForm.reset();
+        }
       })
   }
 
-  setHayError(): void{
+  setHayError(): void {
     this.hayError = true;
     setTimeout(() => {
       this.hayError = false;
-    }, 5000);  
+    }, 5000);
   }
 }
