@@ -1,6 +1,6 @@
 <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
 <div class="alert alert-danger" role="alert" *ngIf="camposIncompletos">
-        Completar todos los campos.
+        {{ mensajeError }}
     </div>
 <div class="container">
     <div class="row">

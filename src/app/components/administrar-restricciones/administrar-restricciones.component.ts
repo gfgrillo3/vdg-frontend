@@ -27,6 +27,7 @@ export class AdministrarRestriccionesComponent implements OnInit {
   successMessage: string;
 
   camposIncompletos = false;
+  mensajeError: String;
 
   constructor(private restriccionService: RestriccionService,
     private personaService: PersonaService,
@@ -52,6 +53,11 @@ export class AdministrarRestriccionesComponent implements OnInit {
     //ACA TRAIGO AL VICTIMARIO
     this.personaService.getPersonaByDNI(this.victimario.dni)
       .subscribe(res => {
+        if(res==null){
+          this.mensajeError = "Verificar el DNI de victimario ingresado.";
+          this.setCamposIncompletos();
+          return;
+        }
         this.victimario = res;
         document.getElementById("labelVictimario").innerHTML =
          "Victimario: " + this.victimario.apellido + ", " + this.victimario.nombre;
@@ -63,6 +69,11 @@ export class AdministrarRestriccionesComponent implements OnInit {
     //ACA TRAIGO LA DAMNIFICADA
     this.personaService.getPersonaByDNI(this.damnificada.dni)
       .subscribe(res => {
+        if(res==null){
+          this.mensajeError = "Verificar el DNI de damnificada ingresado.";
+          this.setCamposIncompletos();
+          return;
+        }
         this.damnificada = res;
         document.getElementById("labelDamnificada").innerHTML =
           "Damnificada: " + this.damnificada.apellido + ", " + this.damnificada.nombre;
@@ -72,6 +83,11 @@ export class AdministrarRestriccionesComponent implements OnInit {
   agregarAdministrativo() {
     this.usuarioService.getUsuarioByEmail(this.administrativo.email)
       .subscribe(res => {
+        if(res==null){
+          this.mensajeError = "Verificar el email de usuario ingresado.";
+          this.setCamposIncompletos();
+          return;
+        }
         this.administrativo = res;
         document.getElementById("labelAdministrativo").innerHTML =
           "Administrativo: " + this.administrativo.email;
@@ -89,6 +105,7 @@ export class AdministrarRestriccionesComponent implements OnInit {
 
     if(this.restriccion.idDamnificada == 0 || this.restriccion.idVictimario == 0 
       || this.restriccion.idDamnificada ==0){
+        this.mensajeError = "Completar todos los campos";
         this.setCamposIncompletos();
       }
     else{
@@ -97,20 +114,23 @@ export class AdministrarRestriccionesComponent implements OnInit {
         var error = res as ErrorDTO;
         if (error.hayError) {
           //MOSTRAR ERROR
-          //error.mensajeError
-          //this._success.next(error.mensajeError);
-
+          this.mensajeError = error.mensajeError;
+          this.setCamposIncompletos();
         }
         else {
           this._success.next("La restricción se agrego correctamente");
           restriccionForm.reset();
           this.getRestricciones();
+          document.getElementById("labelVictimario").innerHTML = "";
+          document.getElementById("labelDamnificada").innerHTML = "";
+          document.getElementById("labelAdministrativo").innerHTML = "";
+          this.victimario = null;
+          this.damnificada = null;
+          this.administrativo = null;
         }
       })
 
-    document.getElementById("labelVictimario").innerHTML = "";
-    document.getElementById("labelDamnificada").innerHTML = "";
-    document.getElementById("labelAdministrativo").innerHTML = "";
+    
     }
   }
 
