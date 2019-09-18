@@ -8,54 +8,59 @@
                     <form #personaForm="ngForm" (ngSubmit)="agregarPersona(personaForm)" novalidate>
                         <div class="row">
                             <input class="form-control" type="text" name="nombre" placeholder="Nombre"
-                            [ngClass]="{ 'is-invalid': nombre.invalid && nombre.touched, 'is-valid': nombre.valid}" 
-                            #nombre="ngModel" [(ngModel)]="personaDTOSelleccionada.persona.nombre"
-                            ngbTooltip="Nombre" required maxlength="50">
-                            <div class="invalid-feedback d-block" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                                [ngClass]="{ 'is-invalid': nombre.invalid && nombre.touched, 'is-valid': nombre.valid}"
+                                #nombre="ngModel" [(ngModel)]="personaDTOSelleccionada.persona.nombre"
+                                ngbTooltip="Nombre" required maxlength="50">
+                            <div class="invalid-feedback d-block"
+                                *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
                                 Nombre requerido
                             </div>
                         </div>
                         <div class="row">
                             <input class="form-control" type="text" name="apellido" placeholder="Apellido"
-                            [ngClass]="{ 'is-invalid': apellido.invalid && apellido.touched, 'is-valid': apellido.valid}" 
-                            #apellido="ngModel" [(ngModel)]="personaDTOSelleccionada.persona.apellido"
-                            ngbTooltip="Apellido" required maxlength="50">
-                            <div class="invalid-feedback d-block" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
-                                    Apellido requerido
+                                [ngClass]="{ 'is-invalid': apellido.invalid && apellido.touched, 'is-valid': apellido.valid}"
+                                #apellido="ngModel" [(ngModel)]="personaDTOSelleccionada.persona.apellido"
+                                ngbTooltip="Apellido" required maxlength="50">
+                            <div class="invalid-feedback d-block"
+                                *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+                                Apellido requerido
                             </div>
                         </div>
                         <div class="row">
-                            <input class="form-control" type="number" name="DNI" placeholder="DNI"
-                            #DNI="ngModel" [(ngModel)]="personaDTOSelleccionada.persona.dni"
-                            [ngClass]="{ 'is-invalid': DNI.invalid && DNI.touched, 'is-valid': DNI.valid}"
-                            ngbTooltip="DNI" required maxlength="10" pattern="^[0-9]+">
+                            <input class="form-control" type="number" name="DNI" placeholder="DNI" #DNI="ngModel"
+                                [(ngModel)]="personaDTOSelleccionada.persona.dni"
+                                [ngClass]="{ 'is-invalid': DNI.invalid && DNI.touched, 'is-valid': DNI.valid}"
+                                ngbTooltip="DNI" required maxlength="10" pattern="^[0-9]+">
                             <div class="invalid-feedback d-block" *ngIf="DNI.invalid && (DNI.dirty || DNI.touched)">
-                                    DNI requerido
+                                DNI requerido
                             </div>
                         </div>
                         <div class="row">
-                                <input class="form-control" type="number" name="telefono" placeholder="Teléfono"
+                            <input class="form-control" type="number" name="telefono" placeholder="Teléfono"
                                 #telefono="ngModel" [(ngModel)]="personaDTOSelleccionada.persona.telefono"
-                                [ngClass]="{ 'is-invalid': telefono.invalid && telefono.touched, 'is-valid': telefono.valid}" 
+                                [ngClass]="{ 'is-invalid': telefono.invalid && telefono.touched, 'is-valid': telefono.valid}"
                                 ngbTooltip="Teléfono" required maxlength="30" pattern="^[0-9]+">
-                                <div class="invalid-feedback d-block" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
-                                        Telefono requerido
-                                </div>
+                            <div class="invalid-feedback d-block"
+                                *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
+                                Telefono requerido
+                            </div>
                         </div>
                         <div class="row">
-                                <input class="form-control" type="text" name="email" placeholder="Email"
-                                #email="ngModel" [(ngModel)]="personaDTOSelleccionada.usuario.email"
-                                [ngClass]="{ 'is-invalid': email.invalid && email.touched, 'is-valid': email.valid}" 
-                                ngbTooltip="Email" required email maxlength="50" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                                <div class="invalid-feedback d-block" *ngIf="email.invalid && (email.dirty || email.touched)">
-                                        Email requerido
-                                </div>
+                            <input class="form-control" type="text" name="email" placeholder="Email" #email="ngModel"
+                                [(ngModel)]="personaDTOSelleccionada.usuario.email"
+                                [ngClass]="{ 'is-invalid': email.invalid && email.touched, 'is-valid': email.valid}"
+                                ngbTooltip="Email" required email maxlength="50"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                            <div class="invalid-feedback d-block"
+                                *ngIf="email.invalid && (email.dirty || email.touched)">
+                                Email requerido
+                            </div>
                         </div>
                         <div class="row">
                             <div class="input-group">
-                                <input class="form-control" placeholder="Fecha nacimiento (Año-Mes-Día)" name="fechaNacimiento"
-                                    [(ngModel)]="personaDTOSelleccionada.persona.fechaNacimiento" ngbDatepicker #d="ngbDatepicker"
-                                    ngbTooltip="Fecha nacimiento" required readonly>
+                                <input class="form-control" placeholder="Fecha nacimiento (Año-Mes-Día)"
+                                    name="fechaNacimiento" [(ngModel)]="personaDTOSelleccionada.persona.fechaNacimiento"
+                                    ngbDatepicker #d="ngbDatepicker" ngbTooltip="Fecha nacimiento" required readonly>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
                                         type="button">
@@ -67,45 +72,46 @@
                         <div class="row">
                             <div class="form-group btn-block">
                                 <select class="form-control" name="rolSeleccionado" [(ngModel)]="rolSeleccionado"
-                                ngbTooltip="Rol de persona" required>
+                                    ngbTooltip="Rol de persona" required>
                                     <option *ngFor="let rol of roles">
                                         {{rol}}
-                                      </option>
+                                    </option>
                                 </select>
                             </div>
                         </div>
                         <label>Dirección</label>
                         <div class="row">
-                                <input class="form-control" type="text" name="calle" placeholder="Calle"
-                                #calle="ngModel" [(ngModel)]="personaDTOSelleccionada.direccion.calle"
-                                [ngClass]="{ 'is-invalid': calle.invalid && calle.touched, 'is-valid': calle.valid}" 
+                            <input class="form-control" type="text" name="calle" placeholder="Calle" #calle="ngModel"
+                                [(ngModel)]="personaDTOSelleccionada.direccion.calle"
+                                [ngClass]="{ 'is-invalid': calle.invalid && calle.touched, 'is-valid': calle.valid}"
                                 ngbTooltip="Calle" required maxlength="50">
-                                <div class="invalid-feedback d-block" *ngIf="calle.invalid && (calle.dirty || calle.touched)">
-                                        Calle requerida
-                                </div>
+                            <div class="invalid-feedback d-block"
+                                *ngIf="calle.invalid && (calle.dirty || calle.touched)">
+                                Calle requerida
                             </div>
-                        <div class="row">
-                                <input class="form-control" type="number" name="altura" placeholder="Altura"
-                                #altura="ngModel" [(ngModel)]="personaDTOSelleccionada.direccion.altura"
-                                [ngClass]="{ 'is-invalid': altura.invalid && altura.touched, 'is-valid': altura.valid}" 
-                                ngbTooltip="Altura" required maxlength="8" pattern="^[0-9]+">
-                                <div class="invalid-feedback d-block" *ngIf="altura.invalid && (altura.dirty || altura.touched)">
-                                        Altura requerida
-                                </div>
                         </div>
                         <div class="row">
-                            <input class="form-control" type="number" name="piso" placeholder="Piso"
-                            #piso="ngModel" [(ngModel)]="personaDTOSelleccionada.direccion.piso"
-                            ngbTooltip="Piso" maxlength="3">
+                            <input class="form-control" type="number" name="altura" placeholder="Altura"
+                                #altura="ngModel" [(ngModel)]="personaDTOSelleccionada.direccion.altura"
+                                [ngClass]="{ 'is-invalid': altura.invalid && altura.touched, 'is-valid': altura.valid}"
+                                ngbTooltip="Altura" required maxlength="8" pattern="^[0-9]+">
+                            <div class="invalid-feedback d-block"
+                                *ngIf="altura.invalid && (altura.dirty || altura.touched)">
+                                Altura requerida
+                            </div>
+                        </div>
+                        <div class="row">
+                            <input class="form-control" type="number" name="piso" placeholder="Piso" #piso="ngModel"
+                                [(ngModel)]="personaDTOSelleccionada.direccion.piso" ngbTooltip="Piso" maxlength="3">
                         </div>
                         <div class="row">
                             <input class="form-control" type="text" name="departamento" placeholder="Departamento"
-                            #departamento="ngModel" [(ngModel)]="personaDTOSelleccionada.direccion.departamento"
-                            ngbTooltip="Departamento" maxlength="8">
+                                #departamento="ngModel" [(ngModel)]="personaDTOSelleccionada.direccion.departamento"
+                                ngbTooltip="Departamento" maxlength="8">
                         </div>
                         <div class="row">
                             <input class="form-control" type="text" name="localidad" placeholder="Localidad"
-                            ngbTooltip="Localidad" required>
+                                ngbTooltip="Localidad" required>
                         </div>
                         <div class="row">
                             <button class="btn btn-primary btn-block" [disabled]="!personaForm.valid">Agregar</button>
