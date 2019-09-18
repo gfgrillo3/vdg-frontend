@@ -40,11 +40,9 @@ export class AdministrarUsuariosComponent implements OnInit {
         var error = res as ErrorDTO;
         if (error.hayError) {
           //MOSTRAR ERROR
-          //error.mensajeError
         }
         else {
-          this.showToastr();
-          console.log(this.usuarioSeleccionado);
+          this.toastr.success('Usuario agregado correctamente', 'Agregado!');
           this.getUsuarios();
           usuarioForm.reset();
         }
@@ -64,13 +62,9 @@ export class AdministrarUsuariosComponent implements OnInit {
           this.toastr.error("" + error.mensajeError, "Error!");
         }
         else {
-          this.toastr.success('Usuario eliminado correctamente', 'Toastr fun!');
+          this.toastr.success('Usuario eliminado correctamente', 'Eliminado!');
           this.getUsuarios();
         }
       });
-  }
-
-  showToastr() {
-    this.toastr.success('Hello', 'Toastr fun!');
   }
 }
