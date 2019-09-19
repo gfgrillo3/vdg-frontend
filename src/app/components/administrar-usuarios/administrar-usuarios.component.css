@@ -18,3 +18,8 @@
 .label{
     margin-top: 15px;
 }
+
+table tr:hover {
+    background-color: azure;
+    cursor: pointer;
+}

@@ -83,7 +83,7 @@
                                 </select>
                             </div>
                         </div>
-                        <label>Domicilio</label>
+                        <legend>Domicilio</legend>
                         <div class="row">
                             <input class="form-control" type="text" name="calle" placeholder="Calle" #calle="ngModel"
                                 [(ngModel)]="personaDTOSelleccionada.direccion.calle"
@@ -137,8 +137,8 @@
                                 </select>
                             </div>
                         </div>
+                        <legend *ngIf="mostrarImagen">Foto Agresor</legend>
                         <div class="row" *ngIf="mostrarImagen">
-                            <label>Foto Agresor</label>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customFile"
                                     (change)="archivoSeleccionado($event)" accept="image/*">
