@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.service';
 
 @Component({
   selector: 'app-incidencias',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IncidenciasComponent implements OnInit {
 
-  constructor() { }
+  constructor(private comunicacionServicio: ComunicacionService) { }
 
   ngOnInit() {
   }
