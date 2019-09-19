@@ -76,6 +76,7 @@ export class RestriccionesComponent implements OnInit {
       imgSize: [60, 60]
     }))
   }));
+  
 //Dibujo Circulo y le aplico un estilo
 var feature = new Feature();
 var geom = new Circle(fromLonLat([this.longitud, this.latitud]));
