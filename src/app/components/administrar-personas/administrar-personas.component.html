@@ -138,10 +138,10 @@
                             </div>
                         </div>
                         <div class="row" *ngIf="mostrarImagen">
-                                <label>Foto Agresor</label>
-                                <div class="custom-file">
+                            <label>Foto Agresor</label>
+                            <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customFile"
-                                    (change)="archivoSeleccionado($event)">
+                                    (change)="archivoSeleccionado($event)" accept="image/*">
                                 <label class="custom-file-label" id="labelImagen" for="customFile">Choose file</label>
                             </div>
                         </div>
