@@ -76,7 +76,7 @@
                             <label>Rol Persona</label>
                             <div class="form-group btn-block">
                                 <select class="form-control" name="rolSeleccionado" [(ngModel)]="rolSeleccionado"
-                                    ngbTooltip="Rol de persona" required>
+                                    ngbTooltip="Rol de persona" (change)="cambioRol()" required>
                                     <option *ngFor="let rol of roles">
                                         {{rol}}
                                     </option>
@@ -137,11 +137,12 @@
                                 </select>
                             </div>
                         </div>
-                        <label>Foto Agresor</label>
-                        <div class="row">
+                        <div class="row" *ngIf="mostrarImagen">
+                            <label>Foto Agresor</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" accept="image/*">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <input type="file" class="custom-file-input" id="customFile"
+                                    (change)="archivoSeleccionado($event)" accept="image/*">
+                                <label class="custom-file-label" id="labelImagen" for="customFile">Choose file</label>
                             </div>
                         </div>
                         <br>

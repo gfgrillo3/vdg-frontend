@@ -17,6 +17,9 @@ export class AdministrarPersonasComponent implements OnInit {
   rolSeleccionado;
   roles;
 
+  mostrarImagen: boolean = false;
+  imagenSeleccionada: File = null;
+
   hayError = false;
 
   constructor(private personaService: PersonaService, private toastr: ToastrService) {
@@ -63,4 +66,21 @@ export class AdministrarPersonasComponent implements OnInit {
       this.hayError = false;
     }, 5000);
   }
+
+  archivoSeleccionado(event){
+    this.imagenSeleccionada = event.target.files[0];
+    if(this.imagenSeleccionada!=null)
+      document.getElementById("labelImagen").innerHTML = ""+this.imagenSeleccionada.name;
+    else
+      document.getElementById("labelImagen").innerHTML = "Choose File";
+    console.log(this.imagenSeleccionada);
+  }
+
+  cambioRol(){
+    if(this.rolSeleccionado=="VICTIMARIO")
+      this.mostrarImagen= true;
+    else
+      this.mostrarImagen= false;
+  }
+
 }
