@@ -1,6 +1,6 @@
 export class Direccion {
 
-    constructor(idDireccion=0,calle='',altura='',piso='',departamento='',idLocalidad=1){
+    constructor(idDireccion=0,calle='',altura='',piso='',departamento='',idLocalidad=2156){
         this.idDireccion=idDireccion;
         this.altura=altura;
         this.piso=piso;
