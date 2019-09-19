@@ -10,26 +10,17 @@ declare var ol: any;
   providers: [RestriccionService]
 })
 export class RestriccionesComponent implements OnInit {
-  latitude: number = -34.522249;
-  longitude: number = -58.700233;
-
+  
+  //Latitud y longitud centrada en la UNGS
+  latitud: number = -34.522249;
+  longitud: number = -58.700233;
   map: any;
+
   constructor(private restriccionService : RestriccionService) { }
 
   ngOnInit() {
     this.getRestricciones(localStorage.getItem("emailUsuario"));
-    this.map = new ol.Map({
-      target: 'map',
-      layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM()
-        })
-      ],
-      view: new ol.View({
-        center: ol.proj.fromLonLat([this.longitude, this.latitude]),
-        zoom: 18
-      })
-    });
+    this.iniciarMapa();
   }
 
   getRestricciones(email: string){
@@ -38,5 +29,20 @@ export class RestriccionesComponent implements OnInit {
      this.restriccionService.restricciones = res as RestriccionDTO[];
      console.log(res);
    })
+  }
+
+  iniciarMapa(){
+    this.map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        })
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat([this.longitud, this.latitud]),
+        zoom: 18
+      })
+    });
   }
 }
