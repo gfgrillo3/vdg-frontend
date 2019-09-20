@@ -128,8 +128,11 @@ export class AdministrarPersonasComponent implements OnInit {
   //SELECCION DE LOCALIDAD
   cambioLocalidad(){
     for (var i = 0; i< this.localidades.length; i++) {
-      if(this.localidades[i].nombre == this.localidadSeleccionada)
+      if(this.localidades[i].nombre == this.localidadSeleccionada){
         this.personaDTOSelleccionada.direccion.idLocalidad = this.localidades[i].idLocalidad;
+        return;
+      }
     }
   }
+ 
 }
