@@ -63,7 +63,8 @@
                             <div class="input-group">
                                 <input class="form-control" placeholder="Fecha nacimiento (Año-Mes-Día)"
                                     name="fechaNacimiento" [(ngModel)]="personaDTOSelleccionada.persona.fechaNacimiento"
-                                    ngbDatepicker #d="ngbDatepicker" ngbTooltip="Fecha nacimiento" required readonly>
+                                    ngbDatepicker [minDate]="{year: 1900, month: 1, day: 1}" [maxDate]="maxDatePicker" #d="ngbDatepicker" ngbTooltip="Fecha nacimiento" 
+                                    required readonly>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
                                         type="button">

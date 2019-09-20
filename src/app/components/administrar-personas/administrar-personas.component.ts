@@ -17,6 +17,8 @@ import { Localidad } from 'src/app/models/localidad';
 export class AdministrarPersonasComponent implements OnInit {
 
   personaDTOSelleccionada = new FormPersonaDTO;
+  fecha: Date = new Date();
+  maxDatePicker = { year: this.fecha.getFullYear(), month: this.fecha.getMonth() + 1, day: this.fecha.getDate() };
 
   //COMBO ROLES
   rolSeleccionado;

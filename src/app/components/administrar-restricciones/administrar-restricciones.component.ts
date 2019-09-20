@@ -24,6 +24,8 @@ export class AdministrarRestriccionesComponent implements OnInit {
   restriccion = new Restriccion;
 
   camposIncompletos = false;
+  fecha: Date = new Date();
+  maxDatePicker = { year: this.fecha.getFullYear(), month: this.fecha.getMonth() + 1, day: this.fecha.getDate() };
   
   constructor(private restriccionService: RestriccionService,
     private personaService: PersonaService,
