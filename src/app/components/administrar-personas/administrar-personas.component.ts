@@ -95,6 +95,21 @@ export class AdministrarPersonasComponent implements OnInit {
     console.log(this.imagenSeleccionada);
   }
 
+  eliminarPersona(idPersona: number) {
+    this.personaService.deletePersona(idPersona)
+      .subscribe(res => {
+        var error = res as ErrorDTO;
+        if (error.hayError) {
+          //MOSTRAR ERROR
+          this.toastr.error("" + error.mensajeError, "Error!");
+        }
+        else {
+          this.toastr.success('Persona eliminada correctamente', 'Eliminada!');
+          this.getPersonas();
+        }
+      });
+  }
+
   //SELECCION DE ROL PARA MOSTRAR U OCULTAR IMAGEN
   cambioRol(){
     if(this.rolSeleccionado=="VICTIMARIO")

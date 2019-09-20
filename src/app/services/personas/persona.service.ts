@@ -30,4 +30,8 @@ export class PersonaService {
     return this.http.get<Persona>("http://localhost:9090/Persona/GetByDni/"+dni);
   }
 
+  deletePersona(id: number){
+    return this.http.delete(this.URL_API + `/${id}`);
+  }
+
 }
