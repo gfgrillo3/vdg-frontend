@@ -5,7 +5,7 @@
             <div class="card bg-light mb-3" style="max-width: 20rem;">
                 <div class="card-body">
                     <legend>Restricción Perimetral</legend>
-                    <form #restriccionForm="ngForm" (ngSubmit)="agregarRestriccion(restriccionForm)">
+                    <form #restriccionForm="ngForm" (ngSubmit)="agregarRestriccion(restriccionForm)" novalidate>
                         <div class="row">
                             <div class="input-group">
                                 <input class="form-control" type="text" name="dniVictimario"
@@ -51,7 +51,12 @@
                         <div class="row">
                             <input class="form-control" type="number" name="distancia" placeholder="Distancia"
                                 ngbTooltip="Distancia restricción" #distancia="ngModel"
-                                [(ngModel)]="restriccion.distancia" required>
+                                [ngClass]="{ 'is-invalid': distancia.invalid && distancia.touched, 'is-valid': distancia.valid}"
+                                [(ngModel)]="restriccion.distancia" pattern="^[0-9]+" required>
+                                <div class="invalid-feedback d-block"
+                                *ngIf="distancia.invalid && (distancia.dirty || distancia.touched)">
+                                Distancia requerida
+                            </div>
                         </div>
                         <div class="row">
                             <div class="input-group">
