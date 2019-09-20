@@ -143,8 +143,8 @@
                         <div class="row" *ngIf="mostrarImagen">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customFile"
-                                    (change)="archivoSeleccionado($event)" accept="image/*">
-                                <label class="custom-file-label" id="labelImagen" for="customFile">Choose file</label>
+                                    (change)="archivoSeleccionado($event)" accept="image/*" required>
+                                <label class="custom-file-label" id="labelImagen" for="customFile">Seleccionar imagen</label>
                             </div>
                         </div>
                         <br>
