@@ -14,6 +14,8 @@ import { Circle } from 'ol/geom';
 
 
 import { fromLonLat } from 'ol/proj';
+import { Restriccion } from 'src/app/models/restriccion';
+import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.service';
 
 @Component({
   selector: 'app-restricciones',
@@ -33,7 +35,7 @@ export class RestriccionesComponent implements OnInit {
   ubicacionVictimario; //: Ubicacion;
   ubicacionDamnificada; //: Ubicacion;
   
-  constructor(private restriccionService: RestriccionService) { }
+  constructor(private restriccionService: RestriccionService, private comunicacion: ComunicacionService) { }
 
   ngOnInit() {
     this.getRestricciones(localStorage.getItem("emailUsuario"));
@@ -46,6 +48,10 @@ export class RestriccionesComponent implements OnInit {
         this.restriccionService.restricciones = res as RestriccionDTO[];
         console.log(res);
       })
+  }
+
+  seleccionarRestriccion(restriccion: RestriccionDTO){
+    this.comunicacion.enviarRestriccion(restriccion);
   }
 
   iniciarMapa() {
