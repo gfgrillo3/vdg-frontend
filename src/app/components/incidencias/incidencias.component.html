@@ -8,15 +8,14 @@
                     <ul class="navbar-nav mr-auto">
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
-                        <select class="form-control" name="tipoIncidencia"
-                            [(ngModel)]="tipoIncidencia"
+                        <select class="form-control" name="tipoIncidencia" [(ngModel)]="tipoIncidencia"
                             ngbTooltip="Tipo de Incidencia" required>
                             <option value="1">Todas</option>
                             <option value="2">Infracciones</option>
                             <option value="3">Pruebas de vida</option>
                         </select>
-                        <button class="btn btn-secondary my-2 my-sm-0" 
-                            type="button" (click)=cambioTexto()>Search</button>
+                        <button class="btn btn-secondary my-2 my-sm-0" type="button"
+                            (click)=cambioTexto()>Search</button>
                     </form>
                 </div>
             </nav>
@@ -24,19 +23,47 @@
     </div>
     <br>
     <div class="row">
-        <div class="col">
-            <table class="table table-light">
+        <div class="col-8">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Incidencia</th>
+                        <th scope="col">Tipo de incidencia</th>
                         <th scope="col">Fecha y Hora</th>
-                        <th scope="col">Datos relevantes</th>
-                        <th scope="col">Operaciones</th>
+                        <th scope="col">Datos generales</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <tr *ngFor="let incidencia of incidencias"
+                        (click)="seleccionarIncidencia(incidencia)">
+                        <td>{{incidencia.topico}}</td>
+                        <td>{{incidencia.fecha}}</td>
+                        <td>{{incidencia.descripcion}}</td>
+                    </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="col-4">
+            <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                <div class="card-header text-center">
+                    <h4 class="card-title">Detalle</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <form>
+                            <div class="row">
+                                <h5>Tópico: <a id="topico"></a></h5>
+                            </div>
+                            <div class="row">
+                                <h5>Fecha y hora: <a id="fechaHora"></a></h5>
+                            </div>
+                            <div class="row">
+                                <textarea class="form-control" id="exampleTextarea" rows="5" placeholder="Detalles"
+                                    ngbTooltip="Detalles"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
