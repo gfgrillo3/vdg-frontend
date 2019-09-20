@@ -120,20 +120,26 @@
                         <div class="row">
                             <label>Provincia</label>
                             <div class="form-group btn-block">
-                                <select class="form-control" name="provincia" [(ngModel)]="provinciaSeleccionada"
-                                    ngbTooltip="Provincia" required>
-                                    <option value="1">Buenos Aires</option>
-                                    <option value="2">Córdoba</option>
-                                    <option value="3">Mendoza</option>
+                                <select class="form-control" name="provinciaSeleccionada"
+                                    [(ngModel)]="provinciaSeleccionada" ngbTooltip="Provincia"
+                                    (change)="cambioProvincia()" required>
+                                    <option>-Seleccionar Provincia-</option>
+                                    <option *ngFor="let provincia of provincias">
+                                        {{provincia.nombre}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <label>Localidad</label>
                             <div class="form-group btn-block">
-                                <select class="form-control" name="localidad" [(ngModel)]="localidadSeleccionada"
-                                    ngbTooltip="Localidad" required>
-                                    <option value="1">San Miguel</option>
+                                <select class="form-control" name="localidadSeleccionada"
+                                    [(ngModel)]="localidadSeleccionada" ngbTooltip="Localidad"
+                                    (change)="cambioLocalidad()" required>
+                                    <option>-Seleccionar localidad-</option>
+                                    <option *ngFor="let localidad of localidades">
+                                        {{localidad.nombre}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -155,7 +161,7 @@
         </div>
         <!-- TABLA DE PERSONAS -->
         <div class="col">
-            <table class="table table-light">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Apellido</th>
@@ -166,7 +172,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let persona of personaService.personas" class="table-active">
+                    <tr *ngFor="let persona of personaService.personas">
                         <td>{{persona.nombre}}</td>
                         <td>{{persona.apellido}}</td>
                         <td>{{persona.dni}}</td>

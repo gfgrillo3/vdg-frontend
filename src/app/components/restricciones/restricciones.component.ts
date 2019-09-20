@@ -14,6 +14,7 @@ import {Circle} from 'ol/geom';
 
 
 import { fromLonLat } from 'ol/proj';
+import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.service';
 
 @Component({
   selector: 'app-restricciones',
@@ -35,7 +36,11 @@ export class RestriccionesComponent implements OnInit {
   vectorLayer;
   rasterLayer;
 
-  constructor(private restriccionService : RestriccionService) { }
+  //seleccion de restriccion
+  restriccionSeleccionada: RestriccionDTO;
+
+  constructor(private restriccionService : RestriccionService,
+              private comunicacion: ComunicacionService) { }
 
   ngOnInit() {
     this.getRestricciones(localStorage.getItem("emailUsuario"));
@@ -105,6 +110,11 @@ feature.setStyle(style);
     view: this.view
   });
   
+  }
+
+  seleccionarRestriccion(restriccion: RestriccionDTO){
+    this.restriccionSeleccionada = restriccion;
+    this.comunicacion.enviarRestriccion(this.restriccionSeleccionada);
   }
   
 }

@@ -35,7 +35,7 @@
         </div>
 
         <div class="col">
-            <table class="table table-light">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Usuario</th>
@@ -44,7 +44,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let usuario of usuarioService.usuarios" class="table-active">
+                    <tr *ngFor="let usuario of usuarioService.usuarios">
                         <td>{{usuario.email}}</td>
                         <td>{{usuario.rolDeUsuario}}</td>
                         <td>

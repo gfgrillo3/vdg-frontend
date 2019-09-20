@@ -76,7 +76,7 @@
         </div>
         <!-- TABLA DE RESTRICCIONES -->
         <div class="col">
-            <table class="table table-light">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Victimario</th>
@@ -86,7 +86,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let restriccion of restriccionService.restricciones" class="table-active">
+                    <tr *ngFor="let restriccion of restriccionService.restricciones">
                         <td>{{restriccion.victimario.apellido}}</td>
                         <td>{{restriccion.damnificada.apellido}}</td>
                         <td>{{restriccion.usuario.email}}</td>
