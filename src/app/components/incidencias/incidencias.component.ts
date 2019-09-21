@@ -12,13 +12,16 @@ import { Incidencia } from 'src/app/models/incidencia';
 export class IncidenciasComponent implements OnInit {
 
   restriccion: RestriccionDTO;
-  incidencias;
+  incidencias: Incidencia[];
 
   constructor(private comunicacionServicio: ComunicacionService,
     private incideciaServicio: IncidenciaService) { }
 
   ngOnInit() {
     this.getRestriccion();
+    if(this.restriccion != null){
+      this.getIncidenciasPorRestriccion(this.restriccion.restriccion.idRestriccion)
+    }
   }
 
   getRestriccion() {
@@ -31,8 +34,8 @@ export class IncidenciasComponent implements OnInit {
     }
   }
 
-  getIncidencias() {
-    this.incideciaServicio.getIncidencias()
+  getIncidenciasPorRestriccion(idRestriccion: number) {
+    this.incideciaServicio.getIncidenciasPorRestriccion(idRestriccion)
       .subscribe(res => {
         this.incidencias = res as Incidencia[];
       });
@@ -45,9 +48,9 @@ export class IncidenciasComponent implements OnInit {
       });
   }
 
-  seleccionarIncidencia(){
-    document.getElementById("topico").innerHTML = "Infracción";
-    document.getElementById("fechaHora").innerHTML = "20/9/2019";
+  seleccionarIncidencia(incidencia: Incidencia){
+    document.getElementById("topico").innerHTML = " " + incidencia.topico;
+    document.getElementById("fechaHora").innerHTML = " " + incidencia.fecha;
   }
 
 }
