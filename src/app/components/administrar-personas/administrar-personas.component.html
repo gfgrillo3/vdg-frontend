@@ -143,7 +143,7 @@
                         <legend *ngIf="mostrarImagen">Foto Agresor</legend>
                         <div class="row" *ngIf="mostrarImagen">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile"
+                                <input type="file" class="custom-file-input" id="customFile" name="imagen"
                                     (change)="archivoSeleccionado($event)" accept="image/*" required>
                                 <label class="custom-file-label" id="labelImagen" for="customFile">Seleccionar imagen</label>
                             </div>
