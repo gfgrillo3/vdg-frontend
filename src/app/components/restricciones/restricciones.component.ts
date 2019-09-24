@@ -34,7 +34,9 @@ export class RestriccionesComponent implements OnInit {
   vistaMapa: OlView;
   ubicacionVictimario; //: Ubicacion;
   ubicacionDamnificada; //: Ubicacion;
-  
+  vectorUbicaciones: VectorSource;
+  capaUbicaciones: VectorLayer;
+
   constructor(private restriccionService: RestriccionService, private comunicacion: ComunicacionService) { }
 
   ngOnInit() {
@@ -50,8 +52,9 @@ export class RestriccionesComponent implements OnInit {
       })
   }
 
-  seleccionarRestriccion(restriccion: RestriccionDTO){
+  seleccionarRestriccion(restriccion: RestriccionDTO) {
     this.comunicacion.enviarRestriccion(restriccion);
+    this.mostrarRestriccion();
   }
 
   iniciarMapa() {
@@ -79,15 +82,20 @@ export class RestriccionesComponent implements OnInit {
       view: this.vistaMapa
     });
 
-    this.mostrarRestriccion();
+    //DESCOMENTAR ESTA LINEA DESPUÉS DE LA PRESENTACION
+    //this.mostrarRestriccion();
   }
 
   mostrarRestriccion() {
     var markerVictimario: Feature;
     var markerDamnificada: Feature;
-    var vectorUbicaciones: VectorSource;
-    var capaUbicaciones: VectorLayer;
     var perimetro: Feature;
+    //BORRAR LUEGO DE LA ENTREGA ESTAS VARIABLES
+    var markerVictimario2: Feature;
+    var markerDamnificada2: Feature;
+    var perimetro2: Feature;
+    //HASTA ACA BORRAR
+
 
     //GET UBICACIONES Y SET the this.ubicaciones
 
@@ -114,6 +122,33 @@ export class RestriccionesComponent implements OnInit {
       }))
     }));
 
+    //MUESTRA PARA LA ENTREGA DE LA ITERACIÓN LUEGO BORRAR
+    markerVictimario2 = new Feature({
+      geometry: new Point(fromLonLat([this.longitud - 0.007397, this.latitud - 0.003775]))
+    });
+    markerVictimario2.setStyle(new Style({
+      image: new Icon(({
+        src: 'assets/markerVictimario.png',
+        imgSize: [60, 60]
+      }))
+    }));
+    markerDamnificada2 = new Feature({
+      geometry: new Point(fromLonLat([this.longitud - 0.006877, this.latitud - 0.002745]))
+    });
+    markerDamnificada2.setStyle(new Style({
+      image: new Icon(({
+        src: 'assets/markerDamnificada.png',
+        imgSize: [60, 60]
+      }))
+    }));
+    perimetro2 = new Feature();
+    var forma2 = new Circle(fromLonLat([this.longitud - 0.006877, this.latitud - 0.002745]));
+    forma2.setRadius(200);
+    perimetro2.setGeometry(forma2);
+    this.pintarPerimetroDeRojo(perimetro2);
+    //BORRAR HASTA ACA
+
+
     //Dibujo Circulo y le aplico un estilo longitud y latitud por ubicacionVictima
     //Radio por distancia infracción.
     perimetro = new Feature();
@@ -122,16 +157,44 @@ export class RestriccionesComponent implements OnInit {
     perimetro.setGeometry(forma);
     this.pintarPerimetro(perimetro);
 
-    //Creo el vector y capa para mostrar las ubicaciones 
-    vectorUbicaciones = new VectorSource({
+    //Borro lo dibujado anteriormente en el mapa
+    var layers = this.map.getLayers().getArray();
+    for (var i = layers.length - 1; i >= 1; --i) {
+      var layer = layers[i];
+      this.map.removeLayer(layer);
+    }
+
+    //Creo el vector y capa para mostrar las ubicaciones
+    this.vectorUbicaciones = new VectorSource({
       features: [markerVictimario, markerDamnificada, perimetro]
     });
-    capaUbicaciones = new VectorLayer({
-      source: vectorUbicaciones
+    this.capaUbicaciones = new VectorLayer({
+      source: this.vectorUbicaciones
     });
 
-    //Agrego la capa al mapa
-    this.map.addLayer(capaUbicaciones);
+    //CENTRO EL MAPA EN LA UBICACION DE LA DAMNIFICADA
+
+    //BORRAR ESTE IF ELSE LUEGO DE LA PRESENTACIÓN
+    if (this.comunicacion.restriccionDTO.restriccion.idRestriccion == 1) {
+      this.vectorUbicaciones = new VectorSource({
+        features: [markerVictimario, markerDamnificada, perimetro]
+      });
+      this.capaUbicaciones = new VectorLayer({
+        source: this.vectorUbicaciones
+      });
+      this.vistaMapa.setCenter(fromLonLat([this.longitud, this.latitud]));
+    }
+    else {
+      this.vectorUbicaciones = new VectorSource({
+        features: [markerVictimario2, markerDamnificada2, perimetro2]
+      });
+      this.capaUbicaciones = new VectorLayer({
+        source: this.vectorUbicaciones
+      });
+      this.vistaMapa.setCenter(fromLonLat([this.longitud-0.006877, this.latitud- 0.002745]));
+    }
+    //BORRAR HASTA ACA EL IF
+    this.map.addLayer(this.capaUbicaciones);
   }
 
   pintarPerimetro(perimetro) {
@@ -141,8 +204,16 @@ export class RestriccionesComponent implements OnInit {
     style.getFill().setColor([0, 255, 0, .4]);
     //else
     //style.getFill().setColor([255, 0, 0, .4]);
-  
+
     perimetro.setStyle(style);
   }
 
+  //ESTE METODO BORRARLO LUEGO DE LA ENTREGA
+  pintarPerimetroDeRojo(perimetro) {
+    //Pinto el perimetro dependiendo si infringe o no
+    var style = new Style({ fill: new Fill({}) });
+    style.getFill().setColor([255, 0, 0, .4]);
+    perimetro.setStyle(style);
+  }
+  //HASTA ACA SE BORRA EL METODO
 }
