@@ -11,11 +11,12 @@ import VectorSource from 'ol/source/Vector';
 import { Vector as VectorLayer } from 'ol/layer';
 import { Icon, Style, Stroke, Fill } from 'ol/style';
 import { Circle } from 'ol/geom';
-
-
 import { fromLonLat } from 'ol/proj';
 import { Restriccion } from 'src/app/models/restriccion';
 import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.service';
+import { UbicacionService } from 'src/app/services/ubicaciones/ubicacion.service';
+import { Ubicacion } from 'src/app/models/ubicacion';
+import { UbicacionDto } from 'src/app/models/ubicacion-dto';
 
 @Component({
   selector: 'app-restricciones',
@@ -32,12 +33,16 @@ export class RestriccionesComponent implements OnInit {
   mapSource: OlXYZ;
   capaMapa: OlTileLayer;
   vistaMapa: OlView;
-  ubicacionVictimario; //: Ubicacion;
-  ubicacionDamnificada; //: Ubicacion;
   vectorUbicaciones: VectorSource;
   capaUbicaciones: VectorLayer;
 
-  constructor(private restriccionService: RestriccionService, private comunicacion: ComunicacionService) { }
+  ubicacionVictimario: Ubicacion;
+  ubicacionDamnificada: Ubicacion;
+  ubicacionDto: UbicacionDto;
+
+
+  constructor(private restriccionService: RestriccionService, private comunicacion: ComunicacionService,
+    private ubicacionService: UbicacionService) { }
 
   ngOnInit() {
     this.getRestricciones(localStorage.getItem("emailUsuario"));
@@ -70,10 +75,9 @@ export class RestriccionesComponent implements OnInit {
 
     //Centro el mapa en la UNGS O en cualquier lado
     this.vistaMapa = new OlView({
-      center: fromLonLat([this.longitud, this.latitud]),
+      center: fromLonLat([-58.700233, -34.522249]),
       zoom: 17
     });
-
 
     //Creo el mapa con las capas y la vista
     this.map = new OlMap({
@@ -81,28 +85,26 @@ export class RestriccionesComponent implements OnInit {
       layers: [this.capaMapa],
       view: this.vistaMapa
     });
-
-    //DESCOMENTAR ESTA LINEA DESPUÉS DE LA PRESENTACION
-    //this.mostrarRestriccion();
   }
 
   mostrarRestriccion() {
     var markerVictimario: Feature;
     var markerDamnificada: Feature;
     var perimetro: Feature;
-    //BORRAR LUEGO DE LA ENTREGA ESTAS VARIABLES
-    var markerVictimario2: Feature;
-    var markerDamnificada2: Feature;
-    var perimetro2: Feature;
-    //HASTA ACA BORRAR
-
 
     //GET UBICACIONES Y SET the this.ubicaciones
+    this.ubicacionService.getUbicacionesRestriccion(this.comunicacion.restriccionDTO.restriccion.idRestriccion)
+    .subscribe(res => {
 
+      this.ubicacionDto = res as UbicacionDto;
+      this.ubicacionDamnificada = this.ubicacionDto.ubicacionDamnificada;
+      this.ubicacionVictimario = this.ubicacionDto.ubicacionVictimario;
+
+      
     //Marco Ubicaciones en Mapa
     //Marco Victimario con su marker La longitud y latitud es de objeto Ubicacion
     markerVictimario = new Feature({
-      geometry: new Point(fromLonLat([this.longitud, this.latitud + 0.0010]))
+      geometry: new Point(fromLonLat([this.ubicacionVictimario.longitud, this.ubicacionVictimario.latitud]))
     });
     markerVictimario.setStyle(new Style({
       image: new Icon(({
@@ -113,7 +115,7 @@ export class RestriccionesComponent implements OnInit {
 
     //Marco Damnificada con su marker La longitud y latitud es de objeto Ubicacion
     markerDamnificada = new Feature({
-      geometry: new Point(fromLonLat([this.longitud, this.latitud]))
+      geometry: new Point(fromLonLat([this.ubicacionDamnificada.longitud, this.ubicacionDamnificada.latitud]))
     });
     markerDamnificada.setStyle(new Style({
       image: new Icon(({
@@ -122,38 +124,10 @@ export class RestriccionesComponent implements OnInit {
       }))
     }));
 
-    //MUESTRA PARA LA ENTREGA DE LA ITERACIÓN LUEGO BORRAR
-    markerVictimario2 = new Feature({
-      geometry: new Point(fromLonLat([this.longitud - 0.007397, this.latitud - 0.003775]))
-    });
-    markerVictimario2.setStyle(new Style({
-      image: new Icon(({
-        src: 'assets/markerVictimario.png',
-        imgSize: [60, 60]
-      }))
-    }));
-    markerDamnificada2 = new Feature({
-      geometry: new Point(fromLonLat([this.longitud - 0.006877, this.latitud - 0.002745]))
-    });
-    markerDamnificada2.setStyle(new Style({
-      image: new Icon(({
-        src: 'assets/markerDamnificada.png',
-        imgSize: [60, 60]
-      }))
-    }));
-    perimetro2 = new Feature();
-    var forma2 = new Circle(fromLonLat([this.longitud - 0.006877, this.latitud - 0.002745]));
-    forma2.setRadius(200);
-    perimetro2.setGeometry(forma2);
-    this.pintarPerimetroDeRojo(perimetro2);
-    //BORRAR HASTA ACA
-
-
-    //Dibujo Circulo y le aplico un estilo longitud y latitud por ubicacionVictima
-    //Radio por distancia infracción.
+    //Dibujo Circulo y le aplico un estilo 
     perimetro = new Feature();
-    var forma = new Circle(fromLonLat([this.longitud, this.latitud]));
-    forma.setRadius(100);
+    var forma = new Circle(fromLonLat([this.ubicacionDamnificada.longitud, this.ubicacionDamnificada.latitud]));
+    forma.setRadius(this.comunicacion.restriccionDTO.restriccion.distancia);
     perimetro.setGeometry(forma);
     this.pintarPerimetro(perimetro);
 
@@ -173,8 +147,10 @@ export class RestriccionesComponent implements OnInit {
     });
 
     //CENTRO EL MAPA EN LA UBICACION DE LA DAMNIFICADA
+    this.vistaMapa.setCenter(fromLonLat([this.ubicacionDamnificada.longitud, this.ubicacionDamnificada.latitud]));
 
     //BORRAR ESTE IF ELSE LUEGO DE LA PRESENTACIÓN
+    /*
     if (this.comunicacion.restriccionDTO.restriccion.idRestriccion == 1) {
       this.vectorUbicaciones = new VectorSource({
         features: [markerVictimario, markerDamnificada, perimetro]
@@ -194,7 +170,13 @@ export class RestriccionesComponent implements OnInit {
       this.vistaMapa.setCenter(fromLonLat([this.longitud-0.006877, this.latitud- 0.002745]));
     }
     //BORRAR HASTA ACA EL IF
+    */
     this.map.addLayer(this.capaUbicaciones);
+
+
+    });
+    
+    
   }
 
   pintarPerimetro(perimetro) {
