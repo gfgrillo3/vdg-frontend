@@ -38,6 +38,7 @@ export class RestriccionesComponent implements OnInit {
   ubicacionVictimario: Ubicacion;
   ubicacionDamnificada: Ubicacion;
   ubicacionDto: UbicacionDto;
+  intervalo;
 
 
   constructor(private restriccionService: RestriccionService, private comunicacion: ComunicacionService,
@@ -59,6 +60,12 @@ export class RestriccionesComponent implements OnInit {
   seleccionarRestriccion(restriccion: RestriccionDTO) {
     this.comunicacion.enviarRestriccion(restriccion);
     this.mostrarRestriccion();
+    let thisjr = this;
+    //CADA 15 SEGUNDOS ACTUALIZO EL MAPA
+    clearInterval(this.intervalo);
+    this.intervalo = setInterval(function () {
+      thisjr.mostrarRestriccion();
+    }, 15000);
   }
 
   iniciarMapa() {
@@ -156,11 +163,15 @@ export class RestriccionesComponent implements OnInit {
   pintarPerimetro(perimetro) {
     //Pinto el perimetro dependiendo si infringe o no
     var style = new Style({ fill: new Fill({}) });
-    //if(EstaInfringiendo)
-    style.getFill().setColor([0, 255, 0, .4]);
-    //else
-    //style.getFill().setColor([255, 0, 0, .4]);
+    this.ubicacionService.getEstaInfringiendo(this.comunicacion.restriccionDTO.restriccion.idRestriccion, this.ubicacionDto)
+      .subscribe(res => {
+        var estaInfringiendo = res as boolean;
+        if (estaInfringiendo)
+          style.getFill().setColor([255, 0, 0, .4]);
+        else
+          style.getFill().setColor([0, 255, 0, .4]);
 
-    perimetro.setStyle(style);
-  }
+        perimetro.setStyle(style);
+      });
+    }
 }
