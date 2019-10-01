@@ -17,7 +17,7 @@ export class UsuarioComponent implements OnInit {
 
   loginEsInvalido = false;
 
-  constructor(protected usuarioService: UsuarioService, private router: Router) { }
+  constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit() {
   }
