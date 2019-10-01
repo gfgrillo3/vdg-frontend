@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build --aot --prod"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -29,8 +28,8 @@
     "js-sha256": "^0.9.0",
     "js-sha512": "^0.8.0",
     "ngx-toastr": "^10.2.0",
+    "nodemon": "^1.19.3",
     "ol": "^5.3.3",
-    "path": "^0.12.7",
     "popper.js": "^1.15.0",
     "rxjs": "~6.4.0",
     "sha.js": "^2.4.11",
@@ -57,9 +56,5 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
-  },
-  "engines": {
-    "node": "~10.16.3",
-    "npm": "~6.9.0"
   }
 }
