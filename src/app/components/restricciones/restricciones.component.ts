@@ -14,7 +14,6 @@ import { Circle } from 'ol/geom';
 
 
 import { fromLonLat } from 'ol/proj';
-import { Restriccion } from 'src/app/models/restriccion';
 import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.service';
 
 @Component({
