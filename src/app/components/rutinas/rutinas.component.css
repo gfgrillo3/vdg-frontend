@@ -1,0 +1,17 @@
+.general{
+    margin: auto;
+    width: 99%;
+    height: 600px;
+    color: #053667;
+}
+
+.opciones-victimario{
+    float: left;
+    width: 30%;
+    height: 100%;
+}
+
+.card{
+    margin-top: 30%;
+    text-align: center;
+}
