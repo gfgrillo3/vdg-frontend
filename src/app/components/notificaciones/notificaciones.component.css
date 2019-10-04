@@ -1,0 +1,12 @@
+.card:hover{
+    opacity: .7;
+}
+
+.card-header i{
+    position: absolute;
+    left: 95%;
+}
+
+.card-header a{
+    margin-left: 2%;
+}

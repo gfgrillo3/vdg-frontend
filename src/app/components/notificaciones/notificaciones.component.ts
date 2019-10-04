@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.service';
+import { Notificacion } from 'src/app/models/notificacion';
+import { NotificacionService } from 'src/app/services/notificaciones/notificacion.service';
+import { NotificacionDTO } from 'src/app/models/notificacion-dto';
 
 @Component({
   selector: 'app-notificaciones',
@@ -8,10 +9,22 @@ import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.
   styleUrls: ['./notificaciones.component.css']
 })
 export class NotificacionesComponent implements OnInit {
+  
+  notificaciones: NotificacionDTO[];
 
-  constructor() { }
+  constructor(private notificacionService: NotificacionService) { }
 
   ngOnInit() {
+    this.getNotificaciones();
+  }
+
+  getNotificaciones() {
+    this.notificacionService.getNotificaciones(localStorage.getItem("emailUsuario"))
+      .subscribe(res => {
+        this.notificaciones = res as NotificacionDTO[];
+        console.log(res);
+        this.notificaciones[0].notificacion.visto = true;
+      })
   }
 
 }
