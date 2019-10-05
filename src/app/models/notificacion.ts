@@ -1,14 +1,18 @@
 export class Notificacion {
 
-    constructor(idNotificacion = 0, idIncidencia = 0, idUsuario = 0, visto = false){
+    constructor(idNotificacion = 0, fecha=null, asunto='', descripcion='', estado='', idUsuario=0){
         this.idNotificacion = idNotificacion;
-        this.idIncidencia = idIncidencia;
+        this.fecha = fecha;
+        this.asunto = asunto;
+        this.descripcion = descripcion;
+        this.estado = estado;
         this.idUsuario = idUsuario;
-        this.visto = visto;
     }
 
     idNotificacion: number;
-    idIncidencia: number;
+    fecha: Date;
+    asunto: string;
+    descripcion: string;
+    estado: string;
     idUsuario: number;
-    visto: boolean;
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Notificacion } from 'src/app/models/notificacion';
 import { NotificacionService } from 'src/app/services/notificaciones/notificacion.service';
-import { NotificacionDTO } from 'src/app/models/notificacion-dto';
 
 @Component({
   selector: 'app-notificaciones',
@@ -10,7 +9,7 @@ import { NotificacionDTO } from 'src/app/models/notificacion-dto';
 })
 export class NotificacionesComponent implements OnInit {
   
-  notificaciones: NotificacionDTO[];
+  notificaciones: Notificacion[];
 
   constructor(private notificacionService: NotificacionService) { }
 
@@ -21,9 +20,8 @@ export class NotificacionesComponent implements OnInit {
   getNotificaciones() {
     this.notificacionService.getNotificaciones(localStorage.getItem("emailUsuario"))
       .subscribe(res => {
-        this.notificaciones = res as NotificacionDTO[];
+        this.notificaciones = res as Notificacion[];
         console.log(res);
-        this.notificaciones[0].notificacion.visto = true;
       })
   }
 

@@ -1,13 +1,12 @@
 <div class="container">
     <div class="card border-primary mb-2" *ngFor="let notificacion of notificaciones">
         <div class="card-header">
-            <i *ngIf="notificacion.notificacion.visto==false" class="large material-icons">visibility</i>
-            <i *ngIf="notificacion.notificacion.visto==true" class="large material-icons">check</i>
-            Restriccion: {{notificacion.incidencia.idRestriccion}}
-            <a>{{notificacion.incidencia.fecha}}</a>
+            <i *ngIf="notificacion.estado==NoVista" class="large material-icons">visibility</i>
+            <i *ngIf="notificacion.estado==Vista" class="large material-icons">check</i>
+            {{notificacion.fecha}}
         </div>
         <div class="card-body">
-            {{notificacion.incidencia.descripcion}}
+            {{notificacion.asunto}}
         </div>
     </div>
 </div>
