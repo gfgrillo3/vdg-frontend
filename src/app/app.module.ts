@@ -19,6 +19,7 @@ import { HttpClientModule} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { RutinasComponent } from './components/rutinas/rutinas.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ToastrModule } from 'ngx-toastr';
     AdministrarRestriccionesComponent,
     AdministrarUsuariosComponent,
     AdministrarPersonasComponent,
+    RutinasComponent,
   ],
   imports: [
     BrowserModule,

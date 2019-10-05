@@ -9,6 +9,7 @@ import { PruebasDeVidaComponent } from './components/pruebas-de-vida/pruebas-de-
 import { AdministrarRestriccionesComponent } from './components/administrar-restricciones/administrar-restricciones.component';
 import { AdministrarUsuariosComponent } from './components/administrar-usuarios/administrar-usuarios.component';
 import { AdministrarPersonasComponent } from './components/administrar-personas/administrar-personas.component';
+import { RutinasComponent } from './components/rutinas/rutinas.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'notificaciones', component: NotificacionesComponent},
       { path: 'incidencias', component: IncidenciasComponent},
       { path: 'pruebasDeVida', component: PruebasDeVidaComponent},
+      { path: 'rutinas', component: RutinasComponent},
       { path: 'administrarPersonas', component: AdministrarPersonasComponent },
       { path: 'administrarUsuarios', component: AdministrarUsuariosComponent },
       { path: 'administrarRestricciones', component: AdministrarRestriccionesComponent }
