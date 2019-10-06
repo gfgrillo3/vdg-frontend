@@ -1,5 +1,5 @@
 .card:hover{
-    opacity: .7;
+    opacity: .9;
 }
 
 .card-header i{
@@ -9,4 +9,14 @@
 
 .card-header a{
     margin-left: 2%;
+}
+
+.archivadas{
+    margin-top: 3%;
+    float: right;
+    text-align: right;
+}
+
+.btn{
+    float: right;
 }

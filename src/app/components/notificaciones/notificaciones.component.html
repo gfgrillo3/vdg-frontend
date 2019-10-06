@@ -1,12 +1,51 @@
 <div class="container">
+    <div class="row">
+        <div class="archivadas">
+            <div class="form-group">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1" checked=""
+                        (change)="verArchivadas()" [(ngModel)]="check">
+                    <label class="custom-control-label" for="customSwitch1">Ver archivadas</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Titulo</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Descripción</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Archivar</button>
+        </div>
+    </ng-template>
+
+    <div class="card border-primary mb-2">
+        <div class="card-header">
+            Titulo
+        </div>
+        <div class="card-body">
+            Asunto
+            <button class="btn btn-primary" (click)="open(content)">Ver</button>
+        </div>
+    </div>
+
     <div class="card border-primary mb-2" *ngFor="let notificacion of notificaciones">
         <div class="card-header">
-            <i *ngIf="notificacion.estado==NoVista" class="large material-icons">visibility</i>
-            <i *ngIf="notificacion.estado==Vista" class="large material-icons">check</i>
+            <i *ngIf="notificacion.estado==NoVista" class="large material-icons">visibility_off</i>
+            <i *ngIf="notificacion.estado==Vista" class="large material-icons">visibility</i>
+            <i *ngIf="notificacion.estado==Archivada" class="large material-icons">check_circle</i>
             {{notificacion.fecha}}
         </div>
         <div class="card-body">
             {{notificacion.asunto}}
+            <button class="btn btn-primary" (click)="open(content)">Ver</button>
         </div>
     </div>
 </div>
