@@ -10,7 +10,7 @@ export class RestriccionService {
 
   restriccionSeleccionada: Restriccion;
   restricciones: RestriccionDTO[];  
-  readonly URL_API = 'http://localhost:9090/RestriccionPerimetral';
+  readonly URL_API = 'https://vdg-back.herokuapp.com/RestriccionPerimetral';
 
   constructor(private http:HttpClient) { 
     this.restriccionSeleccionada = new Restriccion();

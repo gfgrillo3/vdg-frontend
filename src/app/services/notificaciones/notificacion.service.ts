@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class NotificacionService {
 
-  readonly URL_API = 'http://localhost:9090/Notificacion';
+  readonly URL_API = 'https://vdg-back.herokuapp.com/Notificacion';
 
   constructor(private http: HttpClient) { }
 

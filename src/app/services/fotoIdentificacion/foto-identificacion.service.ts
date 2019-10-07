@@ -8,7 +8,7 @@ import { FotoIdentificacion } from 'src/app/models/foto-identificacion';
 export class FotoIdentificacionService {
 
   fotoIdentificacion: FotoIdentificacion;
-  readonly URL_API = 'http://localhost:9090/FotoIdentificacion';
+  readonly URL_API = 'https://vdg-back.herokuapp.com/FotoIdentificacion';
 
 
   constructor(private http: HttpClient) {

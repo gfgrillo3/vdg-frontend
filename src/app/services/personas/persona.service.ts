@@ -10,7 +10,7 @@ export class PersonaService {
 
   personaDTOSelleccionada: FormPersonaDTO;
   personas: Persona[];
-  readonly URL_API = 'http://localhost:9090/FormABMPersona';
+  readonly URL_API = 'https://vdg-back.herokuapp.com/FormABMPersona';
 
 
   constructor(private http: HttpClient) {
