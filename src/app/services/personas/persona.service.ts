@@ -27,7 +27,7 @@ export class PersonaService {
   }
 
   getPersonaByDNI(dni: string){
-    return this.http.get<Persona>("http://localhost:9090/Persona/GetByDni/"+dni);
+    return this.http.get<Persona>("https://vdg-back.herokuapp.com/Persona/GetByDni/"+dni);
   }
 
   deletePersona(id: number){
