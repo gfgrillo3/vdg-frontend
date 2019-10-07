@@ -17,7 +17,7 @@ export class RestriccionService {
   }
 
   getRestricciones(){
-    return this.http.get("http://localhost:9090/RestriccionDTO");
+    return this.http.get("https://vdg-back.herokuapp.com/RestriccionDTO");
   }
 
   postRestriccion(restriccion: Restriccion){
@@ -25,7 +25,7 @@ export class RestriccionService {
   }
 
   getRestriccionesAdministrativo(email: string){
-    return this.http.get("http://localhost:9090/RestriccionDTO/getByUsuario/"+
+    return this.http.get("https://vdg-back.herokuapp.com/RestriccionDTO/getByUsuario/"+
       email);
   }
 
