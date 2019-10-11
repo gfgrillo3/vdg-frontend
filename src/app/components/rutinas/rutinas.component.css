@@ -1,7 +1,7 @@
 .general{
     margin: auto;
     width: 99%;
-    height: 600px;
+    height: 800px;
     color: #053667;
 }
 
@@ -14,4 +14,10 @@
 .card{
     margin-top: 30%;
     text-align: center;
+}
+
+.map{
+    float: left;
+    width: 70%;
+    height: 100%;
 }
