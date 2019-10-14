@@ -30,7 +30,7 @@ export class NavComponent implements OnInit {
         
         //SI TENGO MAS NO VISTAS, MUESTRO TOASTR
         if(cantNoVistas > thisjr.cantNotificaciones){
-          thisjr.toastr.error("NUEVAS NOTIFICACIONES");
+          thisjr.toastr.info("NUEVAS NOTIFICACIONES");
         }
 
         //SI LA CANTIDAD QUE OBTUVE DE NO VISTAS ES DISTINTA A LA ACTUAL, LO ACTUALIZO
