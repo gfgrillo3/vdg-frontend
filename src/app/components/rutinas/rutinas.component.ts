@@ -46,7 +46,7 @@ export class RutinasComponent implements OnInit {
 
 
   constructor(private ubicacionService: UbicacionService, private comunicacion: ComunicacionService,
-    private toastr: ToastrService,) { }
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.iniciarMapa();

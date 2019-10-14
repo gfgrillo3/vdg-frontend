@@ -26,4 +26,8 @@ export class NotificacionService {
   notificacionSetVista(notificacion: Notificacion){
     return this.http.post(this.URL_API + '/setVista', notificacion.idNotificacion);
   }
+
+  getCantNotificacionesNoVistas(email: String){
+    return this.http.get(this.URL_API + '/getCantNoVistas/' + email);
+  }
 }
