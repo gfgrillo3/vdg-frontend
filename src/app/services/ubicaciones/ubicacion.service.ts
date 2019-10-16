@@ -7,16 +7,21 @@ import { UbicacionDto } from 'src/app/models/ubicacion-dto';
 })
 export class UbicacionService {
 
-  readonly URL_API = 'https://vdg-back.herokuapp.com/Ubicacion';
+  readonly URL_API = 'http://localhost:9090/Ubicacion';
 
   constructor(private http: HttpClient) { }
 
-  getUbicacionesRestriccion(idRestriccion: number){
+  getUbicacionesRestriccion(idRestriccion: number) {
     return this.http.get(this.URL_API + "/getByRestriccion/" + idRestriccion);
   }
 
-  getEstaInfringiendo(idRestriccion: number, ubicacionDTO: UbicacionDto){
+  getEstaInfringiendo(idRestriccion: number, ubicacionDTO: UbicacionDto) {
     return this.http.post(this.URL_API + "/infringe/" + idRestriccion, ubicacionDTO);
+  }
+
+  getUbicacionPromedioRutina(idPersona: number, dia: number, hora: number, minutos: number) {
+    return this.http.get('http://localhost:9090/UbicacionRutina/persona=' + idPersona +
+      "/dia=" + dia + "/hora=" + hora + "/minutos=" + minutos);
   }
 
 }

@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProvinciaLocalidadService {
 
-  readonly URL_API = 'https://vdg-back.herokuapp.com/';
+  readonly URL_API = 'http://localhost:9090/';
 
   constructor(private http: HttpClient) { }
 

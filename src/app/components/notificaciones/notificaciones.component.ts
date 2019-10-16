@@ -13,6 +13,7 @@ export class NotificacionesComponent implements OnInit {
   notificaciones: Notificacion[];
 
   check = false;
+  notificacionSeleccionada: Notificacion;
 
   constructor(private notificacionService: NotificacionService,
     config: NgbModalConfig, private modalService: NgbModal) {
@@ -47,8 +48,24 @@ export class NotificacionesComponent implements OnInit {
     }
   }
 
-  open(content) {
+  open(content, notificacion) {
+    this.notificacionSeleccionada = notificacion;
+    this.setVista();
     this.modalService.open(content);
   }
 
+  archivar() {
+    this.notificacionService.archivarNotificacion(this.notificacionSeleccionada).subscribe(res => {
+      this.getNotificacionesNoArchivadas();
+      this.modalService.dismissAll();
+    })
+  }
+
+  setVista() {
+    if(this.notificacionSeleccionada.estado == 'NoVista'){
+      this.notificacionService.notificacionSetVista(this.notificacionSeleccionada).subscribe(res => {
+        this.getNotificacionesNoArchivadas();
+      })
+    }
+  }
 }

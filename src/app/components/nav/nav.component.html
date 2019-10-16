@@ -8,7 +8,9 @@
             class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="notificaciones">Notificaciones</a>
+        <a class="nav-link" routerLink="notificaciones">Notificaciones <span
+            class="badge badge-pill badge-danger badge-notif"
+            [(ngModel)]="notificacionesNoLeidas" [hidden]="cantNotificaciones<=0">{{notificacionesNoLeidas}}</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="incidencias">Incidencias</a>
@@ -31,7 +33,7 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-        <a class="dropdown-item" routerLink="../ingresar" (click)="salir()">Salir</a>
+      <a class="dropdown-item" routerLink="../ingresar" (click)="salir()">Salir</a>
     </form>
   </div>
 </nav>
