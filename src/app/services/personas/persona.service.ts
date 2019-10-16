@@ -26,8 +26,12 @@ export class PersonaService {
     return this.http.post(this.URL_API, personaDTO);
   }
 
-  getPersonaByDNI(dni: string){
-    return this.http.get<Persona>("http://localhost:9090/Persona/GetByDni/"+dni);
+  getVictimarioByDNI(dni: string){
+    return this.http.get<Persona>("http://localhost:9090/Persona/GetVictimarioByDni/"+dni);
+  }
+
+  getDamnificadaByDNI(dni: string){
+    return this.http.get<Persona>("http://localhost:9090/Persona/GetDamnificadaByDni/"+dni);
   }
 
   deletePersona(id: number){

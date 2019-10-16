@@ -45,7 +45,7 @@ export class AdministrarRestriccionesComponent implements OnInit {
 
   agregarVictimario() {
     //ACA TRAIGO AL VICTIMARIO
-    this.personaService.getPersonaByDNI(this.victimario.dni)
+    this.personaService.getVictimarioByDNI(this.victimario.dni)
       .subscribe(res => {
         if(res==null){
           this.toastr.error("Verificar el DNI de victimario ingresado.", "Error!");
@@ -61,7 +61,7 @@ export class AdministrarRestriccionesComponent implements OnInit {
 
   agregarDamnificada() {
     //ACA TRAIGO LA DAMNIFICADA
-    this.personaService.getPersonaByDNI(this.damnificada.dni)
+    this.personaService.getDamnificadaByDNI(this.damnificada.dni)
       .subscribe(res => {
         if(res==null){
           this.toastr.error("Verificar el DNI de damnificada ingresado.", "Error!");          
