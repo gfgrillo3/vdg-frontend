@@ -26,6 +26,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr *ngFor="let pruebaDeVida of pruebasDeVida">
+                        <td>{{pruebaDeVida.fecha}}</td>
+                        <td>{{pruebaDeVida.descripcion}}</td>
+                        <td>{{pruebaDeVida.estado}}</td>
+                    </tr>
                 </tbody>
             </table>
 
