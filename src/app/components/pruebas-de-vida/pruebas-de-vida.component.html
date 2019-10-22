@@ -1,4 +1,31 @@
 <div class="container">
+
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-6">
+                    <legend text-center>Foto perfil</legend>
+                    <img src="https://media.istockphoto.com/vectors/man-face-pop-art-cartoon-vector-id892379546" alt="">
+                </div>
+                <div class="col-6">
+                    <legend>Prueba de vida</legend>
+                    <img src="https://media.istockphoto.com/vectors/man-face-pop-art-cartoon-vector-id892379546" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="aceptarPruebaDeVida()">Aceptar</button>
+            <button type="button" class="btn btn-danger" (click)="rechazarPruebaDeVida()">Rechazar</button>
+        </div>
+    </ng-template>
+
+    <button class="btn btn-lg btn-primary" (click)="open(content)">Ver</button>
+
     <div class="row">
         <div class="col">
             <div class="card bg-light mb-3" style="max-width: 20rem;">
@@ -23,6 +50,7 @@
                         <th scope="col">Fecha</th>
                         <th scope="col">Descripción</th>
                         <th scope="col">Estado</th>
+                        <th scope="col">Ver</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,12 +58,15 @@
                         <td>{{pruebaDeVida.fecha}}</td>
                         <td>{{pruebaDeVida.descripcion}}</td>
                         <td>{{pruebaDeVida.estado}}</td>
+                        <td>
+                            <a (click)="open(content, pruebaDeVida)" *ngIf="pruebaDeVida.estado=='Pendiente'">
+                                <i class="material-icons">insert_photo </i>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-
         </div>
-
     </div>
 
 </div>

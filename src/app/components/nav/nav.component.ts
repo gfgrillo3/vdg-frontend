@@ -15,11 +15,13 @@ export class NavComponent implements OnInit {
   constructor(private toastr: ToastrService, private notificacionService: NotificacionService) { }
 
   ngOnInit() {
+    /*
     clearInterval(this.intervalo);
     let thisjr = this;
     this.intervalo = setInterval(function () {
       thisjr.controlarNotificaciones(thisjr);
     }, 6000);
+    */
   }
 
   controlarNotificaciones(thisjr) {

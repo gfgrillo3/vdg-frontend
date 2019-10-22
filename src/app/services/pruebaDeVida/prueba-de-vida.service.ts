@@ -15,8 +15,12 @@ export class PruebaDeVidaService {
     return this.http.get(this.URL_API + '/' + idPersona);
   }
 
-  postPruebaDeVida(pruevaDeVida: PruebaDeVida){
-    console.log(pruevaDeVida);
-    return this.http.post(this.URL_API, pruevaDeVida);
+  postPruebaDeVida(pruebaDeVida: PruebaDeVida){
+    console.log(pruebaDeVida);
+    return this.http.post(this.URL_API, pruebaDeVida);
+  }
+
+  putPruebaDeVida(pruebaDeVida: PruebaDeVida){
+    return this.http.put(this.URL_API + "/" + pruebaDeVida.idPruebaDeVida, pruebaDeVida);
   }
 }

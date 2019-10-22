@@ -3,6 +3,7 @@ import { PruebaDeVida } from 'src/app/models/prueba-de-vida';
 import { NgForm } from '@angular/forms';
 import { PruebaDeVidaService } from 'src/app/services/pruebaDeVida/prueba-de-vida.service';
 import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.service';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-pruebas-de-vida',
@@ -16,7 +17,12 @@ export class PruebasDeVidaComponent implements OnInit {
   pruebaDeVida = new PruebaDeVida;
 
   constructor(private pruevaDeVidaService: PruebaDeVidaService,
-              private comunicacion: ComunicacionService) { }
+    private comunicacion: ComunicacionService,
+    config: NgbModalConfig, private modalService: NgbModal) {
+
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   ngOnInit() {
     this.getPruebasDeVidaPersona(this.comunicacion.restriccionDTO.victimario.idPersona);
@@ -42,5 +48,33 @@ export class PruebasDeVidaComponent implements OnInit {
         console.log(res);
       })
   }
+
+  aceptarPruebaDeVida(){
+    this.pruebaDeVida.estado = "Aceptada";
+    this.pruevaDeVidaService.putPruebaDeVida(this.pruebaDeVida)
+    .subscribe(res => {
+      console.log(res);
+      this.pruebaDeVida = new PruebaDeVida;
+      this.getPruebasDeVidaPersona(this.comunicacion.restriccionDTO.victimario.idPersona);
+      this.modalService.dismissAll();
+    })
+  }
+
+  rechazarPruebaDeVida(){
+    this.pruebaDeVida.estado = "Rechazada";
+    this.pruevaDeVidaService.putPruebaDeVida(this.pruebaDeVida)
+    .subscribe(res => {
+      console.log(res);
+      this.pruebaDeVida = new PruebaDeVida;
+      this.getPruebasDeVidaPersona(this.comunicacion.restriccionDTO.victimario.idPersona);
+      this.modalService.dismissAll();
+    })
+  }
+
+  open(content, pruebaDeVida: PruebaDeVida) {
+    this.pruebaDeVida = pruebaDeVida;
+    this.modalService.open(content, {size: 'xl'});
+  }
+
 
 }
