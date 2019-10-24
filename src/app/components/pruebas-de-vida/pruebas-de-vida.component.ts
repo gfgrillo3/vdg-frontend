@@ -71,10 +71,9 @@ export class PruebasDeVidaComponent implements OnInit {
     })
   }
 
-  open(content, pruebaDeVida: PruebaDeVida) {
-    this.pruebaDeVida = pruebaDeVida;
+  open(content, prueba: PruebaDeVida) {
+    this.pruebaDeVida = prueba;
     this.modalService.open(content, {size: 'xl'});
   }
-
 
 }

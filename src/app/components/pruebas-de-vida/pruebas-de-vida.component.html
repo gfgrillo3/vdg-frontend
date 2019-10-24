@@ -24,8 +24,6 @@
         </div>
     </ng-template>
 
-    <button class="btn btn-lg btn-primary" (click)="open(content)">Ver</button>
-
     <div class="row">
         <div class="col">
             <div class="card bg-light mb-3" style="max-width: 20rem;">
@@ -54,12 +52,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let pruebaDeVida of pruebasDeVida">
-                        <td>{{pruebaDeVida.fecha}}</td>
-                        <td>{{pruebaDeVida.descripcion}}</td>
-                        <td>{{pruebaDeVida.estado}}</td>
+                    <tr *ngFor="let prueba of pruebasDeVida">
+                        <td>{{prueba.fecha}}</td>
+                        <td>{{prueba.descripcion}}</td>
+                        <td>{{prueba.estado}}</td>
                         <td>
-                            <a (click)="open(content, pruebaDeVida)" *ngIf="pruebaDeVida.estado=='Pendiente'">
+                            <a (click)="open(content, prueba)" *ngIf="prueba.estado=='Pendiente'">
                                 <i class="material-icons">insert_photo </i>
                             </a>
                         </td>
