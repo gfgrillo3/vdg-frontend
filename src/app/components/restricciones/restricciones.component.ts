@@ -16,6 +16,7 @@ import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.
 import { UbicacionService } from 'src/app/services/ubicaciones/ubicacion.service';
 import { Ubicacion } from 'src/app/models/ubicacion';
 import { UbicacionDto } from 'src/app/models/ubicacion-dto';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-restricciones',
@@ -39,9 +40,8 @@ export class RestriccionesComponent implements OnInit {
   ubicacionDto: UbicacionDto;
   intervalo;
 
-
   constructor(private restriccionService: RestriccionService, private comunicacion: ComunicacionService,
-    private ubicacionService: UbicacionService) { }
+    private ubicacionService: UbicacionService, private spinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getRestricciones(localStorage.getItem("emailUsuario"));
@@ -49,8 +49,10 @@ export class RestriccionesComponent implements OnInit {
   }
 
   getRestricciones(email: string) {
+    this.spinnerService.show();
     this.restriccionService.getRestriccionesAdministrativo(email)
       .subscribe(res => {
+        this.spinnerService.hide();
         this.restriccionService.restricciones = res as RestriccionDTO[];
         console.log(res);
       })

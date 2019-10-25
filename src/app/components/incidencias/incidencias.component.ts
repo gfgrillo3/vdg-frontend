@@ -3,6 +3,7 @@ import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.
 import { RestriccionDTO } from 'src/app/models/restriccion-dto';
 import { IncidenciaService } from 'src/app/services/incidencias/incidencia.service';
 import { Incidencia } from 'src/app/models/incidencia';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-incidencias',
@@ -15,7 +16,8 @@ export class IncidenciasComponent implements OnInit {
   incidencias: Incidencia[];
 
   constructor(private comunicacionServicio: ComunicacionService,
-    private incideciaServicio: IncidenciaService) { }
+    private incideciaServicio: IncidenciaService,
+    private spinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getRestriccion();
@@ -35,8 +37,10 @@ export class IncidenciasComponent implements OnInit {
   }
 
   getIncidenciasPorRestriccion(idRestriccion: number) {
+    this.spinnerService.show();
     this.incideciaServicio.getIncidenciasPorRestriccion(idRestriccion)
       .subscribe(res => {
+        this.spinnerService.hide();
         this.incidencias = res as Incidencia[];
       });
   }

@@ -1,4 +1,6 @@
 <div class="container">
+    <ngx-spinner type="ball-clip-rotate" size="medium"></ngx-spinner>
+
     <div class="row">
         <div class="archivadas">
             <div class="form-group">
@@ -25,7 +27,7 @@
             <p>Fecha: {{notificacionSeleccionada.fecha}}</p>
             <button type="button" class="btn btn-outline-dark" *ngIf="notificacionSeleccionada.estado!='Archivada'"
                 (click)="archivar()">Archivar</button>
-            
+
         </div>
     </ng-template>
 

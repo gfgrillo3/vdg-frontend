@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Notificacion } from 'src/app/models/notificacion';
 import { NotificacionService } from 'src/app/services/notificaciones/notificacion.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-notificaciones',
@@ -16,7 +17,8 @@ export class NotificacionesComponent implements OnInit {
   notificacionSeleccionada: Notificacion;
 
   constructor(private notificacionService: NotificacionService,
-    config: NgbModalConfig, private modalService: NgbModal) {
+    config: NgbModalConfig, private modalService: NgbModal, 
+    private spinnerService: NgxSpinnerService) {
   }
 
   ngOnInit() {
@@ -24,16 +26,20 @@ export class NotificacionesComponent implements OnInit {
   }
 
   getNotificacionesArchivadas() {
+    this.spinnerService.show();
     this.notificacionService.getNotificacionesArchivadas(localStorage.getItem("emailUsuario"))
       .subscribe(res => {
+        this.spinnerService.hide();
         this.notificaciones = res as Notificacion[];
         console.log(res);
       })
   }
 
   getNotificacionesNoArchivadas() {
+    this.spinnerService.show();
     this.notificacionService.getNotificacionesNoArchivadas(localStorage.getItem("emailUsuario"))
       .subscribe(res => {
+        this.spinnerService.hide();
         this.notificaciones = res as Notificacion[];
         console.log(res);
       })

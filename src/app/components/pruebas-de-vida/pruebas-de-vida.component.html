@@ -1,5 +1,4 @@
 <div class="container">
-
     <ng-template #content let-c="close" let-d="dismiss">
         <div class="modal-header">
             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -42,6 +41,12 @@
             </div>
         </div>
         <div class="col-8">
+            <div class="text-center">
+                <div class="spinner-grow" *ngIf="spinnerBoolean" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
             <table class="table table-striped">
                 <thead>
                     <tr>

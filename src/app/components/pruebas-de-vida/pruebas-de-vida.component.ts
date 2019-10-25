@@ -15,6 +15,7 @@ export class PruebasDeVidaComponent implements OnInit {
   pruebasDeVida: PruebaDeVida[];
 
   pruebaDeVida = new PruebaDeVida;
+  spinnerBoolean: boolean = false;
 
   constructor(private pruevaDeVidaService: PruebaDeVidaService,
     private comunicacion: ComunicacionService,
@@ -42,8 +43,10 @@ export class PruebasDeVidaComponent implements OnInit {
   }
 
   getPruebasDeVidaPersona(idPersona: number) {
+    this.spinnerBoolean = true;
     this.pruevaDeVidaService.getPruevasDeVidaPersona(idPersona)
       .subscribe(res => {
+        this.spinnerBoolean = false;
         this.pruebasDeVida = res as PruebaDeVida[];
         console.log(res);
       })
@@ -75,5 +78,4 @@ export class PruebasDeVidaComponent implements OnInit {
     this.pruebaDeVida = prueba;
     this.modalService.open(content, {size: 'xl'});
   }
-
 }
