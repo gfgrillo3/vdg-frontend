@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { PruebaDeVidaService } from 'src/app/services/pruebaDeVida/prueba-de-vida.service';
 import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { RestriccionDTO } from 'src/app/models/restriccion-dto';
 
 @Component({
   selector: 'app-pruebas-de-vida',
@@ -16,6 +17,7 @@ export class PruebasDeVidaComponent implements OnInit {
 
   pruebaDeVida = new PruebaDeVida;
   spinnerBoolean: boolean = false;
+  restriccion: RestriccionDTO;
 
   constructor(private pruevaDeVidaService: PruebaDeVidaService,
     private comunicacion: ComunicacionService,
@@ -26,7 +28,11 @@ export class PruebasDeVidaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getPruebasDeVidaPersona(this.comunicacion.restriccionDTO.victimario.idPersona);
+    if(this.comunicacion.restriccionDTO != null){
+      this.restriccion = this.comunicacion.restriccionDTO;
+      this.imprimirNombrePersona();
+      this.getPruebasDeVidaPersona(this.comunicacion.restriccionDTO.victimario.idPersona);
+    }
   }
 
   enviarPruebaDeVida(pruebaDeVidaForm: NgForm) {
@@ -77,5 +83,12 @@ export class PruebasDeVidaComponent implements OnInit {
   open(content, prueba: PruebaDeVida) {
     this.pruebaDeVida = prueba;
     this.modalService.open(content, {size: 'xl'});
+  }
+
+  imprimirNombrePersona(){
+    if (this.restriccion != null) {
+      document.getElementById("restriccionSeleccionada").innerHTML = ""
+        + this.restriccion.victimario.apellido + ", " + this.restriccion.victimario.nombre;
+    }
   }
 }

@@ -25,16 +25,25 @@
 
     <div class="row">
         <div class="col">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand"></a>
+                <a id="restriccionSeleccionada"></a>
+            </nav>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
             <div class="card bg-light mb-3" style="max-width: 20rem;">
                 <div class="card-body" text-center>
                     <legend>Generar prueba de vida</legend>
                     <form #pruebaDeVidaForm="ngForm" (ngSubmit)="enviarPruebaDeVida(pruebaDeVidaForm)">
                         <div class="form.group">
                             <input type="text" class="form-control" placeholder="Descripción" name="descripcion"
-                                #descripcion="ngModel" [(ngModel)]="pruebaDeVida.descripcion">
+                                #descripcion="ngModel" [(ngModel)]="pruebaDeVida.descripcion" required>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-primary btn-block">Enviar</button>
+                            <button class="btn btn-primary btn-block" [disabled]="!pruebaDeVidaForm.valid">Enviar</button>
                         </div>
                     </form>
                 </div>
