@@ -6,6 +6,7 @@ import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RestriccionDTO } from 'src/app/models/restriccion-dto';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { FotoIdentificacion } from 'src/app/models/foto-identificacion';
 
 @Component({
   selector: 'app-pruebas-de-vida',
@@ -19,6 +20,7 @@ export class PruebasDeVidaComponent implements OnInit {
   pruebaDeVida = new PruebaDeVida;
   spinnerBoolean: boolean = false;
   restriccion: RestriccionDTO;
+  imgString: String;
 
   constructor(private pruevaDeVidaService: PruebaDeVidaService,
     private comunicacion: ComunicacionService,
@@ -26,7 +28,7 @@ export class PruebasDeVidaComponent implements OnInit {
     private spinnerService: NgxSpinnerService) {
 
     config.backdrop = 'static';
-    config.keyboard = false;
+    config.keyboard = false; 
   }
 
   ngOnInit() {
@@ -34,6 +36,11 @@ export class PruebasDeVidaComponent implements OnInit {
       this.restriccion = this.comunicacion.restriccionDTO;
       this.imprimirNombrePersona();
       this.getPruebasDeVidaPersona(this.comunicacion.restriccionDTO.victimario.idPersona);
+      this.pruevaDeVidaService.getFotoIdentificacion().subscribe( res => {
+        var foto = res as FotoIdentificacion;
+        this.imgString = foto.foto;
+        console.log(res);
+      });
     }
   }
 

@@ -7,6 +7,6 @@ export class FotoIdentificacion {
     }
 
     idFoto: number;
-    foto: Blob;
+    foto: string;
     idPersona: number;
 }
