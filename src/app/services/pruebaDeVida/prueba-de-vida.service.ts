@@ -23,4 +23,8 @@ export class PruebaDeVidaService {
   putPruebaDeVida(pruebaDeVida: PruebaDeVida){
     return this.http.put(this.URL_API + "/" + pruebaDeVida.idPruebaDeVida, pruebaDeVida);
   }
+
+  getFotoIdentificacion(){
+    return this.http.get("http://localhost:9090/FotoIdentificacion/probando"); 
+   }
 }
