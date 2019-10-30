@@ -11,12 +11,12 @@ export class NotificacionService {
 
   constructor(private http: HttpClient) { }
 
-  getNotificacionesArchivadas(email: string){
-    return this.http.get(this.URL_API + '/getArchivadas/' + email);
+  getNotificacionesArchivadas(idAdm: number, cant: number){
+    return this.http.get(this.URL_API + '/getArchivadas/' + idAdm+"/"+cant);
   }
 
-  getNotificacionesNoArchivadas(email: string){
-    return this.http.get(this.URL_API + '/getNotificaciones/' + email);
+  getNotificacionesNoArchivadas(idAdm: number, cant: number){
+    return this.http.get(this.URL_API + '/getNotificaciones/' + idAdm +"/"+cant);
   }
 
   archivarNotificacion(notificacion: Notificacion){

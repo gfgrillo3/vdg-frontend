@@ -42,3 +42,7 @@
     white-space:nowrap; 
     overflow:hidden; 
 }
+
+.cargarMas{
+    cursor: pointer;
+}

@@ -16,6 +16,8 @@ export class AdministrarUsuariosComponent implements OnInit {
   rolSeleccionado;
   usuarioSeleccionado = new Usuario;
 
+  spinnerBoolean: boolean = false;
+
   constructor(private usuarioService: UsuarioService, private toastr: ToastrService) {
     this.roles = ['SUPERVISOR', 'ADMINISTRATIVO'];
   }
@@ -25,8 +27,10 @@ export class AdministrarUsuariosComponent implements OnInit {
   }
 
   getUsuarios() {
+    this.spinnerBoolean = true;
     this.usuarioService.getUsuarios()
       .subscribe(res => {
+        this.spinnerBoolean = false;
         this.usuarioService.usuarios = res as Usuario[];
         console.log(res);
       })

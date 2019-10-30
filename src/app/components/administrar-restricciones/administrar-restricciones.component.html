@@ -53,7 +53,7 @@
                                 ngbTooltip="Distancia restricción" #distancia="ngModel"
                                 [ngClass]="{ 'is-invalid': distancia.invalid && distancia.touched, 'is-valid': distancia.valid}"
                                 [(ngModel)]="restriccion.distancia" pattern="^[0-9]+" required>
-                                <div class="invalid-feedback d-block"
+                            <div class="invalid-feedback d-block"
                                 *ngIf="distancia.invalid && (distancia.dirty || distancia.touched)">
                                 Distancia requerida
                             </div>
@@ -62,8 +62,8 @@
                             <div class="input-group">
                                 <input class="form-control" placeholder="Fecha (Año-Mes-Día)" name="dp"
                                     [(ngModel)]="restriccion.fechaSentencia" ngbDatepicker #d="ngbDatepicker"
-                                    ngbTooltip="Fecha de sentencia" 
-                                    [minDate]="{year: 1900, month: 1, day: 1}" [maxDate]="maxDatePicker" readonly required>
+                                    ngbTooltip="Fecha de sentencia" [minDate]="{year: 1900, month: 1, day: 1}"
+                                    [maxDate]="maxDatePicker" readonly required>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
                                         type="button">
@@ -82,6 +82,12 @@
         </div>
         <!-- TABLA DE RESTRICCIONES -->
         <div class="col">
+            <div class="text-center">
+                <div class="spinner-grow" *ngIf="spinnerBoolean" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
             <table class="table table-striped">
                 <thead>
                     <tr>

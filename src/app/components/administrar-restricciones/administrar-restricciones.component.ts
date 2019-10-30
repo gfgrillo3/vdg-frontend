@@ -27,6 +27,8 @@ export class AdministrarRestriccionesComponent implements OnInit {
   fecha: Date = new Date();
   maxDatePicker = { year: this.fecha.getFullYear(), month: this.fecha.getMonth() + 1, day: this.fecha.getDate() };
   
+  spinnerBoolean: boolean = false;
+
   constructor(private restriccionService: RestriccionService,
     private personaService: PersonaService,
     private usuarioService: UsuarioService, private toastr: ToastrService) { }
@@ -36,8 +38,10 @@ export class AdministrarRestriccionesComponent implements OnInit {
   }  
 
   getRestricciones() {
+    this.spinnerBoolean = true;
     this.restriccionService.getRestricciones()
       .subscribe(res => {
+        this.spinnerBoolean = false;
         this.restriccionService.restricciones = res as RestriccionDTO[];
         console.log(res);
       })

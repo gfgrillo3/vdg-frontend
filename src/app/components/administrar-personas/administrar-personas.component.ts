@@ -38,6 +38,7 @@ export class AdministrarPersonasComponent implements OnInit {
   imagenSeleccionada: File = null;
 
   hayError = false;
+  spinnerBoolean: boolean = false;
 
   constructor(private personaService: PersonaService,
     private toastr: ToastrService,
@@ -52,8 +53,10 @@ export class AdministrarPersonasComponent implements OnInit {
   }
 
   getPersonas() {
+    this.spinnerBoolean = true;
     this.personaService.getPersonas()
       .subscribe(res => {
+        this.spinnerBoolean = false;
         this.personaService.personas = res as Persona[];
         console.log(res);
       })

@@ -3,6 +3,7 @@ import { Notificacion } from 'src/app/models/notificacion';
 import { NotificacionService } from 'src/app/services/notificaciones/notificacion.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.service';
 
 @Component({
   selector: 'app-notificaciones',
@@ -16,39 +17,40 @@ export class NotificacionesComponent implements OnInit {
   check = false;
   notificacionSeleccionada: Notificacion;
 
+  cantidadNotificaciones: number = 20;
+
   constructor(private notificacionService: NotificacionService,
     config: NgbModalConfig, private modalService: NgbModal, 
-    private spinnerService: NgxSpinnerService) {
+    private spinnerService: NgxSpinnerService, private comunicacion: ComunicacionService) {
   }
 
   ngOnInit() {
-    this.getNotificacionesNoArchivadas();
+    this.getNotificacionesNoArchivadas(this.comunicacion.administrativo.idUsuario, this.cantidadNotificaciones);
   }
 
-  getNotificacionesArchivadas() {
+  getNotificacionesArchivadas(idAdm: number, cantNotificaciones: number) {
     this.spinnerService.show();
-    this.notificacionService.getNotificacionesArchivadas(localStorage.getItem("emailUsuario"))
+    this.notificacionService.getNotificacionesArchivadas(idAdm, this.cantidadNotificaciones)
       .subscribe(res => {
         this.spinnerService.hide();
         this.notificaciones = res as Notificacion[];
       })
   }
 
-  getNotificacionesNoArchivadas() {
-    this.spinnerService.show();
-    this.notificacionService.getNotificacionesNoArchivadas(localStorage.getItem("emailUsuario"))
+  getNotificacionesNoArchivadas(idAdm: number, cantNotificaciones: number) {
+    this.notificacionService.getNotificacionesNoArchivadas(idAdm, this.cantidadNotificaciones)
       .subscribe(res => {
-        this.spinnerService.hide();
         this.notificaciones = res as Notificacion[];
       })
   }
 
   verArchivadas() {
+    this.cantidadNotificaciones = 20;
     if (this.check == true) {
-      this.getNotificacionesArchivadas();
+      this.getNotificacionesArchivadas(this.comunicacion.administrativo.idUsuario, this.cantidadNotificaciones);
     }
     else {
-      this.getNotificacionesNoArchivadas();
+      this.getNotificacionesNoArchivadas(this.comunicacion.administrativo.idUsuario, this.cantidadNotificaciones);
     }
   }
 
@@ -60,16 +62,27 @@ export class NotificacionesComponent implements OnInit {
 
   archivar() {
     this.notificacionService.archivarNotificacion(this.notificacionSeleccionada).subscribe(res => {
-      this.getNotificacionesNoArchivadas();
+      this.getNotificacionesNoArchivadas(this.comunicacion.administrativo.idUsuario, this.cantidadNotificaciones);
       this.modalService.dismissAll();
     })
   }
 
   setVista() {
     if(this.notificacionSeleccionada.estado == 'NoVista'){
-      this.notificacionService.notificacionSetVista(this.notificacionSeleccionada).subscribe(res => {
-        this.getNotificacionesNoArchivadas();
+      this.notificacionService.notificacionSetVista(this.notificacionSeleccionada)
+      .subscribe(res => {
+        this.getNotificacionesNoArchivadas(this.comunicacion.administrativo.idUsuario, this.cantidadNotificaciones);
       })
+    }
+  }
+
+  cargarMas(){
+    this.cantidadNotificaciones += 20;
+    if (this.check == true) {
+      this.getNotificacionesArchivadas(this.comunicacion.administrativo.idUsuario, this.cantidadNotificaciones);
+    }
+    else {
+      this.getNotificacionesNoArchivadas(this.comunicacion.administrativo.idUsuario, this.cantidadNotificaciones);
     }
   }
 }
