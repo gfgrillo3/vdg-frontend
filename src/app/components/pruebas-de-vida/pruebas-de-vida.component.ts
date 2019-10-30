@@ -5,6 +5,7 @@ import { PruebaDeVidaService } from 'src/app/services/pruebaDeVida/prueba-de-vid
 import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RestriccionDTO } from 'src/app/models/restriccion-dto';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-pruebas-de-vida',
@@ -21,7 +22,8 @@ export class PruebasDeVidaComponent implements OnInit {
 
   constructor(private pruevaDeVidaService: PruebaDeVidaService,
     private comunicacion: ComunicacionService,
-    config: NgbModalConfig, private modalService: NgbModal) {
+    config: NgbModalConfig, private modalService: NgbModal,
+    private spinnerService: NgxSpinnerService) {
 
     config.backdrop = 'static';
     config.keyboard = false;
@@ -59,6 +61,7 @@ export class PruebasDeVidaComponent implements OnInit {
   }
 
   aceptarPruebaDeVida(){
+    this.spinnerService.show();
     this.pruebaDeVida.estado = "Aceptada";
     this.pruevaDeVidaService.putPruebaDeVida(this.pruebaDeVida)
     .subscribe(res => {
@@ -66,10 +69,12 @@ export class PruebasDeVidaComponent implements OnInit {
       this.pruebaDeVida = new PruebaDeVida;
       this.getPruebasDeVidaPersona(this.comunicacion.restriccionDTO.victimario.idPersona);
       this.modalService.dismissAll();
+      this.spinnerService.hide();
     })
   }
 
   rechazarPruebaDeVida(){
+    this.spinnerService.show();
     this.pruebaDeVida.estado = "Rechazada";
     this.pruevaDeVidaService.putPruebaDeVida(this.pruebaDeVida)
     .subscribe(res => {
@@ -77,6 +82,7 @@ export class PruebasDeVidaComponent implements OnInit {
       this.pruebaDeVida = new PruebaDeVida;
       this.getPruebasDeVidaPersona(this.comunicacion.restriccionDTO.victimario.idPersona);
       this.modalService.dismissAll();
+      this.spinnerService.hide();
     })
   }
 

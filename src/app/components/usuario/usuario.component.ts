@@ -5,6 +5,7 @@ import { NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 import * as sha256 from 'js-sha256';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.service';
 
 
 

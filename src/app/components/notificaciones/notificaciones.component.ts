@@ -31,7 +31,6 @@ export class NotificacionesComponent implements OnInit {
       .subscribe(res => {
         this.spinnerService.hide();
         this.notificaciones = res as Notificacion[];
-        console.log(res);
       })
   }
 
@@ -41,7 +40,6 @@ export class NotificacionesComponent implements OnInit {
       .subscribe(res => {
         this.spinnerService.hide();
         this.notificaciones = res as Notificacion[];
-        console.log(res);
       })
   }
 

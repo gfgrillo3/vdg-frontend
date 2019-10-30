@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { NotificacionService } from 'src/app/services/notificaciones/notificacion.service';
+import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.service';
+import { UsuarioService } from 'src/app/services/login/usuario.service';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-nav',
@@ -12,7 +15,8 @@ export class NavComponent implements OnInit {
   cantNotificaciones = 0;
   notificacionesNoLeidas = "";
 
-  constructor(private toastr: ToastrService, private notificacionService: NotificacionService) { }
+  constructor(private toastr: ToastrService, private notificacionService: NotificacionService,
+    private comunicacionService: ComunicacionService, private usuarioService: UsuarioService) { }
 
   ngOnInit() {
     /*
@@ -53,4 +57,5 @@ export class NavComponent implements OnInit {
   salir() {
     localStorage.setItem("emailUsuario", "");
   }
+
 }

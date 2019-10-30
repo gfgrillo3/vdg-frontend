@@ -23,10 +23,10 @@ export class RestriccionService {
   postRestriccion(restriccion: Restriccion){
     return this.http.post(this.URL_API, restriccion);
   }
-
+  
   getRestriccionesAdministrativo(email: string){
-    return this.http.get("http://localhost:9090/RestriccionDTO/getByUsuario/"+
-      email);
+    return this.http.get("http://localhost:9090/RestriccionDTO/"+
+    email);
   }
 
 }
