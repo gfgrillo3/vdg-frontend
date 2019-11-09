@@ -7,6 +7,8 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RestriccionDTO } from 'src/app/models/restriccion-dto';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FotoIdentificacion } from 'src/app/models/foto-identificacion';
+import { FotoIdentificacionService } from 'src/app/services/fotoIdentificacion/foto-identificacion.service';
+import { FotoPruebaDeVida } from 'src/app/models/foto-prueba-de-vida';
 
 @Component({
   selector: 'app-pruebas-de-vida',
@@ -20,12 +22,14 @@ export class PruebasDeVidaComponent implements OnInit {
   pruebaDeVida = new PruebaDeVida;
   spinnerBoolean: boolean = false;
   restriccion: RestriccionDTO;
-  imgString: String;
+  imgPerfil: String;
+  imgPruebaDeVida: String;
+
 
   constructor(private pruevaDeVidaService: PruebaDeVidaService,
     private comunicacion: ComunicacionService,
     config: NgbModalConfig, private modalService: NgbModal,
-    private spinnerService: NgxSpinnerService) {
+    private spinnerService: NgxSpinnerService, private fotoIdentificacionService: FotoIdentificacionService) {
 
     config.backdrop = 'static';
     config.keyboard = false; 
@@ -36,9 +40,10 @@ export class PruebasDeVidaComponent implements OnInit {
       this.restriccion = this.comunicacion.restriccionDTO;
       this.imprimirNombrePersona();
       this.getPruebasDeVidaPersona(this.comunicacion.restriccionDTO.victimario.idPersona);
-      this.pruevaDeVidaService.getFotoIdentificacion().subscribe( res => {
+    this.fotoIdentificacionService.getFotoPefil(this.comunicacion.restriccionDTO.victimario.idPersona).
+     subscribe( res => {
         var foto = res as FotoIdentificacion;
-        this.imgString = foto.foto;
+        this.imgPerfil = foto.foto;
         console.log(res);
       });
     }
@@ -95,7 +100,17 @@ export class PruebasDeVidaComponent implements OnInit {
 
   open(content, prueba: PruebaDeVida) {
     this.pruebaDeVida = prueba;
+    this.getRespuestaPruebaDeVida();
     this.modalService.open(content, {size: 'xl'});
+  }
+
+  getRespuestaPruebaDeVida(){
+    this.pruevaDeVidaService.getFotoPruebaDeVida(this.pruebaDeVida.idPruebaDeVida).
+    subscribe( res => {
+       var foto = res as FotoPruebaDeVida;
+       this.imgPruebaDeVida = foto.foto;
+       console.log(res);
+     });
   }
 
   imprimirNombrePersona(){

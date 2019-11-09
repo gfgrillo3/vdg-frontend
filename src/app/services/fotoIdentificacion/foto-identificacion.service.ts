@@ -31,4 +31,8 @@ export class FotoIdentificacionService {
     return this.http.post(this.URL_API, fd);
   }
   
+  getFotoPefil(idVictimario: number){
+    return this.http.get(this.URL_API+"/getFoto/"+idVictimario); 
+   }
+
 }
