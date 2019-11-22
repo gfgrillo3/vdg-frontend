@@ -14,11 +14,13 @@ export class NavComponent implements OnInit {
   intervalo;
   cantNotificaciones = 0;
   notificacionesNoLeidas = "";
+  usuarioLogeado: string = "";
 
   constructor(private toastr: ToastrService, private notificacionService: NotificacionService,
     private comunicacionService: ComunicacionService, private usuarioService: UsuarioService) { }
 
   ngOnInit() {
+    this.usuarioLogeado = localStorage.getItem('emailUsuario');
     /*
     clearInterval(this.intervalo);
     let thisjr = this;

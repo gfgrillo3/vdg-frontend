@@ -42,7 +42,7 @@
                 <div class="card-body" text-center>
                     <legend>Generar prueba de vida</legend>
                     <form #pruebaDeVidaForm="ngForm" (ngSubmit)="enviarPruebaDeVida(pruebaDeVidaForm)">
-                        <div class="form.group">
+                        <div class="form-group">
                             <input type="text" class="form-control" placeholder="Descripción" name="descripcion"
                                 #descripcion="ngModel" [(ngModel)]="pruebaDeVida.descripcion" required>
                         </div>

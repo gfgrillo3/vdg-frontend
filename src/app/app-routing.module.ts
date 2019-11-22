@@ -10,6 +10,7 @@ import { AdministrarRestriccionesComponent } from './components/administrar-rest
 import { AdministrarUsuariosComponent } from './components/administrar-usuarios/administrar-usuarios.component';
 import { AdministrarPersonasComponent } from './components/administrar-personas/administrar-personas.component';
 import { RutinasComponent } from './components/rutinas/rutinas.component';
+import { RecuperarContrasenaComponent } from './components/recuperar-contrasena/recuperar-contrasena.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
       { path: 'rutinas', component: RutinasComponent},
       { path: 'administrarPersonas', component: AdministrarPersonasComponent },
       { path: 'administrarUsuarios', component: AdministrarUsuariosComponent },
-      { path: 'administrarRestricciones', component: AdministrarRestriccionesComponent }
+      { path: 'administrarRestricciones', component: AdministrarRestriccionesComponent },
+      { path: 'recuperarContrasena', component: RecuperarContrasenaComponent },
     ]
   },
   { path: 'ingresar', component: UsuarioComponent },
