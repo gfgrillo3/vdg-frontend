@@ -10,6 +10,7 @@ import { Provincia } from 'src/app/models/provincia';
 import { Localidad } from 'src/app/models/localidad';
 import { FotoIdentificacion } from 'src/app/models/foto-identificacion';
 import { FotoIdentificacionService } from 'src/app/services/fotoIdentificacion/foto-identificacion.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-administrar-personas',
@@ -23,6 +24,8 @@ export class AdministrarPersonasComponent implements OnInit {
   fecha: Date = new Date();
   maxDatePicker = { year: this.fecha.getFullYear(), month: this.fecha.getMonth() + 1, day: this.fecha.getDate() };
 
+  fechaMarcador;
+
   //COMBO ROLES
   rolSeleccionado;
   roles;
@@ -32,37 +35,67 @@ export class AdministrarPersonasComponent implements OnInit {
   provinciaSeleccionada;
   localidades;
   localidadSeleccionada;
+  localidad: Localidad = new Localidad;
 
   //CONDOCIONALES PARA FORM
   mostrarImagen: boolean = false;
   imagenSeleccionada: File = null;
 
   hayError = false;
-  spinnerBoolean: boolean = false;
+  editarBandera: boolean = false;
 
-  constructor(private personaService: PersonaService,
+  constructor(
+    private personaService: PersonaService,
     private toastr: ToastrService,
     private provinciaLocalidadService: ProvinciaLocalidadService,
-    private fotoIdentificacionService: FotoIdentificacionService) {
+    private fotoIdentificacionService: FotoIdentificacionService,
+    private spinner: NgxSpinnerService) {
     this.roles = ['DAMNIFICADA', 'VICTIMARIO'];
   }
 
   ngOnInit() {
     this.getPersonas();
     this.getProvincias();
+    this.editarBandera = false;
   }
 
   getPersonas() {
-    this.spinnerBoolean = true;
+    this.spinner.show();
     this.personaService.getPersonas()
       .subscribe(res => {
-        this.spinnerBoolean = false;
-        this.personaService.personas = res as Persona[];
+        this.spinner.hide();
+        this.personaService.personas = res as FormPersonaDTO[];
         console.log(res);
       })
   }
 
+  guardarPersona(personaForm: NgForm){
+    this.personaDTOSelleccionada.usuario.rolDeUsuario = this.rolSeleccionado;
+    let ngbDate = personaForm.value.fechaNacimiento;
+    let myDate = new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day+1);
+    this.personaDTOSelleccionada.persona.fechaNacimiento = myDate;
+    
+    if(this.editarBandera == true){
+      this.spinner.show();
+      this.personaService.putPersona(this.personaDTOSelleccionada)
+        .subscribe(res => {
+          console.log(res);
+          this.getPersonas();
+          personaForm.reset();
+          this.editarBandera = false;
+          this.personaDTOSelleccionada = new FormPersonaDTO;
+          this.spinner.hide();
+        });
+    }
+    else{
+      this.agregarPersona(personaForm);
+    }
+    this.editarBandera = false;
+
+  }
+
   agregarPersona(personaForm: NgForm) {
+    this.spinner.show();
     //CARGO DATOS DEL FORM A PERSONA
     this.personaDTOSelleccionada.usuario.rolDeUsuario = this.rolSeleccionado;
     let ngbDate = personaForm.value.fechaNacimiento;
@@ -82,7 +115,6 @@ export class AdministrarPersonasComponent implements OnInit {
     promise.then(function (imgBase64) {
       let img: string = imgBase64 as string;
       thisjr.personaDTOSelleccionada.foto = img;
-
       thisjr.personaService.postPersona(thisjr.personaDTOSelleccionada)
         .subscribe(res => {
           var error = res as ErrorDTO;
@@ -90,12 +122,14 @@ export class AdministrarPersonasComponent implements OnInit {
             //MOSTRAR ERROR
             thisjr.toastr.error("" + error.mensajeError, "Error!");
             thisjr.setHayError();
+            this.spinner.hide();
           }
           else {
             thisjr.toastr.success("Persona agregada correctamente", "Agregada!");
             console.log(thisjr.personaDTOSelleccionada);
             thisjr.getPersonas();
             personaForm.reset();
+            this.spinner.hide();
           }
         })
 
@@ -124,14 +158,15 @@ export class AdministrarPersonasComponent implements OnInit {
   archivoSeleccionado(event) {
     //Obtengo la imagen seleccionada
     this.imagenSeleccionada = event.target.files[0];
-    if (this.imagenSeleccionada != null) 
+    if (this.imagenSeleccionada != null)
       document.getElementById("labelImagen").innerHTML = "" + this.imagenSeleccionada.name;
     else
       document.getElementById("labelImagen").innerHTML = "Choose File";
   }
 
-  eliminarPersona(idPersona: number) {
-    this.personaService.deletePersona(idPersona)
+  eliminarPersona(persona: FormPersonaDTO) {
+    console.log(persona.persona.idPersona);
+    this.personaService.deletePersona(persona.persona.idPersona)
       .subscribe(res => {
         var error = res as ErrorDTO;
         if (error.hayError) {
@@ -155,8 +190,10 @@ export class AdministrarPersonasComponent implements OnInit {
 
   //Obtener las provincias
   getProvincias() {
+    this.spinner.show();
     this.provinciaLocalidadService.getProvincias()
       .subscribe(res => {
+        this.spinner.hide();
         this.provincias = res as Provincia[];
       });
   }
@@ -171,9 +208,15 @@ export class AdministrarPersonasComponent implements OnInit {
 
   //SE LLENA LAS LOCALIDADES SEGUN PROVINCIA
   getLocalidades(idProvincia: number) {
+    this.spinner.show();
+    this.localidades = null;
     this.provinciaLocalidadService.getLocalidades(idProvincia)
       .subscribe(res => {
+        this.spinner.hide();
         this.localidades = res as Localidad[];
+        if(this.localidad.nombre != ""){
+          this.localidadSeleccionada = this.localidad.nombre;
+        }
       });
   }
 
@@ -187,4 +230,39 @@ export class AdministrarPersonasComponent implements OnInit {
     }
   }
 
+  editarPersona(persona: FormPersonaDTO) {
+    this.editarBandera = true;
+    this.localidadSeleccionada = "";
+    this.localidad = new Localidad;
+    this.personaDTOSelleccionada = persona;
+    this.rolSeleccionado = persona.usuario.rolDeUsuario;
+    let date = new Date(persona.persona.fechaNacimiento);
+    this.fechaMarcador = {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate() + 1
+    };
+
+    this.getLocalidad(persona.direccion.idLocalidad);
+    this.cambioRol();
+    console.log(persona);
+  }
+
+    //BUSCO LA LOCALIDAD DE LA PERSONA PARA TOMAR LA PROVINCIA 
+    //Y LLENO LOS COMBOS
+    getLocalidad(idLocalidad: number) {
+      this.spinner.show();
+      this.provinciaLocalidadService.getLocalidad(idLocalidad)
+        .subscribe(res => {
+          this.spinner.hide();
+          this.localidad = res as Localidad;
+          for(let i = 0; i < this.provincias.length; i++){
+            if(this.provincias[i].idProvincia == this.localidad.idProvincia){
+              this.provinciaSeleccionada = this.provincias[i].nombre;
+              this.getLocalidades(this.localidad.idProvincia);
+            }
+          }
+        });
+    }
+  
 }

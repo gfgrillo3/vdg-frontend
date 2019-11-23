@@ -9,7 +9,7 @@ import { Persona } from 'src/app/models/persona';
 export class PersonaService {
 
   personaDTOSelleccionada: FormPersonaDTO;
-  personas: Persona[];
+  personas: FormPersonaDTO[];
   readonly URL_API = 'http://localhost:9090/FormABMPersona';
 
 
@@ -35,7 +35,11 @@ export class PersonaService {
   }
 
   deletePersona(id: number){
-    return this.http.delete(this.URL_API + `/${id}`);
+    return this.http.delete(this.URL_API + "/" + id);
+  }
+
+  putPersona(personaDTO: FormPersonaDTO){
+    return this.http.put(this.URL_API + "/ModificarPersona", personaDTO);
   }
 
 }

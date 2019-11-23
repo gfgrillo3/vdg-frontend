@@ -27,8 +27,3 @@
     opacity: .3;
 }
 
-.spinner-grow{
-    position: fixed;
-    margin-top: 20%;
-    z-index: 9999;
-}

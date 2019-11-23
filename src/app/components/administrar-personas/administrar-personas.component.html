@@ -1,6 +1,9 @@
 <div class="alert alert-danger" role="alert" *ngIf="hayError">
     {{ mensajeError }}
 </div>
+<ngx-spinner type="ball-pulse-sync" size="medium" bdColor="rgba(51,51,51,0.5)">
+    <p style="font-size: 15px; font-weight: bold; color: white">Cargando...</p>
+</ngx-spinner>
 <div class="container">
     <div class="row">
         <!-- FORMULARIO DE PERSONAS -->
@@ -8,7 +11,7 @@
             <div class="card bg-light mb-3" style="max-width: 20rem;">
                 <div class="card-body">
                     <legend>Persona</legend>
-                    <form #personaForm="ngForm" (ngSubmit)="agregarPersona(personaForm)" novalidate>
+                    <form #personaForm="ngForm" (ngSubmit)="guardarPersona(personaForm)" novalidate>
                         <div class="row">
                             <input class="form-control" type="text" name="nombre" placeholder="Nombre"
                                 [ngClass]="{ 'is-invalid': nombre.invalid && nombre.touched, 'is-valid': nombre.valid}"
@@ -64,7 +67,7 @@
                                 <input class="form-control" placeholder="Fecha nacimiento (Año-Mes-Día)"
                                     name="fechaNacimiento" [(ngModel)]="personaDTOSelleccionada.persona.fechaNacimiento"
                                     ngbDatepicker [minDate]="{year: 1900, month: 1, day: 1}" [maxDate]="maxDatePicker"
-                                    #d="ngbDatepicker" ngbTooltip="Fecha nacimiento" required readonly>
+                                    #d="ngbDatepicker" ngbTooltip="Fecha nacimiento" [startDate]="fechaMarcador" required>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
                                         type="button">
@@ -144,7 +147,7 @@
                         <div class="row" *ngIf="mostrarImagen">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customFile" name="imagen"
-                                    (change)="archivoSeleccionado($event)" accept="image/*" required>
+                                    (change)="archivoSeleccionado($event)" accept="image/*">
                                 <label class="custom-file-label" id="labelImagen" for="customFile">Seleccionar
                                     imagen</label>
                             </div>
@@ -159,12 +162,6 @@
         </div>
         <!-- TABLA DE PERSONAS -->
         <div class="col">
-            <div class="text-center">
-                <div class="spinner-grow" *ngIf="spinnerBoolean" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
-
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -177,15 +174,15 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let persona of personaService.personas">
-                        <td>{{persona.nombre}}</td>
-                        <td>{{persona.apellido}}</td>
-                        <td>{{persona.dni}}</td>
-                        <td>{{persona.fechaNacimiento}}</td>
+                        <td>{{persona.persona.nombre}}</td>
+                        <td>{{persona.persona.apellido}}</td>
+                        <td>{{persona.persona.dni}}</td>
+                        <td>{{persona.persona.fechaNacimiento}}</td>
                         <td>
                             <a (click)="editarPersona(persona)">
                                 <i class="material-icons">editar</i>
                             </a>
-                            <a (click)="eliminarPersona(persona.idPersona)">
+                            <a (click)="eliminarPersona(persona)">
                                 <i class="material-icons">delete</i>
                             </a>
                         </td>
