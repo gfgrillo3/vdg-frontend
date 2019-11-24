@@ -14,11 +14,15 @@ export class NavComponent implements OnInit {
   intervalo;
   cantNotificaciones = 0;
   notificacionesNoLeidas = "";
+  rolDeUsuario = "";
 
   constructor(private toastr: ToastrService, private notificacionService: NotificacionService,
     private comunicacionService: ComunicacionService, private usuarioService: UsuarioService) { }
 
   ngOnInit() {
+    console.log(" ROL DEL QUE INICIO ES : "+ this.comunicacionService.administrativo.rolDeUsuario);
+    this.rolDeUsuario = this.comunicacionService.administrativo.rolDeUsuario;
+    
     /*
     clearInterval(this.intervalo);
     let thisjr = this;
