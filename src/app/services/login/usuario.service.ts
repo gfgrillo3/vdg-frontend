@@ -37,4 +37,8 @@ export class UsuarioService {
   getUsuarioByEmail(email: string){
     return this.http.get<Usuario>(this.URL_API+"/GetByEmail/"+email);
   }
+
+  putUsuario(usuario: Usuario){
+    return this.http.put(this.URL_API+"/modificarUsuario", usuario);
+  }
 }

@@ -29,4 +29,12 @@ export class RestriccionService {
     email);
   }
 
+  putRestriccion(restriccion: Restriccion){
+    return this.http.put(this.URL_API, restriccion);
+  }
+
+  deleteRestriccion(idRestriccion: number){
+    return this.http.delete(this.URL_API + "/borrar/" + idRestriccion);
+  }
+
 }

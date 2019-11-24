@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { RutinasComponent } from './components/rutinas/rutinas.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { RecuperarContrasenaComponent } from './components/recuperar-contrasena/recuperar-contrasena.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     AdministrarUsuariosComponent,
     AdministrarPersonasComponent,
     RutinasComponent,
+    RecuperarContrasenaComponent,
   ],
   imports: [
     BrowserModule,

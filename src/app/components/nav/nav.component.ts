@@ -15,6 +15,8 @@ export class NavComponent implements OnInit {
   cantNotificaciones = 0;
   notificacionesNoLeidas = "";
   rolDeUsuario = "";
+  usuarioLogeado: string = "";
+
 
   constructor(private toastr: ToastrService, private notificacionService: NotificacionService,
     private comunicacionService: ComunicacionService, private usuarioService: UsuarioService) { }
@@ -22,7 +24,8 @@ export class NavComponent implements OnInit {
   ngOnInit() {
     console.log(" ROL DEL QUE INICIO ES : "+ this.comunicacionService.administrativo.rolDeUsuario);
     this.rolDeUsuario = this.comunicacionService.administrativo.rolDeUsuario;
-    
+    this.usuarioLogeado = localStorage.getItem('emailUsuario');
+
     /*
     clearInterval(this.intervalo);
     let thisjr = this;

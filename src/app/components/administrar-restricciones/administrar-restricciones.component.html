@@ -1,3 +1,6 @@
+<ngx-spinner type="ball-pulse-sync" size="medium" bdColor="rgba(51,51,51,0.5)">
+    <p style="font-size: 15px; font-weight: bold; color: white">Cargando...</p>
+</ngx-spinner>
 <div class="container">
     <div class="row">
         <!-- FORMULARIO DE RESTRICCIONES -->
@@ -5,7 +8,7 @@
             <div class="card bg-light mb-3" style="max-width: 20rem;">
                 <div class="card-body">
                     <legend>Restricción Perimetral</legend>
-                    <form #restriccionForm="ngForm" (ngSubmit)="agregarRestriccion(restriccionForm)" novalidate>
+                    <form #restriccionForm="ngForm" (ngSubmit)="guardarRestriccion(restriccionForm)" novalidate>
                         <div class="row">
                             <div class="input-group">
                                 <input class="form-control" type="text" name="dniVictimario"
@@ -82,12 +85,6 @@
         </div>
         <!-- TABLA DE RESTRICCIONES -->
         <div class="col">
-            <div class="text-center">
-                <div class="spinner-grow" *ngIf="spinnerBoolean" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
-
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -101,12 +98,12 @@
                     <tr *ngFor="let restriccion of restriccionService.restricciones">
                         <td>{{restriccion.victimario.apellido}}</td>
                         <td>{{restriccion.damnificada.apellido}}</td>
-                        <td>{{restriccion.usuario.email}}</td>
+                        <td>{{restriccion.administrativo.email}}</td>
                         <td>
-                            <a>
+                            <a (click)="editarRestriccion(restriccion)">
                                 <i class="material-icons">editar</i>
                             </a>
-                            <a>
+                            <a (click)="eliminarRestriccion(restriccion)">
                                 <i class="material-icons">delete</i>
                             </a>
                         </td>

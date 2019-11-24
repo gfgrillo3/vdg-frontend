@@ -17,4 +17,8 @@ export class ProvinciaLocalidadService {
   getLocalidades(idProvincia: number){
     return this.http.get(this.URL_API + 'Localidad/' + idProvincia);
   }
+
+  getLocalidad(idLocalidad: number){
+    return this.http.get(this.URL_API + 'Localidad/Buscar/' + idLocalidad);
+  }
 }
