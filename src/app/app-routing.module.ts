@@ -11,23 +11,25 @@ import { AdministrarUsuariosComponent } from './components/administrar-usuarios/
 import { AdministrarPersonasComponent } from './components/administrar-personas/administrar-personas.component';
 import { RutinasComponent } from './components/rutinas/rutinas.component';
 import { RecuperarContrasenaComponent } from './components/recuperar-contrasena/recuperar-contrasena.component';
-
+import { AuthGuard } from './guards/auth.guard';
+import { AuthSupervisorGuard } from './guards/auth-supervisor.guard';
+import { AuthAdministrativoGuard } from './guards/auth-administrativo.guard';
 
 const routes: Routes = [
   {
     path: 'inicio',
-    component : InicioComponent,
+    component : InicioComponent, canActivate : [ AuthGuard ],
     children:
     [
       { path: '', redirectTo: 'notificaciones', pathMatch: 'full' },
-      { path: 'restricciones', component: RestriccionesComponent},
-      { path: 'notificaciones', component: NotificacionesComponent},
-      { path: 'incidencias', component: IncidenciasComponent},
-      { path: 'pruebasDeVida', component: PruebasDeVidaComponent},
-      { path: 'rutinas', component: RutinasComponent},
-      { path: 'administrarPersonas', component: AdministrarPersonasComponent },
-      { path: 'administrarUsuarios', component: AdministrarUsuariosComponent },
-      { path: 'administrarRestricciones', component: AdministrarRestriccionesComponent },
+      { path: 'restricciones', component: RestriccionesComponent, canActivate : [ AuthAdministrativoGuard ]},
+      { path: 'notificaciones', component: NotificacionesComponent, canActivate : [ AuthAdministrativoGuard ]},
+      { path: 'incidencias', component: IncidenciasComponent, canActivate : [ AuthAdministrativoGuard ]},
+      { path: 'pruebasDeVida', component: PruebasDeVidaComponent, canActivate : [ AuthAdministrativoGuard ]},
+      { path: 'rutinas', component: RutinasComponent, canActivate : [ AuthAdministrativoGuard ]},
+      { path: 'administrarPersonas', component: AdministrarPersonasComponent, canActivate : [ AuthSupervisorGuard ] },
+      { path: 'administrarUsuarios', component: AdministrarUsuariosComponent, canActivate : [ AuthSupervisorGuard ] },
+      { path: 'administrarRestricciones', component: AdministrarRestriccionesComponent, canActivate : [ AuthSupervisorGuard ] },
       { path: 'recuperarContrasena', component: RecuperarContrasenaComponent },
     ]
   },
