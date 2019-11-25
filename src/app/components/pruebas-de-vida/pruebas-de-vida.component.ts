@@ -27,10 +27,12 @@ export class PruebasDeVidaComponent implements OnInit {
   respondio: boolean = true;
 
 
-  constructor(private pruevaDeVidaService: PruebaDeVidaService,
+  constructor(
+    private pruevaDeVidaService: PruebaDeVidaService,
     private comunicacion: ComunicacionService,
     config: NgbModalConfig, private modalService: NgbModal,
-    private spinnerService: NgxSpinnerService, private fotoIdentificacionService: FotoIdentificacionService) {
+    private spinnerService: NgxSpinnerService,
+    private fotoIdentificacionService: FotoIdentificacionService) {
 
     config.backdrop = 'static';
     config.keyboard = false; 
@@ -41,8 +43,10 @@ export class PruebasDeVidaComponent implements OnInit {
       this.restriccion = this.comunicacion.restriccionDTO;
       this.imprimirNombrePersona();
       this.getPruebasDeVidaPersona(this.comunicacion.restriccionDTO.victimario.idPersona);
+      this.spinnerService.show();
     this.fotoIdentificacionService.getFotoPefil(this.comunicacion.restriccionDTO.victimario.idPersona).
      subscribe( res => {
+      this.spinnerService.hide();
         var foto = res as FotoIdentificacion;
         this.imgPerfil = foto.foto;
         console.log(res);
@@ -54,8 +58,10 @@ export class PruebasDeVidaComponent implements OnInit {
     this.pruebaDeVida.idRestriccion = this.comunicacion.restriccionDTO.restriccion.idRestriccion;
     this.pruebaDeVida.idPersonaRestriccion = this.comunicacion.restriccionDTO.victimario.idPersona;
     this.pruebaDeVida.estado = "Pendiente";
+    this.spinnerService.show();
     this.pruevaDeVidaService.postPruebaDeVida(this.pruebaDeVida)
       .subscribe(res => {
+        this.spinnerService.hide();
         console.log(res);
         pruebaDeVidaForm.reset();
         this.pruebaDeVida = new PruebaDeVida;
@@ -64,10 +70,10 @@ export class PruebasDeVidaComponent implements OnInit {
   }
 
   getPruebasDeVidaPersona(idPersona: number) {
-    this.spinnerBoolean = true;
+    this.spinnerService.show();
     this.pruevaDeVidaService.getPruevasDeVidaPersona(idPersona)
       .subscribe(res => {
-        this.spinnerBoolean = false;
+        this.spinnerService.hide();
         this.pruebasDeVida = res as PruebaDeVida[];
         console.log(res);
       })
@@ -128,5 +134,10 @@ export class PruebasDeVidaComponent implements OnInit {
       document.getElementById("restriccionSeleccionada").innerHTML = ""
         + this.restriccion.victimario.apellido + ", " + this.restriccion.victimario.nombre;
     }
+  }
+
+  cerrarModal(){
+    this.pruebaDeVida = new PruebaDeVida;
+    this.modalService.dismissAll();
   }
 }
