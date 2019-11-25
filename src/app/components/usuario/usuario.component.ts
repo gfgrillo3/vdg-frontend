@@ -47,8 +47,13 @@ export class UsuarioComponent implements OnInit {
               var usuarioLogueado = res as Usuario;
               this.comunicacionService.enviarUsuario(usuarioLogueado);
               localStorage.setItem('rolUsuario', usuarioLogueado.rolDeUsuario);
-              this.router.navigate(["/inicio"]);
               localStorage.setItem('emailUsuario', mail);
+              if(usuarioLogueado.rolDeUsuario == 'ADMINISTRATIVO'){
+                this.router.navigate(["/inicio/restricciones"]);
+              }
+              else if(usuarioLogueado.rolDeUsuario == 'SUPERVISOR'){
+                this.router.navigate(["/inicio/administrarRestricciones"]);
+              }
             })
           }
           else

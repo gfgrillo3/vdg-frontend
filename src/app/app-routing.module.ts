@@ -19,7 +19,7 @@ const routes: Routes = [
     component : InicioComponent,
     children:
     [
-      //{ path: '', redirectTo: 'restricciones', pathMatch: 'full' },
+      { path: '', redirectTo: 'notificaciones', pathMatch: 'full' },
       { path: 'restricciones', component: RestriccionesComponent},
       { path: 'notificaciones', component: NotificacionesComponent},
       { path: 'incidencias', component: IncidenciasComponent},
