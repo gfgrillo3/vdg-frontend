@@ -41,4 +41,9 @@ export class UsuarioService {
   putUsuario(usuario: Usuario){
     return this.http.put(this.URL_API+"/modificarUsuario", usuario);
   }
+
+  recuperarContrasena(usuario: Usuario){
+    return this.http.put(this.URL_API+"/recuperarContrasena", usuario);
+  }
+
 }

@@ -16,3 +16,8 @@
     padding: 8px 8px;
     color: #aaa;
 }
+
+#forgotPassword{
+    cursor: pointer;
+}
+

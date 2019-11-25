@@ -1,6 +1,6 @@
 <div class="container">
     <ngx-spinner type="ball-pulse-sync" size="medium" bdColor="rgba(51,51,51,0.5)">
-        <p style="font-size: 15px; font-weight: bold; color: white">Iniciando sesión...</p>
+        <p style="font-size: 15px; font-weight: bold; color: white">Cargando...</p>
     </ngx-spinner>
     <div class="col-4 mx-auto">
         <div class="card border-primary mb-3 text-center">
@@ -42,7 +42,9 @@
                                 </div>
                             </div>
 
-                            <small id="forgotPassword" class="form-text text-muted">Olvidé mi contraseña</small>
+                            <small (click)="recuperarContrasena()" id="forgotPassword" class="form-text text-muted"
+                            *ngIf="mail.valid">
+                                Olvidé mi contraseña</small>
                         </div>
 
                         <div class="alert alert-danger" role="alert" *ngIf="loginEsInvalido">

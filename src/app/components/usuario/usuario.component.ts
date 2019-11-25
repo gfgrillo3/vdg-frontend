@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import * as sha256 from 'js-sha256';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ComunicacionService } from 'src/app/services/comunicacion/comunicacion.service';
+import { ErrorDTO } from 'src/app/models/error-dto';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -19,8 +21,12 @@ export class UsuarioComponent implements OnInit {
 
   loginEsInvalido = false;
 
-  constructor(private usuarioService: UsuarioService, private router: Router,
-    private spinner: NgxSpinnerService, private comunicacionService: ComunicacionService) { }
+  constructor(
+    private usuarioService: UsuarioService,
+    private router: Router,
+    private spinner: NgxSpinnerService,
+    private comunicacionService: ComunicacionService,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -64,6 +70,28 @@ export class UsuarioComponent implements OnInit {
     setTimeout(() => {
       this.loginEsInvalido = false;
     }, 5000);
+  }
+
+  recuperarContrasena() {
+    if (this.usuarioService.usuarioSeleccionado.email != "") {
+      let usuario = new Usuario;
+      usuario.email = this.usuarioService.usuarioSeleccionado.email;
+      usuario.rolDeUsuario = 'ADMINISTRATIVO';
+      if (confirm("Una nueva contraseña se enviará al email ingresado. ¿Desea continuar?")) {
+        this.spinner.show();
+        this.usuarioService.recuperarContrasena(usuario)
+          .subscribe(res => {
+            let error = res as ErrorDTO;
+            this.spinner.hide();
+            if(error.hayError){
+              this.toastr.error("" + error.mensajeError, "Error!");
+            }
+            else{
+              this.toastr.success('Nueva contraseña enviada al email', 'Enviada!');
+            }
+          });
+      }
+    }
   }
 
 }
