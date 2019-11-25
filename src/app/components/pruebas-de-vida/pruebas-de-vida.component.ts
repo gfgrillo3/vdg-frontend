@@ -24,6 +24,7 @@ export class PruebasDeVidaComponent implements OnInit {
   restriccion: RestriccionDTO;
   imgPerfil: String;
   imgPruebaDeVida: String;
+  respondio: boolean = true;
 
 
   constructor(private pruevaDeVidaService: PruebaDeVidaService,
@@ -100,16 +101,25 @@ export class PruebasDeVidaComponent implements OnInit {
 
   open(content, prueba: PruebaDeVida) {
     this.pruebaDeVida = prueba;
+    this.imgPruebaDeVida ="";
+    this.respondio = true;
     this.getRespuestaPruebaDeVida();
     this.modalService.open(content, {size: 'xl'});
   }
 
   getRespuestaPruebaDeVida(){
+    this.spinnerService.show();
     this.pruevaDeVidaService.getFotoPruebaDeVida(this.pruebaDeVida.idPruebaDeVida).
     subscribe( res => {
+      this.spinnerService.hide();
        var foto = res as FotoPruebaDeVida;
+       if (foto == null){
+        this.respondio = false;
+      }
+      else{
        this.imgPruebaDeVida = foto.foto;
        console.log(res);
+      }
      });
   }
 
