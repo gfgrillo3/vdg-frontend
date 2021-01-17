@@ -39,7 +39,7 @@
                 <tbody>
                     <tr *ngFor="let incidencia of incidencias" (click)="seleccionarIncidencia(incidencia)">
                         <td>{{incidencia.topico}}</td>
-                        <td>{{incidencia.fecha}}</td>
+                        <td class="joinedDate">{{incidencia.fecha | date:'dd-MM-yyyy HH:mm:ss'}}</td>
                         <td>{{incidencia.descripcion}}</td>
                     </tr>
                 </tbody>
@@ -57,11 +57,8 @@
                                 <h5>Tópico: <a id="topico"></a></h5>
                             </div>
                             <div class="row">
-                                <h5>Fecha y hora: <a id="fechaHora"></a></h5>
-                            </div>
-                            <div class="row">
                                 <textarea class="form-control" id="exampleTextarea" rows="5" placeholder="Detalles"
-                                    ngbTooltip="Detalles"></textarea>
+                                    ngbTooltip="Detalles" readonly></textarea>
                             </div>
                         </form>
                     </div>

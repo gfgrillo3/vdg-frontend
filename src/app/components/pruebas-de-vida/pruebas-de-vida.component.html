@@ -73,7 +73,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let prueba of pruebasDeVida">
-                        <td>{{prueba.fecha}}</td>
+                        <td class="joinedDate">{{prueba.fecha | date:'dd-MM-yyyy HH:mm:ss'}}</td>
                         <td>{{prueba.descripcion}}</td>
                         <td>{{prueba.estado}}</td>
                         <td>

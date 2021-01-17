@@ -177,7 +177,7 @@
                         <td>{{persona.persona.nombre}}</td>
                         <td>{{persona.persona.apellido}}</td>
                         <td>{{persona.persona.dni}}</td>
-                        <td>{{persona.persona.fechaNacimiento}}</td>
+                        <td class="joinedDate">{{persona.persona.fechaNacimiento | date:'dd-MM-yyyy'}}</td>
                         <td>
                             <a (click)="editarPersona(persona)">
                                 <i class="material-icons">editar</i>

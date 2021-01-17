@@ -40,8 +40,25 @@ export class IncidenciasComponent implements OnInit {
     this.spinnerService.show();
     this.incideciaServicio.getIncidenciasPorRestriccion(idRestriccion)
       .subscribe(res => {
-        this.spinnerService.hide();
         this.incidencias = res as Incidencia[];
+        for (var i = 0; i < this.incidencias.length; i++) {
+          if(this.incidencias[i].topico == "VictimarioIlocalizable"){
+            this.incidencias[i].topico = "Victimario Ilocalizable";
+          }
+          if(this.incidencias[i].topico == "DamnificadaIlocalizable"){
+            this.incidencias[i].topico = "Damnificada Ilocalizable";
+          }
+          if(this.incidencias[i].topico == "PruebaDeVidaFallida"){
+            this.incidencias[i].topico = "Prueba De Vida Fallida";
+          }
+          if(this.incidencias[i].topico == "InfraccionDeRestriccion"){
+            this.incidencias[i].topico = "Infraccion De Restriccion";
+          }
+          if(this.incidencias[i].topico == "FueraDeRutina"){
+            this.incidencias[i].topico = "Fuera De Rutina";
+          }
+        };
+        this.spinnerService.hide();
       });
   }
 
@@ -54,7 +71,7 @@ export class IncidenciasComponent implements OnInit {
 
   seleccionarIncidencia(incidencia: Incidencia){
     document.getElementById("topico").innerHTML = " " + incidencia.topico;
-    document.getElementById("fechaHora").innerHTML = " " + incidencia.fecha;
+    document.getElementById("exampleTextarea").innerHTML = " " + incidencia.descripcion;
   }
 
 }
