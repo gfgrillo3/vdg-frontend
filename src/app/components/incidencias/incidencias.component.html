@@ -39,7 +39,7 @@
                 <tbody>
                     <tr *ngFor="let incidencia of incidencias" (click)="seleccionarIncidencia(incidencia)">
                         <td>{{incidencia.topico}}</td>
-                        <td class="joinedDate">{{incidencia.fecha | date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                        <td class="joinedDate">{{incidencia.fecha | date:'dd-MM-yyyy HH:mm'}}</td>
                         <td>{{incidencia.descripcion}}</td>
                     </tr>
                 </tbody>
@@ -65,5 +65,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="text-center">
+        <a class="cargarMas" (click)="cargarMas()">Cargar más ...</a>
     </div>
 </div>

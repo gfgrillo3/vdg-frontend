@@ -26,7 +26,7 @@
             <p>{{notificacionSeleccionada.descripcion}}</p>
         </div>
         <div class="modal-footer">
-            <p>Fecha: {{notificacionSeleccionada.fecha}}</p>
+            <p class="joinedDate">Fecha: {{notificacionSeleccionada.fecha | date:'dd-MM-yyyy HH:mm'}}</p>
             <button type="button" class="btn btn-outline-dark" *ngIf="notificacionSeleccionada.estado!='Archivada'"
                 (click)="archivar()">Archivar</button>
 

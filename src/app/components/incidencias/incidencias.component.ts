@@ -15,6 +15,9 @@ export class IncidenciasComponent implements OnInit {
   restriccion: RestriccionDTO;
   incidencias: Incidencia[];
 
+  cantidadIncidencias: number = 20;
+
+
   constructor(private comunicacionServicio: ComunicacionService,
     private incideciaServicio: IncidenciaService,
     private spinnerService: NgxSpinnerService) { }
@@ -38,24 +41,24 @@ export class IncidenciasComponent implements OnInit {
 
   getIncidenciasPorRestriccion(idRestriccion: number) {
     this.spinnerService.show();
-    this.incideciaServicio.getIncidenciasPorRestriccion(idRestriccion)
+    this.incideciaServicio.getIncidenciasPorRestriccion(idRestriccion, this.cantidadIncidencias)
       .subscribe(res => {
         this.incidencias = res as Incidencia[];
         for (var i = 0; i < this.incidencias.length; i++) {
           if(this.incidencias[i].topico == "VictimarioIlocalizable"){
-            this.incidencias[i].topico = "Victimario Ilocalizable";
+            this.incidencias[i].topico = "Victimario ilocalizable";
           }
           if(this.incidencias[i].topico == "DamnificadaIlocalizable"){
-            this.incidencias[i].topico = "Damnificada Ilocalizable";
+            this.incidencias[i].topico = "Damnificada ilocalizable";
           }
           if(this.incidencias[i].topico == "PruebaDeVidaFallida"){
-            this.incidencias[i].topico = "Prueba De Vida Fallida";
+            this.incidencias[i].topico = "Prueba de vida fallida";
           }
           if(this.incidencias[i].topico == "InfraccionDeRestriccion"){
-            this.incidencias[i].topico = "Infraccion De Restriccion";
+            this.incidencias[i].topico = "Infraccion de restriccion";
           }
           if(this.incidencias[i].topico == "FueraDeRutina"){
-            this.incidencias[i].topico = "Fuera De Rutina";
+            this.incidencias[i].topico = "Fuera de rutina";
           }
         };
         this.spinnerService.hide();
@@ -63,7 +66,7 @@ export class IncidenciasComponent implements OnInit {
   }
 
   getIncidenciasPorTopico(topico: string) {
-    this.incideciaServicio.getIncidenciasPorTopico(topico)
+    this.incideciaServicio.getIncidenciasPorTopico(topico, this.cantidadIncidencias)
       .subscribe(res => {
         this.incidencias = res as Incidencia[];
       });
@@ -72,6 +75,14 @@ export class IncidenciasComponent implements OnInit {
   seleccionarIncidencia(incidencia: Incidencia){
     document.getElementById("topico").innerHTML = " " + incidencia.topico;
     document.getElementById("exampleTextarea").innerHTML = " " + incidencia.descripcion;
+  }
+
+  cargarMas(){
+    this.cantidadIncidencias += 20;
+    
+    this.getIncidenciasPorRestriccion(this.restriccion.restriccion.idRestriccion);
+    
+    
   }
 
 }

@@ -12,12 +12,12 @@ export class IncidenciaService {
 
   constructor(private http: HttpClient) { }
 
-  getIncidenciasPorTopico(topico: string){
-    return this.http.get(this.URL_API + '/' + topico);
+  getIncidenciasPorTopico(topico: string, cant: number){
+    return this.http.get(this.URL_API + '/' + topico + '/' + cant);
   }
 
-  getIncidenciasPorRestriccion(idRestriccion: number){
-    return this.http.get(this.URL_API + '/' + idRestriccion);
+  getIncidenciasPorRestriccion(idRestriccion: number, cant: number){
+    return this.http.get(this.URL_API + '/' + idRestriccion + '/' + cant);
   }
 
 }
