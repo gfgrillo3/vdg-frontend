@@ -11,12 +11,12 @@
                     <form #restriccionForm="ngForm" (ngSubmit)="guardarRestriccion(restriccionForm)" novalidate>
                         <div class="row">
                             <div class="input-group">
-                                <input class="form-control" type="text" name="dniVictimario"
+                                <input class="form-control" type="tel" name="dniVictimario"
                                     placeholder="DNI Victimario" ngbTooltip="DNI victimario"
                                     [(ngModel)]="victimario.dni">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button"
-                                        (click)="agregarVictimario()">
+                                        (click)="agregarVictimario()" [disabled]="victimario.dni === ''">
                                         <i class="small material-icons">person_add</i>
                                     </button>
                                 </div>
@@ -25,12 +25,12 @@
                         </div>
                         <div class="row">
                             <div class="input-group">
-                                <input class="form-control" type="text" name="dniDamnificada"
+                                <input class="form-control" type="tel" name="dniDamnificada"
                                     placeholder="DNI Damnificada" ngbTooltip="DNI damnificada"
                                     [(ngModel)]="damnificada.dni">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button"
-                                        (click)="agregarDamnificada()">
+                                        (click)="agregarDamnificada()" [disabled]="damnificada.dni === ''">
                                         <i class="small material-icons">person_add</i>
                                     </button>
                                 </div>
@@ -44,7 +44,7 @@
                                     [(ngModel)]="administrativo.email">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button"
-                                        (click)="agregarAdministrativo()">
+                                        (click)="agregarAdministrativo()" [disabled]="administrativo.email === ''">
                                         <i class="small material-icons">person_add</i>
                                     </button>
                                 </div>
