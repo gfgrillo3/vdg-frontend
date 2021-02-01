@@ -7,7 +7,7 @@ import { Notificacion } from 'src/app/models/notificacion';
 })
 export class NotificacionService {
 
-  readonly URL_API = 'http://localhost:9090/Notificacion';
+  readonly URL_API = 'http://vdg-back.herokuapp.com/Notificacion';
 
   constructor(private http: HttpClient) { }
 

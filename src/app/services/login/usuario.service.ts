@@ -9,7 +9,7 @@ export class UsuarioService {
 
   usuarioSeleccionado: Usuario;
   usuarios: Usuario[];
-  readonly URL_API = 'http://localhost:9090/Usuario';
+  readonly URL_API = 'http://vdg-back.herokuapp.com/Usuario';
 
   constructor(private http: HttpClient) {
     this.usuarioSeleccionado = new Usuario();

@@ -7,7 +7,7 @@ import { PruebaDeVida } from 'src/app/models/prueba-de-vida';
 })
 export class PruebaDeVidaService {
 
-  readonly URL_API = 'http://localhost:9090/PruebaDeVida';
+  readonly URL_API = 'http://vdg-back.herokuapp.com/PruebaDeVida';
 
   constructor(private http: HttpClient) { }
 
@@ -26,7 +26,7 @@ export class PruebaDeVidaService {
 
   
   getFotoPruebaDeVida(idPruebaDeVida: number){
-    return this.http.get("http://localhost:9090/FotoPruebaDeVida/getFotoPruebaDeVida/"+idPruebaDeVida); 
+    return this.http.get("http://vdg-back.herokuapp.com/FotoPruebaDeVida/getFotoPruebaDeVida/"+idPruebaDeVida); 
    }
 
 }

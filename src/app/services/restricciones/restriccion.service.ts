@@ -10,14 +10,14 @@ export class RestriccionService {
 
   restriccionSeleccionada: Restriccion;
   restricciones: RestriccionDTO[];  
-  readonly URL_API = 'http://localhost:9090/RestriccionPerimetral';
+  readonly URL_API = 'http://vdg-back.herokuapp.com/RestriccionPerimetral';
 
   constructor(private http:HttpClient) { 
     this.restriccionSeleccionada = new Restriccion();
   }
 
   getRestricciones(){
-    return this.http.get("http://localhost:9090/RestriccionDTO");
+    return this.http.get("http://vdg-back.herokuapp.com/RestriccionDTO");
   }
 
   postRestriccion(restriccion: Restriccion){
@@ -25,7 +25,7 @@ export class RestriccionService {
   }
   
   getRestriccionesAdministrativo(email: string){
-    return this.http.get("http://localhost:9090/RestriccionDTO/"+
+    return this.http.get("http://vdg-back.herokuapp.com/RestriccionDTO/"+
     email);
   }
 

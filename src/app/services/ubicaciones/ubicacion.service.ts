@@ -7,7 +7,7 @@ import { UbicacionDto } from 'src/app/models/ubicacion-dto';
 })
 export class UbicacionService {
 
-  readonly URL_API = 'http://localhost:9090/Ubicacion';
+  readonly URL_API = 'http://vdg-back.herokuapp.com/Ubicacion';
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +20,7 @@ export class UbicacionService {
   }
 
   getUbicacionPromedioRutina(idPersona: number, dia: number, hora: number, minutos: number) {
-    return this.http.get('http://localhost:9090/UbicacionRutina/persona=' + idPersona +
+    return this.http.get('http://vdg-back.herokuapp.com/UbicacionRutina/persona=' + idPersona +
       "/dia=" + dia + "/hora=" + hora + "/minutos=" + minutos);
   }
 

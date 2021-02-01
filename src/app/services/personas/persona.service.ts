@@ -10,7 +10,7 @@ export class PersonaService {
 
   personaDTOSelleccionada: FormPersonaDTO;
   personas: FormPersonaDTO[];
-  readonly URL_API = 'http://localhost:9090/FormABMPersona';
+  readonly URL_API = 'http://vdg-back.herokuapp.com/FormABMPersona';
 
 
   constructor(private http: HttpClient) {
@@ -27,11 +27,11 @@ export class PersonaService {
   }
 
   getVictimarioByDNI(dni: string){
-    return this.http.get<Persona>("http://localhost:9090/Persona/GetVictimarioByDni/"+dni);
+    return this.http.get<Persona>("http://vdg-back.herokuapp.com/Persona/GetVictimarioByDni/"+dni);
   }
 
   getDamnificadaByDNI(dni: string){
-    return this.http.get<Persona>("http://localhost:9090/Persona/GetDamnificadaByDni/"+dni);
+    return this.http.get<Persona>("http://vdg-back.herokuapp.com/Persona/GetDamnificadaByDni/"+dni);
   }
 
   deletePersona(id: number){
