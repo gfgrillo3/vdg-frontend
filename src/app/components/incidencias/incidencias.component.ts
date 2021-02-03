@@ -80,7 +80,7 @@ export class IncidenciasComponent implements OnInit {
   cargarMas(){
     this.cantidadIncidencias += 20;
     
-    this.getIncidenciasPorRestriccion(this.restriccion.restriccion.idRestriccion, this.cantidadIncidencias);
+    this.getIncidenciasPorRestriccion(this.restriccion.restriccion.idRestriccion);
     
     
   }
