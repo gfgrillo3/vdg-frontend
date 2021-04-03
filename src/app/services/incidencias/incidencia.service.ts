@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Incidencia } from 'src/app/models/incidencia';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ import { Incidencia } from 'src/app/models/incidencia';
 export class IncidenciaService {
 
   incidencias: Incidencia[];
-  readonly URL_API = 'http://vdg-back.herokuapp.com/Incidencia';
+  readonly URL_API = environment.apiUrl+'/Incidencia';
 
   constructor(private http: HttpClient) { }
 

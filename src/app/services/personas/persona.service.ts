@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { FormPersonaDTO } from 'src/app/models/form-persona-dto';
 import { HttpClient } from '@angular/common/http';
 import { Persona } from 'src/app/models/persona';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,8 @@ export class PersonaService {
 
   personaDTOSelleccionada: FormPersonaDTO;
   personas: FormPersonaDTO[];
-  readonly URL_API = 'http://vdg-back.herokuapp.com/FormABMPersona';
+  readonly URL_API = environment.apiUrl+'/FormABMPersona';
+  readonly URL_API_PERSONA = environment.apiUrl+'/Persona';
 
 
   constructor(private http: HttpClient) {
@@ -27,11 +30,11 @@ export class PersonaService {
   }
 
   getVictimarioByDNI(dni: string){
-    return this.http.get<Persona>("http://vdg-back.herokuapp.com/Persona/GetVictimarioByDni/"+dni);
+    return this.http.get<Persona>(this.URL_API_PERSONA+"/GetVictimarioByDni/"+dni);
   }
 
   getDamnificadaByDNI(dni: string){
-    return this.http.get<Persona>("http://vdg-back.herokuapp.com/Persona/GetDamnificadaByDni/"+dni);
+    return this.http.get<Persona>(this.URL_API_PERSONA+"/GetDamnificadaByDni/"+dni);
   }
 
   deletePersona(id: number){

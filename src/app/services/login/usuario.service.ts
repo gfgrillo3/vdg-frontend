@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../../models/usuario';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ export class UsuarioService {
 
   usuarioSeleccionado: Usuario;
   usuarios: Usuario[];
-  readonly URL_API = 'http://vdg-back.herokuapp.com/Usuario';
+  readonly URL_API = environment.apiUrl+'/Usuario';
 
   constructor(private http: HttpClient) {
     this.usuarioSeleccionado = new Usuario();

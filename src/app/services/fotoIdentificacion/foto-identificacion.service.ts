@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FotoIdentificacion } from 'src/app/models/foto-identificacion';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +10,7 @@ import { FotoIdentificacion } from 'src/app/models/foto-identificacion';
 export class FotoIdentificacionService {
 
   fotoIdentificacion: FotoIdentificacion;
-  readonly URL_API = 'http://vdg-back.herokuapp.com/FotoIdentificacion';
-
+  readonly URL_API = environment.apiUrl+'/FotoIdentificacion';
 
   constructor(private http: HttpClient) {
     this.fotoIdentificacion = new FotoIdentificacion;

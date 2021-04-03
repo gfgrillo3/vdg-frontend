@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UbicacionDto } from 'src/app/models/ubicacion-dto';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UbicacionService {
 
-  readonly URL_API = 'http://vdg-back.herokuapp.com/Ubicacion';
+  readonly URL_API = environment.apiUrl+'/Ubicacion';
+  readonly URL_API_UBICACION_RUTINA = environment.apiUrl+'/UbicacionRutina';
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +23,7 @@ export class UbicacionService {
   }
 
   getUbicacionPromedioRutina(idPersona: number, dia: number, hora: number, minutos: number) {
-    return this.http.get('http://vdg-back.herokuapp.com/UbicacionRutina/persona=' + idPersona +
+    return this.http.get(this.URL_API_UBICACION_RUTINA+'/persona=' + idPersona +
       "/dia=" + dia + "/hora=" + hora + "/minutos=" + minutos);
   }
 
