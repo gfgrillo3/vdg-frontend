@@ -28,7 +28,7 @@ export class RestriccionService {
   }
   
   getRestriccionesAdministrativo(email: string){
-    return this.http.get(this.URL_API_RESTRICCION_DTO+email);
+    return this.http.get(this.URL_API_RESTRICCION_DTO+"/"+email);
   }
 
   putRestriccion(restriccion: Restriccion){
